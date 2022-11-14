@@ -5,13 +5,18 @@
 
 package com.mycompany.taller;
 
+import com.mycompany.taller.persistencia.Conexion;
+import java.sql.Connection;
+
 /**
  *
  * @author martin
  */
 public class Taller {
-
+    
     public static void main(String[] args) {
         System.out.println("Hello World!");
+        
+        Connection conDataBase = Conexion.getConexion();
     }
 }

@@ -4,6 +4,18 @@
     <groupId>com.mycompany.taller</groupId>
     <artifactId>Taller</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <dependencies>
+        <dependency>
+            <groupId>maria</groupId>
+            <artifactId>maria</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>jcalendar</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>18</maven.compiler.source>
