@@ -15,19 +15,19 @@ public class Servicio {
     private int id;
     private int codigo;
     private String descripcion;
-    private Double costo;
+    private double costo;
 
     public Servicio() {
     }
 
-    public Servicio(int id, int codigo, String descripcion, Double costo) {
+    public Servicio(int id, int codigo, String descripcion, double costo) {
         this.id = id;
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.costo = costo;
     }
 
-    public Servicio(int codigo, String descripcion, Double costo) {
+    public Servicio(int codigo, String descripcion, double costo) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.costo = costo;
@@ -57,11 +57,11 @@ public class Servicio {
         this.descripcion = descripcion;
     }
 
-    public Double getCosto() {
+    public double getCosto() {
         return costo;
     }
 
-    public void setCosto(Double costo) {
+    public void setCosto(double costo) {
         this.costo = costo;
     }
 
