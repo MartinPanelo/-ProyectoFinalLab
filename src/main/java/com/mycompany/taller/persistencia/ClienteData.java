@@ -19,7 +19,7 @@ public class ClienteData {
     
     public void guardarCliente(Cliente cliente) {
 
-        String query = "INSERT INTO `cliente`(`nombre`, `apellido`, `dni`, `domicilio`, `celular`, `borrado`) VALUES (?,?,?,?,?,?)";
+        String query = "INSERT INTO `cliente`(`nombre`, `apellido`, `dni`, `domicilio`, `celular`, `borrado`) VALUES (?,?,?,?,?,0)";
         try {
             PreparedStatement ps = conexionData.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, cliente.getNombre());
@@ -27,7 +27,7 @@ public class ClienteData {
             ps.setLong(3, cliente.getDni());
             ps.setString(4, cliente.getDomicilio());
             ps.setLong(5, cliente.getCelular());
-            ps.setBoolean(6, cliente.isEstado());
+            ps.setBoolean(6, cliente.isborrado());
             
             if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Cliente registrado");
@@ -61,7 +61,7 @@ public class ClienteData {
                 cliente.setDni(rs.getLong("dni"));
                 cliente.setDomicilio(rs.getString("domicilio"));
                 cliente.setCelular(rs.getLong("celular"));
-                cliente.setEstado(rs.getBoolean("false"));
+                cliente.setBorrado(rs.getBoolean("borrado"));
             }
             
             ps.close();
@@ -73,7 +73,7 @@ public class ClienteData {
     }
     
     public void actualizarCliente(Cliente cliente) {
-        String sqlQuery = "UPDATE `cliente` SET `nombre`= ,`apellido`= ?,`dni`= ?,`domicilio`= ?,`celular`= ?, `borrado`= ? WHERE id = ? AND borrado = 0";
+        String sqlQuery = "UPDATE `cliente` SET `nombre`= ,`apellido`= ?,`dni`= ?,`domicilio`= ?,`celular`= ?, `borrado`= ? WHERE id = ?";
             if (buscarCliente(cliente.getId()) != null) {
             try {
             PreparedStatement ps = conexionData.prepareStatement(sqlQuery);
@@ -82,7 +82,7 @@ public class ClienteData {
             ps.setLong(3, cliente.getDni());
             ps.setString(4, cliente.getDomicilio());
             ps.setLong(5, cliente.getCelular());
-            ps.setBoolean(6, cliente.isEstado());
+            ps.setBoolean(6, cliente.isborrado());
            
             if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Registro actualizado");
@@ -122,7 +122,7 @@ public class ClienteData {
 
         ArrayList<Cliente> lista = new ArrayList();
 
-        String sql = "SELECT * FROM cliente WHERE estado = 0";
+        String sql = "SELECT * FROM cliente WHERE borrado = 0";
 
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
@@ -138,7 +138,7 @@ public class ClienteData {
                 cl.setCelular(rs.getLong("celular"));
                 cl.setNombre(rs.getString("nombre"));
                 cl.setDomicilio(rs.getString("domicilio"));
-                cl.setEstado(rs.getBoolean("estado"));
+                cl.setBorrado(rs.getBoolean("borrado"));
                 cl.setDni(rs.getLong("dni"));
 
                 lista.add(cl);

@@ -18,19 +18,19 @@ public class Cliente {
     private long dni;
     private String domicilio;
     private long celular;
-    private boolean estado;
+    private boolean borrado;
 
     public Cliente() {
     }
 
-    public Cliente(int id, String nombre, String apellido, long dni, String domicilio, long celular, boolean estado) {
+    public Cliente(int id, String nombre, String apellido, long dni, String domicilio, long celular, boolean borrado) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.domicilio = domicilio;
         this.celular = celular;
-        this.estado = estado;
+        this.borrado = borrado;
     }
 
     public Cliente(String nombre, String apellido, long dni, String domicilio, long celular,boolean estado) {
@@ -39,19 +39,19 @@ public class Cliente {
         this.dni = dni;
         this.domicilio = domicilio;
         this.celular = celular;
-        this.estado = estado;
+        this.borrado = borrado;
     }
 
     public int getId() {
         return id;
     }
 
-    public boolean isEstado() {
-        return estado;
+    public boolean isborrado() {
+        return borrado;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setBorrado(boolean borrado) {
+        this.borrado = borrado;
     }
 
     public void setId(int id) {
