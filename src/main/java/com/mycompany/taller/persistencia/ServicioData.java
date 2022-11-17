@@ -148,22 +148,22 @@ public class ServicioData {
     
     
         public void borrarServicio (int id){
-        String sql="UPDATE servicio SET borrado=1 WHERE id = ?";
+        String sql="UPDATE servicio SET borrado=true WHERE id = ?";
         try {
             PreparedStatement ps=conexionData.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
             
             if (ps.executeUpdate() <= 0) {
-                JOptionPane.showMessageDialog(null, "No se pudo eliminar el alumno");
+                JOptionPane.showMessageDialog(null, "No se pudo eliminar el servicio");
             } else  {   
-                JOptionPane.showMessageDialog(null, "Se elimino el alumno correctamente");
+                JOptionPane.showMessageDialog(null, "Se elimino el servicio correctamente");
             }
          
             ps.close();
             
     }   catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ALumnoData Sentencia SQL erronea-borrarAlumno");
+            JOptionPane.showMessageDialog(null, "Error de tipo exception "+ ex);
         }
     }
     
