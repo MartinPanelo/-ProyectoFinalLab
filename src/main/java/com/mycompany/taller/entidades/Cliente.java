@@ -18,29 +18,40 @@ public class Cliente {
     private long dni;
     private String domicilio;
     private long celular;
+    private boolean estado;
 
     public Cliente() {
     }
 
-    public Cliente(int id, String nombre, String apellido, long dni, String domicilio, long celular) {
+    public Cliente(int id, String nombre, String apellido, long dni, String domicilio, long celular, boolean estado) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.domicilio = domicilio;
         this.celular = celular;
+        this.estado = estado;
     }
 
-    public Cliente(String nombre, String apellido, long dni, String domicilio, long celular) {
+    public Cliente(String nombre, String apellido, long dni, String domicilio, long celular,boolean estado) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.domicilio = domicilio;
         this.celular = celular;
+        this.estado = estado;
     }
 
     public int getId() {
         return id;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     public void setId(int id) {
