@@ -5,7 +5,9 @@
 
 package com.mycompany.taller;
 
+import com.mycompany.taller.entidades.Servicio;
 import com.mycompany.taller.persistencia.Conexion;
+import com.mycompany.taller.persistencia.ServicioData;
 import java.sql.Connection;
 
 /**
@@ -15,8 +17,50 @@ import java.sql.Connection;
 public class Taller {
     
     public static void main(String[] args) {
-        System.out.println("Hello World!");
         
         Connection conDataBase = Conexion.getConexion();
+        
+        //coneccion de servicioData
+        ServicioData sData = new ServicioData(conDataBase);
+        
+        //Creo y agrego un servicio a la database
+        Servicio servi = new Servicio(2020, "limpieza de cuadro", 1000);
+        
+        sData.crearServicio(servi);
+        
+        //busco un servicio por id
+        System.out.println("busco un servicio por id (2)");
+        System.out.println(sData.buscarServicioPorID(2)+"\n");
+        
+        
+        //actualizo un servicio
+        Servicio serviactualizar = sData.buscarServicioPorID(1);
+        serviactualizar.setCosto(1000);
+        
+        sData.actualizarServicio(serviactualizar);
+        
+        //listo todos los servicios
+        System.out.println("Listo todos los servicios");
+        System.out.println(sData.listarServicios());
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 }
