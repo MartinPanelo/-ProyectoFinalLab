@@ -16,21 +16,24 @@ public class Servicio {
     private int codigo;
     private String descripcion;
     private double costo;
+    private boolean borrado;
 
     public Servicio() {
     }
 
-    public Servicio(int id, int codigo, String descripcion, double costo) {
+    public Servicio(int id, int codigo, String descripcion, double costo, boolean borrado) {
         this.id = id;
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.costo = costo;
+        this.borrado = borrado;
     }
 
-    public Servicio(int codigo, String descripcion, double costo) {
+    public Servicio(int codigo, String descripcion, double costo, boolean borrado) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.costo = costo;
+        this.borrado = borrado;
     }
 
     public int getId() {
@@ -65,13 +68,22 @@ public class Servicio {
         this.costo = costo;
     }
 
+    public boolean isBorrado() {
+        return borrado;
+    }
+
+    public void setBorrado(boolean borrado) {
+        this.borrado = borrado;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
         hash = 29 * hash + this.id;
         hash = 29 * hash + this.codigo;
         hash = 29 * hash + Objects.hashCode(this.descripcion);
-        hash = 29 * hash + Objects.hashCode(this.costo);
+        hash = 29 * hash + (int) (Double.doubleToLongBits(this.costo) ^ (Double.doubleToLongBits(this.costo) >>> 32));
+        hash = 29 * hash + (this.borrado ? 1 : 0);
         return hash;
     }
 
@@ -93,17 +105,21 @@ public class Servicio {
         if (this.codigo != other.codigo) {
             return false;
         }
-        if (!Objects.equals(this.descripcion, other.descripcion)) {
+        if (Double.doubleToLongBits(this.costo) != Double.doubleToLongBits(other.costo)) {
             return false;
         }
-        return Objects.equals(this.costo, other.costo);
+        if (this.borrado != other.borrado) {
+            return false;
+        }
+        return Objects.equals(this.descripcion, other.descripcion);
     }
 
     @Override
     public String toString() {
-        return "Servicio{" + "id=" + id + ", codigo=" + codigo + ", descripcion=" + descripcion + ", costo=" + costo + '}';
+        return "Servicio{" + "id=" + id + ", codigo=" + codigo + ", descripcion=" + descripcion + ", costo=" + costo + ", borrado=" + borrado + '}';
     }
-    
+
+   
     
     
 }

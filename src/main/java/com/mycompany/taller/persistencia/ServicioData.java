@@ -28,7 +28,7 @@ public class ServicioData {
 
     public void crearServicio(Servicio servicio) {
 
-        String query = "INSERT INTO servicio(codigo, descripcion, costo) VALUES (?, ?, ?)";
+        String query = "INSERT INTO servicio(codigo, descripcion, costo, borrado) VALUES (?, ?, ?,false)";
         try {
             PreparedStatement ps = conexionData.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1,servicio.getCodigo());
@@ -58,7 +58,7 @@ public class ServicioData {
     
         public Servicio buscarServicioPorID(int id) {
         Servicio s = null;
-        String sql = "SELECT * FROM servicio WHERE id = ?";
+        String sql = "SELECT * FROM servicio WHERE id = ? AND borrado = false";
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
             ps.setInt(1, id);
@@ -69,6 +69,7 @@ public class ServicioData {
                 s.setCodigo(rs.getInt("codigo"));
                 s.setDescripcion(rs.getString("descripcion"));
                 s.setCosto(rs.getDouble("costo"));
+                s.setBorrado(rs.getBoolean("borrado"));
 
             }
             
@@ -85,14 +86,15 @@ public class ServicioData {
     
     
     public void actualizarServicio(Servicio s) {
-        String sqlQuery = "UPDATE servicio SET codigo= ? ,descripcion= ? ,costo= ? WHERE id = ?";
+        String sqlQuery = "UPDATE servicio SET codigo= ? ,descripcion= ? ,costo= ? ,borrado= ? WHERE id = ?";
             if (buscarServicioPorID(s.getId()) != null) {
             try {
             PreparedStatement ps = conexionData.prepareStatement(sqlQuery);
             ps.setInt(1, s.getCodigo());
             ps.setString(2, s.getDescripcion());
             ps.setDouble(3, s.getCosto());
-            ps.setInt(4, s.getId());
+            ps.setBoolean(4, s.isBorrado());
+            ps.setInt(5, s.getId());
            
            
             if (ps.executeUpdate() > 0) {
@@ -116,7 +118,7 @@ public class ServicioData {
 
         ArrayList<Servicio> listaS = new ArrayList();
 
-        String sql = "SELECT * FROM servicio";
+        String sql = "SELECT * FROM servicio WHERE borrado=false";
 
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
@@ -131,7 +133,7 @@ public class ServicioData {
                 s.setCosto(rs.getDouble("costo"));
                 s.setDescripcion(rs.getString("descripcion"));
                 s.setCodigo(rs.getInt("codigo"));
-
+                s.setBorrado(rs.getBoolean("borrado"));
 
                 listaS.add(s);
             }
@@ -144,5 +146,25 @@ public class ServicioData {
         return listaS;
     }
     
+    
+        public void borrarServicio (int id){
+        String sql="UPDATE servicio SET borrado=1 WHERE id = ?";
+        try {
+            PreparedStatement ps=conexionData.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            
+            if (ps.executeUpdate() <= 0) {
+                JOptionPane.showMessageDialog(null, "No se pudo eliminar el alumno");
+            } else  {   
+                JOptionPane.showMessageDialog(null, "Se elimino el alumno correctamente");
+            }
+         
+            ps.close();
+            
+    }   catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ALumnoData Sentencia SQL erronea-borrarAlumno");
+        }
+    }
     
 }

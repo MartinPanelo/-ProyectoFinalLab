@@ -24,7 +24,7 @@ public class Taller {
         ServicioData sData = new ServicioData(conDataBase);
         
         //Creo y agrego un servicio a la database
-        Servicio servi = new Servicio(2020, "limpieza de cuadro", 1000);
+        Servicio servi = new Servicio(2020, "limpieza de cuadro", 1000,true);
         
         sData.crearServicio(servi);
         
