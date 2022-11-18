@@ -17,25 +17,37 @@ public class Repuesto {
     private long numero_serie;
     private String descripcion;
     private double precio;
+    private boolean borrado;
 
     public Repuesto() {
     }
 
-    public Repuesto(int id, String nombre, long numero_serie, String descripcion, double precio) {
+    public Repuesto(int id, String nombre, long numero_serie, String descripcion, double precio, boolean borrado) {
         this.id = id;
         this.nombre = nombre;
         this.numero_serie = numero_serie;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.borrado = borrado;
     }
 
-    public Repuesto(String nombre, long numero_serie, String descripcion, double precio) {
+    public Repuesto(String nombre, long numero_serie, String descripcion, double precio, boolean borrado) {
         this.nombre = nombre;
         this.numero_serie = numero_serie;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.borrado = borrado;
+        
     }
 
+    public boolean isBorrado() {
+        return borrado;
+    }
+
+    public void setBorrado(boolean borrado) {
+        this.borrado = borrado;
+    }
+    
     public int getId() {
         return id;
     }
@@ -78,12 +90,13 @@ public class Repuesto {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + this.id;
-        hash = 67 * hash + Objects.hashCode(this.nombre);
-        hash = 67 * hash + (int) (this.numero_serie ^ (this.numero_serie >>> 32));
-        hash = 67 * hash + Objects.hashCode(this.descripcion);
-        hash = 67 * hash + (int) (Double.doubleToLongBits(this.precio) ^ (Double.doubleToLongBits(this.precio) >>> 32));
+        int hash = 3;
+        hash = 79 * hash + this.id;
+        hash = 79 * hash + Objects.hashCode(this.nombre);
+        hash = 79 * hash + (int) (this.numero_serie ^ (this.numero_serie >>> 32));
+        hash = 79 * hash + Objects.hashCode(this.descripcion);
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.precio) ^ (Double.doubleToLongBits(this.precio) >>> 32));
+        hash = 79 * hash + (this.borrado ? 1 : 0);
         return hash;
     }
 
@@ -108,6 +121,9 @@ public class Repuesto {
         if (Double.doubleToLongBits(this.precio) != Double.doubleToLongBits(other.precio)) {
             return false;
         }
+        if (this.borrado != other.borrado) {
+            return false;
+        }
         if (!Objects.equals(this.nombre, other.nombre)) {
             return false;
         }
@@ -116,9 +132,10 @@ public class Repuesto {
 
     @Override
     public String toString() {
-        return "Repuesto{" + "id=" + id + ", nombre=" + nombre + ", numero_serie=" + numero_serie + ", descripcion=" + descripcion + ", precio=" + precio + '}';
+        return "Repuesto{" + "id=" + id + ", nombre=" + nombre + ", numero_serie=" + numero_serie + ", descripcion=" + descripcion + ", precio=" + precio + ", borrado=" + borrado + '}';
     }
     
+    }
+
     
-    
-}
+   

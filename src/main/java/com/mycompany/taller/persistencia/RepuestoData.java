@@ -11,6 +11,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -26,7 +27,7 @@ public class RepuestoData {
     
     public void guardarRepuesto(Repuesto r) {
 
-        String query = "INSERT INTO repuesto(numero_serie, nombre, descripcion, precio) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO repuesto(numero_serie, nombre, descripcion, precio, borrado) VALUES (?, ?, ?, ?, 0)";
         try {
             PreparedStatement ps = conexionData.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, r.getNumero_serie());
@@ -56,7 +57,7 @@ public class RepuestoData {
     
     public Repuesto buscarRepuestoPorID(int id) {
         Repuesto r = null;
-        String sql = "SELECT * FROM repuesto WHERE id = ?";
+        String sql = "SELECT * FROM repuesto WHERE id = ? AND borrado = 0";
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
             ps.setInt(1, id);
@@ -68,6 +69,7 @@ public class RepuestoData {
                 r.setNombre(rs.getString("nombre"));
                 r.setDescripcion(rs.getString("descripcion"));
                 r.setPrecio(rs.getDouble("precio"));
+                r.setBorrado(rs.getBoolean("borrado"));
             }
             
             ps.close();
@@ -82,7 +84,7 @@ public class RepuestoData {
     }
     
     public void actualizarRepuesto(Repuesto r) {
-        String sqlQuery = "UPDATE repuesto SET numero_serie= ? ,nombre= ? ,descripcion= ? ,precio= ? WHERE id = ?";
+        String sqlQuery = "UPDATE repuesto SET numero_serie= ? ,nombre= ? ,descripcion= ? ,precio= ?, borrado= ? WHERE id = ?";
             if (buscarRepuestoPorID(r.getId()) != null) {
             try {
             PreparedStatement ps = conexionData.prepareStatement(sqlQuery);
@@ -91,6 +93,7 @@ public class RepuestoData {
             ps.setString(3, r.getDescripcion());
             ps.setDouble(4, r.getPrecio());
             ps.setDouble(5, r.getId());
+            ps.setBoolean(6, r.isBorrado());
            
             if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Se pudo actualizar el repuesto.");
@@ -106,5 +109,59 @@ public class RepuestoData {
             }
             
         }
+    
+    public ArrayList<Repuesto> listarRepuestos() {
+
+        ArrayList<Repuesto> l1 = new ArrayList();
+
+        String sql = "SELECT * FROM repuesto WHERE borrado= 0";
+
+        try {
+            PreparedStatement ps = conexionData.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Repuesto r = new Repuesto();
+
+                r.setId(rs.getInt("id"));
+                r.setNombre(rs.getString("nombre"));
+                r.setDescripcion(rs.getString("descripcion"));
+                r.setNumero_serie(rs.getLong("numero_serie"));
+                r.setBorrado(rs.getBoolean("borrado"));
+                r.setPrecio(rs.getDouble("precio"));
+
+                l1.add(r);
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al obtener la lista de repuestos " + ex);
+        }
+        return l1;
+    }
+    
+    
+        public void borrarRepuesto (int id){
+        String sql="UPDATE repuesto SET borrado= 1 WHERE id = ?";
+        try {
+            PreparedStatement ps=conexionData.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            
+            if (ps.executeUpdate() <= 0) {
+                JOptionPane.showMessageDialog(null, "No se pudo eliminar el repuesto");
+            } else  {   
+                JOptionPane.showMessageDialog(null, "Se elimino el repuesto correctamente");
+            }
+         
+            ps.close();
+            
+    }   catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de tipo exception "+ ex);
+        }
+    }
       
 }
