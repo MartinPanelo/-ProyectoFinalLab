@@ -5,8 +5,10 @@
 
 package com.mycompany.taller;
 
+import com.mycompany.taller.entidades.Repuesto;
 import com.mycompany.taller.entidades.Servicio;
 import com.mycompany.taller.persistencia.Conexion;
+import com.mycompany.taller.persistencia.RepuestoData;
 import com.mycompany.taller.persistencia.ServicioData;
 import java.sql.Connection;
 
@@ -42,6 +44,28 @@ public class Taller {
         //listo todos los servicios
         System.out.println("Listo todos los servicios");
         System.out.println(sData.listarServicios());
+        
+        //coneccion de repuestoData
+        RepuestoData rData = new RepuestoData(conDataBase);
+        
+        //agregar repuesto
+        Repuesto r1 = new Repuesto("Cubiertas", 48567, "Cubiertas para bicicleta", 2000, false);
+        
+        rData.guardarRepuesto(r1);
+        
+        //buscar repuesto por ID
+        System.out.println("\nBuscar un repuesto por id:\n");
+        System.out.println(rData.buscarRepuestoPorID(4));
+        
+        //actualizar un repuesto(Pendiente)
+        Repuesto rActualizado = rData.buscarRepuestoPorID(6);
+        rActualizado.setPrecio(2500);
+        
+        rData.actualizarRepuesto(rActualizado);
+        
+        //listar todos los repuestos
+        System.out.println("\nMostrar todos los repuestos registrados:\n");
+        System.out.println(rData.listarRepuestos());
         
 
         

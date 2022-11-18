@@ -84,7 +84,7 @@ public class RepuestoData {
     }
     
     public void actualizarRepuesto(Repuesto r) {
-        String sqlQuery = "UPDATE repuesto SET numero_serie= ? ,nombre= ? ,descripcion= ? ,precio= ?, borrado= ? WHERE id = ?";
+        String sqlQuery = "UPDATE repuesto SET numero_serie= ? ,nombre= ? ,descripcion= ? ,precio= ? WHERE id = ?";
             if (buscarRepuestoPorID(r.getId()) != null) {
             try {
             PreparedStatement ps = conexionData.prepareStatement(sqlQuery);
@@ -92,9 +92,8 @@ public class RepuestoData {
             ps.setString(2, r.getNombre());
             ps.setString(3, r.getDescripcion());
             ps.setDouble(4, r.getPrecio());
-            ps.setDouble(5, r.getId());
-            ps.setBoolean(6, r.isBorrado());
-           
+            ps.setInt(5, r.getId());
+          
             if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Se pudo actualizar el repuesto.");
             } else  {
@@ -104,7 +103,7 @@ public class RepuestoData {
             ps.close();
             
         } catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Se produjo un error. en actualizar repuesto");
+            JOptionPane.showMessageDialog(null, "Se produjo un error. en actualizar repuesto" + ex);
         }  
             }
             
