@@ -73,7 +73,7 @@ public class ClienteData {
     }
     
     public void actualizarCliente(Cliente cliente) {
-        String sqlQuery = "UPDATE `cliente` SET `nombre`= ,`apellido`= ?,`dni`= ?,`domicilio`= ?,`celular`= ?, `borrado`= ? WHERE id = ?";
+        String sqlQuery = "UPDATE `cliente` SET `nombre`= ?,`apellido`= ?,`dni`= ?,`domicilio`= ?,`celular`= ? WHERE id = ?";
             if (buscarCliente(cliente.getId()) != null) {
             try {
             PreparedStatement ps = conexionData.prepareStatement(sqlQuery);
@@ -82,7 +82,7 @@ public class ClienteData {
             ps.setLong(3, cliente.getDni());
             ps.setString(4, cliente.getDomicilio());
             ps.setLong(5, cliente.getCelular());
-            ps.setBoolean(6, cliente.isborrado());
+            ps.setInt(6, cliente.getId());
            
             if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Registro actualizado");
@@ -100,7 +100,7 @@ public class ClienteData {
         }
     
     public void borrarCliente (int id){
-        String sql="DELETE FROM cliente WHERE id = ? AND borrado = 0";
+        String sql="UPDATE cliente SET borrado= 1 WHERE id = ?";
         try {
             PreparedStatement ps=conexionData.prepareStatement(sql);
             ps.setInt(1, id);
