@@ -28,16 +28,17 @@ public class BicicletaData {
     }
     
     public void guardarBicicleta (Bicicleta bici){
-        String query = "INSERT INTO `bicicleta`(numero_serie, tipo, color, cliente, borrado) VALUES (?,?,?,?,0)";
+        String query = "INSERT INTO `bicicleta`(numero_serie, marca, tipo, color, cliente, borrado) VALUES (?,?,?,?,?,0)";
         
         try {
             PreparedStatement ps = conexionData.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             
             ps.setLong(1, bici.getNumero_serie());
-            ps.setString(2, bici.getTipo());
-            ps.setString(3, bici.getColor());
-            ps.setInt(4, bici.getCliente().getId());// Corroborar que sea el id lo que corresponde
-           // ps.setBoolean(5, bici.getBorrado());
+            ps.setString(2, bici.getMarca());
+            ps.setString(3, bici.getTipo());
+            ps.setString(4, bici.getColor());
+            ps.setInt(5, bici.getCliente().getId());// Corroborar que sea el id lo que corresponde
+           // ps.setBoolean(6, bici.getBorrado());
             
             
             if (ps.executeUpdate() > 0) {
@@ -60,7 +61,7 @@ public class BicicletaData {
     }
         public Bicicleta buscarBicicletaPorID(int id) {
         Bicicleta bici = null;
-        String sql = "SELECT * FROM bicicleta WHERE id = ?";
+        String sql = "SELECT * FROM bicicleta WHERE id = ? AND borrado= 0";
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
             ps.setInt(1, id);
@@ -69,6 +70,7 @@ public class BicicletaData {
                 bici = new Bicicleta();
                 bici.setId(rs.getInt("id"));
                 bici.setNumero_serie(rs.getLong("numero_serie"));
+                bici.setMarca("marca");
                 bici.setTipo(rs.getString("tipo"));
                 bici.setColor(rs.getString("color"));
                 bici.setCliente(cData.buscarCliente(rs.getInt("cliente")));
@@ -85,16 +87,17 @@ public class BicicletaData {
     }
         // actualizar bicicleta
          public void actualizarBicicleta(Bicicleta bici) {
-        String sqlQuery = "UPDATE bicicleta SET numero_serie= ? ,tipo= ? ,color= ? ,cliente= ?, borrado= ? WHERE id = ?";
+        String sqlQuery = "UPDATE bicicleta SET numero_serie= ? ,marca = ? ,tipo= ? ,color= ? ,cliente= ? WHERE id = ?";
             if (buscarBicicletaPorID(bici.getId()) != null) {
             try {
             PreparedStatement ps = conexionData.prepareStatement(sqlQuery);
             ps.setLong(1, bici.getNumero_serie());
-            ps.setString(2, bici.getTipo());
-            ps.setString(3, bici.getColor());
-            ps.setInt(4, bici.getCliente().getId());
-            ps.setDouble(5, bici.getId());
-            ps.setBoolean(6, bici.getBorrado()); //  los chicos tienen is? preguntar
+            ps.setString(2, bici.getMarca());
+            ps.setString(3, bici.getTipo());
+            ps.setString(4, bici.getColor());
+            ps.setInt(5, bici.getCliente().getId());
+            ps.setDouble(6, bici.getId());
+           // ps.setBoolean(7, bici.getBorrado()); //  los chicos tienen is? preguntar
            
             if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Se pudo actualizar la bicicleta.");
@@ -127,6 +130,7 @@ public class BicicletaData {
                 Bicicleta bici = new Bicicleta();
 
                 bici.setId(rs.getInt("id"));
+                bici.setMarca(rs.getString("marca"));
                 bici.setTipo(rs.getString("tipo"));
                 bici.setColor(rs.getString("color"));
                 bici.setNumero_serie(rs.getLong("numero_serie"));

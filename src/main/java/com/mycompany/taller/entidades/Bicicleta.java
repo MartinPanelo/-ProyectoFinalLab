@@ -14,6 +14,7 @@ public class Bicicleta {
     
     private int id;
     private long numero_serie;
+    private String marca;
     private String tipo;
     private String color;
     private Cliente cliente;
@@ -22,17 +23,19 @@ public class Bicicleta {
     public Bicicleta() {
     }
 
-    public Bicicleta(int id, long numero_serie, String tipo, String color, Cliente cliente, Boolean borrado) {
+    public Bicicleta(int id, long numero_serie,String marca, String tipo, String color, Cliente cliente, Boolean borrado) {
         this.id = id;
         this.numero_serie = numero_serie;
+        this.marca = marca;
         this.tipo = tipo;
         this.color = color;
         this.cliente = cliente;
         this.borrado = borrado;
     }
 
-    public Bicicleta(long numero_serie, String tipo, String color, Cliente cliente, Boolean borrado) {
+    public Bicicleta(long numero_serie, String marca, String tipo, String color, Cliente cliente, Boolean borrado) {
         this.numero_serie = numero_serie;
+        this.marca = marca;
         this.tipo = tipo;
         this.color = color;
         this.cliente = cliente;
@@ -54,6 +57,15 @@ public class Bicicleta {
     public void setNumero_serie(long numero_serie) {
         this.numero_serie = numero_serie;
     }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+    
 
     public String getTipo() {
         return tipo;
@@ -117,6 +129,9 @@ public class Bicicleta {
         if (this.numero_serie != other.numero_serie) {
             return false;
         }
+        if (!Objects.equals(this.marca, other.marca)) {
+            return false;
+        }
         if (!Objects.equals(this.tipo, other.tipo)) {
             return false;
         }
@@ -129,7 +144,7 @@ public class Bicicleta {
 
     @Override
     public String toString() {
-        return "Bicicleta{" + "id=" + id + ", numero_serie=" + numero_serie + ", tipo=" + tipo + ", color=" + color + ", cliente=" + cliente + ", borrado =" + borrado +'}';
+        return "Bicicleta{" + "id=" + id + ", numero_serie=" + numero_serie + ", marca=" + marca + ", tipo=" + tipo + ", color=" + color + ", cliente=" + cliente + ", borrado =" + borrado +'}';
     }
     
     
