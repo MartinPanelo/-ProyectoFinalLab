@@ -17,23 +17,26 @@ public class Bicicleta {
     private String tipo;
     private String color;
     private Cliente cliente;
+    private Boolean borrado;
 
     public Bicicleta() {
     }
 
-    public Bicicleta(int id, long numero_serie, String tipo, String color, Cliente cliente) {
+    public Bicicleta(int id, long numero_serie, String tipo, String color, Cliente cliente, Boolean borrado) {
         this.id = id;
         this.numero_serie = numero_serie;
         this.tipo = tipo;
         this.color = color;
         this.cliente = cliente;
+        this.borrado = borrado;
     }
 
-    public Bicicleta(long numero_serie, String tipo, String color, Cliente cliente) {
+    public Bicicleta(long numero_serie, String tipo, String color, Cliente cliente, Boolean borrado) {
         this.numero_serie = numero_serie;
         this.tipo = tipo;
         this.color = color;
         this.cliente = cliente;
+        this.borrado = borrado; 
     }
 
     public int getId() {
@@ -76,6 +79,14 @@ public class Bicicleta {
         this.cliente = cliente;
     }
 
+    public Boolean getBorrado() {
+        return borrado;
+    }
+
+    public void setBorrado(Boolean borrado) {
+        this.borrado = borrado;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -84,6 +95,7 @@ public class Bicicleta {
         hash = 17 * hash + Objects.hashCode(this.tipo);
         hash = 17 * hash + Objects.hashCode(this.color);
         hash = 17 * hash + Objects.hashCode(this.cliente);
+        hash = 17 * hash + Objects.hashCode(this.borrado ? 1 : 0);
         return hash;
     }
 
@@ -112,11 +124,12 @@ public class Bicicleta {
             return false;
         }
         return Objects.equals(this.cliente, other.cliente);
-    }
+        
+     }
 
     @Override
     public String toString() {
-        return "Bicicleta{" + "id=" + id + ", numero_serie=" + numero_serie + ", tipo=" + tipo + ", color=" + color + ", cliente=" + cliente + '}';
+        return "Bicicleta{" + "id=" + id + ", numero_serie=" + numero_serie + ", tipo=" + tipo + ", color=" + color + ", cliente=" + cliente + ", borrado =" + borrado +'}';
     }
     
     
