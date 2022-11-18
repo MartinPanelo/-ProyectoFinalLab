@@ -86,15 +86,14 @@ public class ServicioData {
     
     
     public void actualizarServicio(Servicio s) {
-        String sqlQuery = "UPDATE servicio SET codigo= ? ,descripcion= ? ,costo= ? ,borrado= ? WHERE id = ?";
+        String sqlQuery = "UPDATE servicio SET codigo= ? ,descripcion= ? ,costo= ? WHERE id = ?";
             if (buscarServicioPorID(s.getId()) != null) {
             try {
             PreparedStatement ps = conexionData.prepareStatement(sqlQuery);
             ps.setInt(1, s.getCodigo());
             ps.setString(2, s.getDescripcion());
             ps.setDouble(3, s.getCosto());
-            ps.setBoolean(4, s.isBorrado());
-            ps.setInt(5, s.getId());
+            ps.setInt(4, s.getId());
            
            
             if (ps.executeUpdate() > 0) {
