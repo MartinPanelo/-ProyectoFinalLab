@@ -19,7 +19,7 @@ public class ClienteData {
     
     public void guardarCliente(Cliente cliente) {
 
-        String query = "INSERT INTO `cliente`(`nombre`, `apellido`, `dni`, `domicilio`, `celular`, `borrado`) VALUES (?,?,?,?,?,false)";
+        String query = "INSERT INTO cliente(nombre, apellido, dni, domicilio, celular, borrado) VALUES (?,?,?,?,?,false)";
         try {
             PreparedStatement ps = conexionData.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, cliente.getNombre());
@@ -73,7 +73,7 @@ public class ClienteData {
     }
     
     public void actualizarCliente(Cliente cliente) {
-        String sqlQuery = "UPDATE `cliente` SET `nombre`= ?,`apellido`= ?,`dni`= ?,`domicilio`= ?,`celular`= ? WHERE id = ?";
+        String sqlQuery = "UPDATE cliente SET nombre= ?, apellido= ?, dni= ?, domicilio= ?, celular= ? WHERE id = ?";
             if (buscarCliente(cliente.getId()) != null) {
             try {
             PreparedStatement ps = conexionData.prepareStatement(sqlQuery);
@@ -85,9 +85,9 @@ public class ClienteData {
             ps.setInt(6, cliente.getId());
            
             if (ps.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Registro actualizado");
+                JOptionPane.showMessageDialog(null, "Cliente actualizado");
             } else  {
-                JOptionPane.showMessageDialog(null, "Error al actualizar registro");
+                JOptionPane.showMessageDialog(null, "Error al actualizar cliente");
             }
             
             ps.close();
@@ -108,7 +108,7 @@ public class ClienteData {
             if (ps.executeUpdate() <= 0) {
                 JOptionPane.showMessageDialog(null, "No se pudo eliminar");
             } else  {   
-                JOptionPane.showMessageDialog(null, "Se elimino el alumno correctamente");
+                JOptionPane.showMessageDialog(null, "Se elimino el cliente correctamente");
             }
             
             ps.close();

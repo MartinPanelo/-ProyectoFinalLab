@@ -85,10 +85,10 @@ public class Taller {
         cData.guardarCliente(unCliente);
 
         //busco un cliente por ID
-        System.out.println("Cliente por ID : " + cData.buscarCliente(7));
+        System.out.println("Cliente por ID : " + cData.buscarCliente(3));
 
         //actualizar cliente
-        Cliente ClienteActializado = cData.buscarCliente(7);
+        Cliente ClienteActializado = cData.buscarCliente(3);
         unCliente.setCelular(123123);
         cData.actualizarCliente(ClienteActializado);
 
@@ -96,7 +96,7 @@ public class Taller {
         System.out.println("Lista de clientes : "+cData.listarClientes());
         
         //borro un cliente por id
-        cData.borrarCliente(7);
+        cData.borrarCliente(6);
 
 //---------------------------------------------------------------------------
 
@@ -104,23 +104,23 @@ public class Taller {
         BicicletaData bData = new BicicletaData(conDataBase);
           
         //Creo una biclieta /no existen las bicicletas sin dueños          
-        Cliente clientedb = cData.buscarCliente(7);//es un cliente de la base de datos y borrado = false//          
+        Cliente clientedb = cData.buscarCliente(2);//es un cliente de la base de datos y borrado = false//          
         Bicicleta unaBici = new Bicicleta(1994, "DosRuedas", "todo terrreno", "Verde", clientedb, false);          
         bData.guardarBicicleta(unaBici);
           
         //Buscar por ID          
-        System.out.println("bici por ID : "+bData.buscarBicicletaPorID(9));
+        System.out.println("bici por ID : "+bData.buscarBicicletaPorID(4));
           
         //Listar todas las bicis no borradas
         System.out.println("lista de bicicletas : "+bData.listarBicicletas());
      
         //actualizar datos de una bicicleta        
-        Bicicleta unabici = bData.buscarBicicletaPorID(9);      
+        Bicicleta unabici = bData.buscarBicicletaPorID(4);      
         unabici.setColor("Zaffre");
         bData.actualizarBicicleta(unabici);
           
         //Borrar una bicicleta
-        bData.borrarBicicleta(9);
+        bData.borrarBicicleta(5);
           
           
           
