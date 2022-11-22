@@ -19,7 +19,7 @@ public class ClienteData {
     
     public void guardarCliente(Cliente cliente) {
 
-        String query = "INSERT INTO `cliente`(`nombre`, `apellido`, `dni`, `domicilio`, `celular`, `borrado`) VALUES (?,?,?,?,?,0)";
+        String query = "INSERT INTO `cliente`(`nombre`, `apellido`, `dni`, `domicilio`, `celular`, `borrado`) VALUES (?,?,?,?,?,false)";
         try {
             PreparedStatement ps = conexionData.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, cliente.getNombre());
@@ -27,7 +27,7 @@ public class ClienteData {
             ps.setLong(3, cliente.getDni());
             ps.setString(4, cliente.getDomicilio());
             ps.setLong(5, cliente.getCelular());
-            ps.setBoolean(6, cliente.isborrado());
+          //  ps.setBoolean(6, cliente.isborrado());// este no va ya esta establecido en la consulta
             
             if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Cliente registrado");
@@ -41,7 +41,7 @@ public class ClienteData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Un error a ocurrido");
+            JOptionPane.showMessageDialog(null, "Un error a ocurrido"+ex);
         }
 
     }

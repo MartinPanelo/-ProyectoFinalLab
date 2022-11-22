@@ -28,7 +28,7 @@ public class BicicletaData {
     }
     
     public void guardarBicicleta (Bicicleta bici){
-        String query = "INSERT INTO `bicicleta`(numero_serie, marca, tipo, color, cliente, borrado) VALUES (?,?,?,?,?,0)";
+        String query = "INSERT INTO `bicicleta`(numero_serie, marca, tipo, color, id_cliente, borrado) VALUES (?,?,?,?,?,false)";
         
         try {
             PreparedStatement ps = conexionData.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -56,9 +56,11 @@ public class BicicletaData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Se produjo un error. en agregar bicicleta");
+            JOptionPane.showMessageDialog(null, "Se produjo un error. en agregar bicicleta"+ex);
         }
     }
+    
+    
         public Bicicleta buscarBicicletaPorID(int id) {
         Bicicleta bici = null;
         String sql = "SELECT * FROM bicicleta WHERE id = ? AND borrado= 0";
@@ -70,24 +72,24 @@ public class BicicletaData {
                 bici = new Bicicleta();
                 bici.setId(rs.getInt("id"));
                 bici.setNumero_serie(rs.getLong("numero_serie"));
-                bici.setMarca("marca");
+                bici.setMarca(rs.getString("marca"));
                 bici.setTipo(rs.getString("tipo"));
                 bici.setColor(rs.getString("color"));
-                bici.setCliente(cData.buscarCliente(rs.getInt("cliente")));
+                bici.setCliente(cData.buscarCliente(rs.getInt("id_cliente")));
                 bici.setBorrado(rs.getBoolean("borrado"));
             }
             
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Se produjo un error. en buscar bicicleta por id.");
+            JOptionPane.showMessageDialog(null, "Se produjo un error. en buscar bicicleta por id."+ex);
         }
 
         return bici;
     }
         // actualizar bicicleta
          public void actualizarBicicleta(Bicicleta bici) {
-        String sqlQuery = "UPDATE bicicleta SET numero_serie= ? ,marca = ? ,tipo= ? ,color= ? ,cliente= ? WHERE id = ?";
+        String sqlQuery = "UPDATE bicicleta SET numero_serie= ? ,marca = ? ,tipo= ? ,color= ? ,id_cliente= ? WHERE id = ?";
             if (buscarBicicletaPorID(bici.getId()) != null) {
             try {
             PreparedStatement ps = conexionData.prepareStatement(sqlQuery);
@@ -108,7 +110,7 @@ public class BicicletaData {
             ps.close();
             
         } catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Se produjo un error. en actualizar bicicleta");
+            JOptionPane.showMessageDialog(null, "Se produjo un error. en actualizar bicicleta"+ex);
         }  
             }
             
@@ -135,7 +137,7 @@ public class BicicletaData {
                 bici.setColor(rs.getString("color"));
                 bici.setNumero_serie(rs.getLong("numero_serie"));
                 bici.setBorrado(rs.getBoolean("borrado"));
-                bici.setCliente(cData.buscarCliente(rs.getInt("cliente")));
+                bici.setCliente(cData.buscarCliente(rs.getInt("id_cliente")));
 
                 listaBici.add(bici);
             }
