@@ -19,25 +19,28 @@ public class Reparacion {
     private boolean estado;
     private double precio_final;
     private LocalDate fecha_entrada;
+    private boolean borrado;
 
     public Reparacion() {
     }
 
-    public Reparacion(int id, Bicicleta biclicleta, Servicio servicio, boolean estado, double precio_final, LocalDate fecha_entrada) {
+    public Reparacion(int id, Bicicleta biclicleta, Servicio servicio, boolean estado, double precio_final, LocalDate fecha_entrada, boolean borrado) {
         this.id = id;
         this.biclicleta = biclicleta;
         this.servicio = servicio;
         this.estado = estado;
         this.precio_final = precio_final;
         this.fecha_entrada = fecha_entrada;
+        this.borrado = borrado;
     }
 
-    public Reparacion(Bicicleta biclicleta, Servicio servicio, boolean estado, double precio_final, LocalDate fecha_entrada) {
+    public Reparacion(Bicicleta biclicleta, Servicio servicio, boolean estado, double precio_final, LocalDate fecha_entrada, boolean borrado) {
         this.biclicleta = biclicleta;
         this.servicio = servicio;
         this.estado = estado;
         this.precio_final = precio_final;
         this.fecha_entrada = fecha_entrada;
+        this.borrado = borrado;
     }
 
     public int getId() {
@@ -88,15 +91,24 @@ public class Reparacion {
         this.fecha_entrada = fecha_entrada;
     }
 
+    public boolean isBorrado() {
+        return borrado;
+    }
+
+    public void setBorrado(boolean borrado) {
+        this.borrado = borrado;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + this.id;
-        hash = 29 * hash + Objects.hashCode(this.biclicleta);
-        hash = 29 * hash + Objects.hashCode(this.servicio);
-        hash = 29 * hash + (this.estado ? 1 : 0);
-        hash = 29 * hash + (int) (Double.doubleToLongBits(this.precio_final) ^ (Double.doubleToLongBits(this.precio_final) >>> 32));
-        hash = 29 * hash + Objects.hashCode(this.fecha_entrada);
+        int hash = 3;
+        hash = 47 * hash + this.id;
+        hash = 47 * hash + Objects.hashCode(this.biclicleta);
+        hash = 47 * hash + Objects.hashCode(this.servicio);
+        hash = 47 * hash + (this.estado ? 1 : 0);
+        hash = 47 * hash + (int) (Double.doubleToLongBits(this.precio_final) ^ (Double.doubleToLongBits(this.precio_final) >>> 32));
+        hash = 47 * hash + Objects.hashCode(this.fecha_entrada);
+        hash = 47 * hash + (this.borrado ? 1 : 0);
         return hash;
     }
 
@@ -121,6 +133,9 @@ public class Reparacion {
         if (Double.doubleToLongBits(this.precio_final) != Double.doubleToLongBits(other.precio_final)) {
             return false;
         }
+        if (this.borrado != other.borrado) {
+            return false;
+        }
         if (!Objects.equals(this.biclicleta, other.biclicleta)) {
             return false;
         }
@@ -132,9 +147,9 @@ public class Reparacion {
 
     @Override
     public String toString() {
-        return "Reparacion{" + "id=" + id + ", biclicleta=" + biclicleta + ", servicio=" + servicio + ", estado=" + estado + ", precio_final=" + precio_final + ", fecha_entrada=" + fecha_entrada + '}';
+        return "Reparacion{" + "id=" + id + ", biclicleta=" + biclicleta + ", servicio=" + servicio + ", estado=" + estado + ", precio_final=" + precio_final + ", fecha_entrada=" + fecha_entrada + ", borrado=" + borrado + '}';
     }
     
-    
+        
     
 }

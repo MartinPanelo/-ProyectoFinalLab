@@ -122,23 +122,6 @@ public class Taller {
         //Borrar una bicicleta
         bData.borrarBicicleta(5);
           
-          
-          
-          
-          
-          
-          
-          
-          
-          
-
-        
-
-
-
-
-
-
 
     }
 }

@@ -18,23 +18,23 @@ import java.util.ArrayList;
  * @author ezequ
  */
 public class RepuestoData {
-    
+
     private Connection conexionData;
 
     public RepuestoData(Connection connection) {
         this.conexionData = connection;
     }
-    
+
     public void guardarRepuesto(Repuesto r) {
 
-        String query = "INSERT INTO repuesto(numero_serie, nombre, descripcion, precio, borrado) VALUES (?, ?, ?, ?, 0)";
+        String query = "INSERT INTO repuesto(numero_serie, nombre, descripcion, precio, borrado) VALUES (?, ?, ?, ?, false)";
         try {
             PreparedStatement ps = conexionData.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, r.getNumero_serie());
             ps.setString(2, r.getNombre());
             ps.setString(3, r.getDescripcion());
             ps.setDouble(4, r.getPrecio());
-            
+
             if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Repuesto agregado");
             } else {
@@ -46,18 +46,18 @@ public class RepuestoData {
             } else {
                 JOptionPane.showMessageDialog(null, "No se pudo obtener ID del repuesto");
             }
-            
+
             ps.close();
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Se produjo un error. en agregar repuesto");
         }
 
     }
-    
+
     public Repuesto buscarRepuestoPorID(int id) {
         Repuesto r = null;
-        String sql = "SELECT * FROM repuesto WHERE id = ? AND borrado = 0";
+        String sql = "SELECT * FROM repuesto WHERE id = ? AND borrado = false";
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
             ps.setInt(1, id);
@@ -71,9 +71,9 @@ public class RepuestoData {
                 r.setPrecio(rs.getDouble("precio"));
                 r.setBorrado(rs.getBoolean("borrado"));
             }
-            
+
             ps.close();
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Se produjo un error. en buscar repuesto por id.");
         }
@@ -82,41 +82,43 @@ public class RepuestoData {
 //        }
         return r;
     }
-    
+
     public void actualizarRepuesto(Repuesto r) {
         String sqlQuery = "UPDATE repuesto SET numero_serie= ? ,nombre= ? ,descripcion= ? ,precio= ? WHERE id = ?";
-            if (buscarRepuestoPorID(r.getId()) != null) {
+        if (buscarRepuestoPorID(r.getId()) != null) {
             try {
-            PreparedStatement ps = conexionData.prepareStatement(sqlQuery);
-            ps.setLong(1, r.getNumero_serie());
-            ps.setString(2, r.getNombre());
-            ps.setString(3, r.getDescripcion());
-            ps.setDouble(4, r.getPrecio());
-            ps.setInt(5, r.getId());
-          
-            if (ps.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Se pudo actualizar el repuesto.");
-            } else  {
-                JOptionPane.showMessageDialog(null, "No se pudo actualizar el repuesto.");
+                PreparedStatement ps = conexionData.prepareStatement(sqlQuery);
+                ps.setLong(1, r.getNumero_serie());
+                ps.setString(2, r.getNombre());
+                ps.setString(3, r.getDescripcion());
+                ps.setDouble(4, r.getPrecio());
+                ps.setInt(5, r.getId());
+
+                if (ps.executeUpdate() > 0) {
+                    JOptionPane.showMessageDialog(null, "Se pudo actualizar el repuesto.");
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo actualizar el repuesto.");
+                }
+
+                ps.close();
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Se produjo un error. en actualizar repuesto" + ex);
             }
-            
-            ps.close();
-            
-        } catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Se produjo un error. en actualizar repuesto" + ex);
-        }  
-            }
-            
         }
-    
-    public ArrayList<Repuesto> listarRepuestos() {
+
+    }
+
+    public ArrayList<Repuesto> listarRepuestos(boolean estadito) {
 
         ArrayList<Repuesto> l1 = new ArrayList();
 
-        String sql = "SELECT * FROM repuesto WHERE borrado= 0";
+        String sql = "SELECT * FROM repuesto WHERE borrado= ?";
 
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
+
+            ps.setBoolean(1, estadito); //Estadito igual true me va atraer los que estan borrados y si es igual a false trae los que no estan borrados
 
             ResultSet rs = ps.executeQuery();
 
@@ -141,26 +143,45 @@ public class RepuestoData {
         }
         return l1;
     }
-    
-    
-        public void borrarRepuesto (int id){
-        String sql="UPDATE repuesto SET borrado= 1 WHERE id = ?";
+
+    public void darDeBajaReparacion(int id) {
+        String sql = "UPDATE repuesto SET borrado= true WHERE id = ?";
         try {
-            PreparedStatement ps=conexionData.prepareStatement(sql);
+            PreparedStatement ps = conexionData.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
-            
+
             if (ps.executeUpdate() <= 0) {
-                JOptionPane.showMessageDialog(null, "No se pudo eliminar el repuesto");
-            } else  {   
-                JOptionPane.showMessageDialog(null, "Se elimino el repuesto correctamente");
+                JOptionPane.showMessageDialog(null, "No se pudo dar de baja al repuesto");
+            } else {
+                JOptionPane.showMessageDialog(null, "Se dio de baja al repuesto correctamente");
             }
-         
+
             ps.close();
-            
-    }   catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error de tipo exception "+ ex);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de tipo exception " + ex);
         }
     }
-      
+
+    public void darDeAltaReparacion(int id) {
+        String sql = "UPDATE repuesto SET borrado= false WHERE id = ?";
+        try {
+            PreparedStatement ps = conexionData.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+
+            if (ps.executeUpdate() <= 0) {
+                JOptionPane.showMessageDialog(null, "No se pudo dar de alta al repuesto");
+            } else {
+                JOptionPane.showMessageDialog(null, "Se dio de alta al repuesto correctamente");
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de tipo exception " + ex);
+        }
+    }
+
 }

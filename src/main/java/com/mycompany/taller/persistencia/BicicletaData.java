@@ -63,7 +63,7 @@ public class BicicletaData {
     
         public Bicicleta buscarBicicletaPorID(int id) {
         Bicicleta bici = null;
-        String sql = "SELECT * FROM bicicleta WHERE id = ? AND borrado= 0";
+        String sql = "SELECT * FROM bicicleta WHERE id = ? AND borrado= false";
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
             ps.setInt(1, id);
@@ -116,14 +116,16 @@ public class BicicletaData {
             
         }
         // listar bicicleta
-        public ArrayList<Bicicleta> listarBicicletas() {
+        public ArrayList<Bicicleta> listarBicicletas(boolean estadito) {
 
         ArrayList<Bicicleta> listaBici = new ArrayList();
-
-        String sql = "SELECT * FROM bicicleta WHERE borrado= 0";
+       
+        String sql = "SELECT * FROM bicicleta WHERE borrado= ?";
 
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
+            
+            ps.setBoolean(1, estadito); //Estadito igual true me va atraer los que estan borrados y si es igual a false trae los que no estan borrados
 
             ResultSet rs = ps.executeQuery();
 
@@ -150,24 +152,43 @@ public class BicicletaData {
         return listaBici;
     }
         
-        //borrar bicicleta
-    public void borrarBicicleta (int id){
-        String sql="UPDATE bicicleta SET borrado= 1 WHERE id = ?";
+      public void darDeBajaReparacion (int id){
+        String sql="UPDATE bicicleta SET borrado= true WHERE id = ?";
         try {
             PreparedStatement ps=conexionData.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
             
             if (ps.executeUpdate() <= 0) {
-                JOptionPane.showMessageDialog(null, "No se pudo eliminar la bicicleta");
+                JOptionPane.showMessageDialog(null, "No se pudo dar de baja a la bicicleta");
             } else  {   
-                JOptionPane.showMessageDialog(null, "Se elimino la bicicleta correctamente");
+                JOptionPane.showMessageDialog(null, "Se dio de baja a la bicicleta correctamente");
             }
          
             ps.close();
             
     }   catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error de tipo exception "+ ex);
+            JOptionPane.showMessageDialog(null, "Error de tipo exception " + ex);
+        }
+    }
+    
+    public void darDeAltaReparacion (int id){
+        String sql="UPDATE bicicleta SET borrado= false WHERE id = ?";
+        try {
+            PreparedStatement ps=conexionData.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            
+            if (ps.executeUpdate() <= 0) {
+                JOptionPane.showMessageDialog(null, "No se pudo dar de alta a la bicicleta");
+            } else  {   
+                JOptionPane.showMessageDialog(null, "Se dio de alta a la bicicleta correctamente");
+            }
+         
+            ps.close();
+            
+    }   catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de tipo exception " + ex);
         }
     }
 }
