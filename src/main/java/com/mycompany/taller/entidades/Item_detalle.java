@@ -17,23 +17,26 @@ public class Item_detalle {
     private Repuesto repuesto;
     private int cantidad;
     private double suma_precios;
+    private boolean borrado;
 
     public Item_detalle() {
     }
 
-    public Item_detalle(int id_detalle, Reparacion reparacion, Repuesto repuesto, int cantidad, double suma_precios) {
+    public Item_detalle(int id_detalle, Reparacion reparacion, Repuesto repuesto, int cantidad, double suma_precios, boolean borrado) {
         this.id_detalle = id_detalle;
         this.reparacion = reparacion;
         this.repuesto = repuesto;
         this.cantidad = cantidad;
         this.suma_precios = suma_precios;
+        this.borrado = borrado;
     }
 
-    public Item_detalle(Reparacion reparacion, Repuesto repuesto, int cantidad, double suma_precios) {
+    public Item_detalle(Reparacion reparacion, Repuesto repuesto, int cantidad, double suma_precios, boolean borrado) {
         this.reparacion = reparacion;
         this.repuesto = repuesto;
         this.cantidad = cantidad;
         this.suma_precios = suma_precios;
+        this.borrado = borrado;
     }
 
     public int getId_detalle() {
@@ -76,6 +79,14 @@ public class Item_detalle {
         this.suma_precios = suma_precios;
     }
 
+    public boolean isBorrado() {
+        return borrado;
+    }
+
+    public void setBorrado(boolean borrado) {
+        this.borrado = borrado;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -84,6 +95,7 @@ public class Item_detalle {
         hash = 29 * hash + Objects.hashCode(this.repuesto);
         hash = 29 * hash + this.cantidad;
         hash = 29 * hash + (int) (Double.doubleToLongBits(this.suma_precios) ^ (Double.doubleToLongBits(this.suma_precios) >>> 32));
+        hash = 17 * hash + Objects.hashCode(this.borrado ? 1 : 0);
         return hash;
     }
 
@@ -116,7 +128,7 @@ public class Item_detalle {
 
     @Override
     public String toString() {
-        return "Item_detalle{" + "id_detalle=" + id_detalle + ", reparacion=" + reparacion + ", repuesto=" + repuesto + ", cantidad=" + cantidad + ", suma_precios=" + suma_precios + '}';
+        return "Item_detalle{" + "id_detalle=" + id_detalle + ", reparacion=" + reparacion + ", repuesto=" + repuesto + ", cantidad=" + cantidad + ", suma_precios=" + suma_precios + ", borrado =" + borrado +'}';
     }
     
     
