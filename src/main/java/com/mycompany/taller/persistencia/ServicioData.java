@@ -141,7 +141,7 @@ public class ServicioData {
         return listaS;
     }
 
-    public void darDeBajaReparacion(int id) {
+    public void darDeBajaServicio(int id) {
         String sql = "UPDATE servicio SET borrado= true WHERE id = ?";
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
@@ -161,7 +161,7 @@ public class ServicioData {
         }
     }
 
-    public void darDeAltaReparacion(int id) {
+    public void darDeAltaServicio(int id) {
         String sql = "UPDATE servicio SET borrado= false WHERE id = ?";
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);

@@ -152,7 +152,7 @@ public class BicicletaData {
         return listaBici;
     }
         
-      public void darDeBajaReparacion (int id){
+      public void darDeBajaBicicleta (int id){
         String sql="UPDATE bicicleta SET borrado= true WHERE id = ?";
         try {
             PreparedStatement ps=conexionData.prepareStatement(sql);
@@ -172,7 +172,7 @@ public class BicicletaData {
         }
     }
     
-    public void darDeAltaReparacion (int id){
+    public void darDeAltaBicicleta (int id){
         String sql="UPDATE bicicleta SET borrado= false WHERE id = ?";
         try {
             PreparedStatement ps=conexionData.prepareStatement(sql);

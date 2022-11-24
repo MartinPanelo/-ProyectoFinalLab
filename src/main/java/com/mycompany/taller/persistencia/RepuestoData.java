@@ -144,7 +144,7 @@ public class RepuestoData {
         return l1;
     }
 
-    public void darDeBajaReparacion(int id) {
+    public void darDeBajaRepuesto(int id) {
         String sql = "UPDATE repuesto SET borrado= true WHERE id = ?";
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
@@ -164,7 +164,7 @@ public class RepuestoData {
         }
     }
 
-    public void darDeAltaReparacion(int id) {
+    public void darDeAltaRepuesto(int id) {
         String sql = "UPDATE repuesto SET borrado= false WHERE id = ?";
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);

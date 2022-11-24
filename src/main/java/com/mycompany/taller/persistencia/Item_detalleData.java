@@ -32,7 +32,7 @@ public class Item_detalleData {
     //guardar itemDetalle
     
     public void guardarItem_detalle (Item_detalle item){
-        String query = "INSERT INTO `item_detalle`(reparacion, repuesto, cantidad, suma_precios, borrado) VALUES (?,?,?,?,false)";
+        String query = "INSERT INTO item_detalle(id_reparacion, id_repuesto, cantidad, suma_precios, borrado) VALUES (?,?,?,?,false)";
         
         try {
             PreparedStatement ps = conexionData.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -65,7 +65,7 @@ public class Item_detalleData {
     //buscar itemDetalle
     public Item_detalle buscarItem_detallePorID(int id) {
         Item_detalle item = null;
-        String sql = "SELECT * FROM item_detalle WHERE id = ? AND borrado= 0";
+        String sql = "SELECT * FROM item_detalle WHERE id = ? AND borrado= false";
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
             ps.setInt(1, id);
@@ -93,7 +93,7 @@ public class Item_detalleData {
     
     //actualizar itemDetalle
     public void actualizarItem_detalle(Item_detalle item) { 
-        String sqlQuery = "UPDATE Item_detalle SET id_reparacion= ? ,id_repuesto = ? ,cantidad= ? ,suma_precios= ? WHERE id = ?";
+        String sqlQuery = "UPDATE item_detalle SET id_reparacion= ? ,id_repuesto = ? ,cantidad= ? ,suma_precios= ? WHERE id = ?";
             if (buscarItem_detallePorID(item.getId_detalle()) != null) {
             try {
             PreparedStatement ps = conexionData.prepareStatement(sqlQuery);
@@ -113,7 +113,7 @@ public class Item_detalleData {
             ps.close();
             
         } catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Se produjo un error. en actualizar item"+ex);
+            JOptionPane.showMessageDialog(null, "Se produjo un error. en actualizar item" + ex);
         }  
             }
             
@@ -123,7 +123,7 @@ public class Item_detalleData {
 
         ArrayList<Item_detalle> listaItem = new ArrayList();
        
-        String sql = "SELECT * FROM Item_detalle WHERE borrado= ?";
+        String sql = "SELECT * FROM item_detalle WHERE borrado= ?";
 
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
@@ -156,7 +156,7 @@ public class Item_detalleData {
     
     //dar de baja itemDetalle
       public void darDeBajaItem_detalle (int id){
-        String sql="UPDATE Item_detalle SET borrado= true WHERE id = ?";
+        String sql="UPDATE item_detalle SET borrado= true WHERE id = ?";
         try {
             PreparedStatement ps=conexionData.prepareStatement(sql);
             ps.setInt(1, id);
@@ -177,7 +177,7 @@ public class Item_detalleData {
     //dar de alta itemDetalle
       
       public void darDeAltaItem_detalle (int id){
-        String sql="UPDATE Item_detalle SET borrado= false WHERE id = ?";
+        String sql="UPDATE item_detalle SET borrado= false WHERE id = ?";
         try {
             PreparedStatement ps=conexionData.prepareStatement(sql);
             ps.setInt(1, id);

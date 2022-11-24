@@ -99,7 +99,7 @@ public class ClienteData {
 
     }
 
-    public void darDeBajaReparacion(int id) {
+    public void darDeBajaCliente(int id) {
         String sql = "UPDATE cliente SET borrado= true WHERE id = ?";
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
@@ -119,7 +119,7 @@ public class ClienteData {
         }
     }
 
-    public void darDeAltaReparacion(int id) {
+    public void darDeAltaCliente(int id) {
         String sql = "UPDATE cliente SET borrado= false WHERE id = ?";
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);

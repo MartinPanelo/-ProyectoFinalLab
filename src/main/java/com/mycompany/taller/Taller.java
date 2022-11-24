@@ -47,9 +47,19 @@ public class Taller {
         
         sData.actualizarServicio(serviactualizar);
         
-        //listo todos los servicios
-        System.out.println("Listo todos los servicios");
-        System.out.println(sData.listarServicios());
+        //listo todos los servicios que estan dados de baja
+        System.out.println("Lista de servicios que estan dados de baja:");
+        System.out.println(sData.listarServicios(true));
+        
+        //listo todos los servicios que estan dados de alta
+        System.out.println("Lista de servicios que estan dados de alta:");
+        System.out.println(sData.listarServicios(false));
+        
+        //dar de baja a un servicio
+        sData.darDeBajaServicio(6);
+        
+        //dar de alta a un servicio
+        sData.darDeAltaServicio(4);
   
 //---------------------------------------------------------------------------
 
@@ -71,9 +81,19 @@ public class Taller {
         
         rData.actualizarRepuesto(rActualizado);
         
-        //listar todos los repuestos
-        System.out.println("\nMostrar todos los repuestos registrados:\n");
-        System.out.println(rData.listarRepuestos());
+        //listar todos los repuestos que estan dados de baja
+        System.out.println("\nLista de repuestos que estan dados de baja:\n");
+        System.out.println(rData.listarRepuestos(true));
+        
+        //listar todos los repuestos que estan dados de alta
+        System.out.println("\nlista de repuestos que estan dados de alta:\n");
+        System.out.println(rData.listarRepuestos(false));
+        
+        //dar de baja a un repuesto
+        rData.darDeBajaRepuesto(2);
+        
+        //dar de alta a un repuesto
+        rData.darDeAltaRepuesto(4);
 
 //---------------------------------------------------------------------------
 
@@ -81,7 +101,7 @@ public class Taller {
         ClienteData cData = new ClienteData(conDataBase);
 
         //Guardar un cliente
-        Cliente unCliente = new Cliente("El Chapo", "Guzman", 38439, "mexico", 26648743, true);
+        Cliente unCliente = new Cliente("El Chapo", "Guzman", 38439, "mexico", 266487432, true);
         cData.guardarCliente(unCliente);
 
         //busco un cliente por ID
@@ -92,11 +112,17 @@ public class Taller {
         unCliente.setCelular(123123);
         cData.actualizarCliente(ClienteActializado);
 
-        //listo todos los clientes no borrados
-        System.out.println("Lista de clientes : "+cData.listarClientes());
+        //listo todos los clientes que estan dados de baja 
+        System.out.println("Lista de clientes que estan dados de baja: "+cData.listarClientes(true));
         
-        //borro un cliente por id
-        cData.borrarCliente(6);
+        //listo todos los clientes que estan dados de alta 
+        System.out.println("Lista de clientes que estan dados de alta: "+cData.listarClientes(false));
+        
+        //dar de baja a un cliente por id
+        cData.darDeBajaCliente(6);
+        
+        //dar de alta a un cliente
+        cData.darDeAltaCliente(3);
 
 //---------------------------------------------------------------------------
 
@@ -111,16 +137,24 @@ public class Taller {
         //Buscar por ID          
         System.out.println("bici por ID : "+bData.buscarBicicletaPorID(4));
           
-        //Listar todas las bicis no borradas
-        System.out.println("lista de bicicletas : "+bData.listarBicicletas());
+        //Listar todas las bicis que estan dadas de baja
+        System.out.println("lista de bicicletas que estan dados de baja: "+bData.listarBicicletas(true));
+        
+        //Listar todas las bicis que estan dadas de alta
+        System.out.println("lista de bicicletas que estan dadas de alta: "+bData.listarBicicletas(false));
      
         //actualizar datos de una bicicleta        
         Bicicleta unabici = bData.buscarBicicletaPorID(4);      
         unabici.setColor("Zaffre");
         bData.actualizarBicicleta(unabici);
           
-        //Borrar una bicicleta
-        bData.borrarBicicleta(5);
+        //Dar de baja a una bicicleta
+        bData.darDeBajaBicicleta(4);
+        
+        //Dar de alta a una bicicleta
+        bData.darDeAltaBicicleta(5);
+        
+//--------------------------------------------------------------------------- 
           
 
     }
