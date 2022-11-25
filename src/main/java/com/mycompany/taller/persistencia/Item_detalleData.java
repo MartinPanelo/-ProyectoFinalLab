@@ -40,7 +40,7 @@ public class Item_detalleData {
             ps.setInt(1, item.getReparacion().getId());
             ps.setInt(2, item.getRepuesto().getId());
             ps.setInt(3, item.getCantidad());
-            ps.setDouble(4, item.getSuma_precios());
+            ps.setDouble(4, item.getSuma_precios()); //Valor de repuesto por cantidad de repuesto
                             
             
             if (ps.executeUpdate() > 0) {
