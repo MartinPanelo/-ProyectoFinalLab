@@ -202,6 +202,13 @@ public class Taller {
         
         System.out.println("\nLa lista de bicicletas por fecha es: \n"+  reData.buscarBicicletasPorFecha(LocalDate.of(2022, 11, 17)));
         
+        //Lista de bicicletas reparadas 1
+        
+        System.out.println("\nLa lista de bicicletas reparadas es: \n"+  reData.buscarBicicletasPorEstado(true));
+        
+        //Lista de bicicletas NO reparadas 2 4 5 7 5
+        
+        System.out.println("\nLa lista de bicicletas NO REPARADAS es: \n"+  reData.buscarBicicletasPorEstado(false));
 //------ITEM-DETALLE---------------------------------------------------------------------
         
         //Conexion de Item_detalleData

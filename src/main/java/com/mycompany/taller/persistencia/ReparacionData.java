@@ -253,5 +253,33 @@ public class ReparacionData {
         }
         return bicicletasPorFecha;
     }
+    
+    public ArrayList<Bicicleta> buscarBicicletasPorEstado(Boolean estado) {
+
+        ArrayList<Bicicleta> bicicletasPorEstado = new ArrayList();
+
+        String sql = "SELECT id_bicicleta FROM `reparacion` WHERE estado = ?";
+
+        try {
+            PreparedStatement ps = conexionData.prepareStatement(sql);
+            
+            ps.setBoolean(1, estado); 
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Bicicleta bici = bData.buscarBicicletaPorID(rs.getInt("id_bicicleta"));
+                
+                bicicletasPorEstado.add(bici);
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al obtener la lista de bicicletas por estado "+ex);
+        }
+        return bicicletasPorEstado;
+    }
      
 }
