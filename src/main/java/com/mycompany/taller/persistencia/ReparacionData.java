@@ -122,7 +122,7 @@ public class ReparacionData {
 
         ArrayList<Reparacion> listaR = new ArrayList();
 
-        String sql = "SELECT * FROM reparacion WHERE borrado= false";
+        String sql = "SELECT * FROM reparacion WHERE borrado= ?";
 
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
