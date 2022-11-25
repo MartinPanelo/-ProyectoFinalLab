@@ -57,7 +57,7 @@ public class RepuestoData {
 
     public Repuesto buscarRepuestoPorID(int id) {
         Repuesto r = null;
-        String sql = "SELECT * FROM repuesto WHERE id = ? AND borrado = false";
+        String sql = "SELECT * FROM repuesto WHERE id = ?";
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
             ps.setInt(1, id);

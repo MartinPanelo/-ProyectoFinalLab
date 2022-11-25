@@ -48,7 +48,7 @@ public class ClienteData {
 
     public Cliente buscarCliente(int id) {
         Cliente cliente = null;
-        String sql = "SELECT * FROM cliente WHERE id = ? AND borrado = 0";
+        String sql = "SELECT * FROM cliente WHERE id = ?";
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
             ps.setInt(1, id);

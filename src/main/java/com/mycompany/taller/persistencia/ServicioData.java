@@ -56,7 +56,7 @@ public class ServicioData {
 
     public Servicio buscarServicioPorID(int id) {
         Servicio s = null;
-        String sql = "SELECT * FROM servicio WHERE id = ? AND borrado = false";
+        String sql = "SELECT * FROM servicio WHERE id = ?";
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
             ps.setInt(1, id);

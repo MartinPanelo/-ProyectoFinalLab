@@ -66,7 +66,7 @@ public class ReparacionData {
     
     public Reparacion buscarReparacionPorID(int id) {
         Reparacion r = null;
-        String sql = "SELECT * FROM reparacion WHERE id = ? AND borrado = false";
+        String sql = "SELECT * FROM reparacion WHERE id = ?";
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
             ps.setInt(1, id);

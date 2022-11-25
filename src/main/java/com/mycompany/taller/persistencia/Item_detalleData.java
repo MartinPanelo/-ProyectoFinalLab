@@ -65,7 +65,7 @@ public class Item_detalleData {
     //buscar itemDetalle
     public Item_detalle buscarItem_detallePorID(int id) {
         Item_detalle item = null;
-        String sql = "SELECT * FROM item_detalle WHERE id = ? AND borrado= false";
+        String sql = "SELECT * FROM item_detalle WHERE id = ?";
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
             ps.setInt(1, id);

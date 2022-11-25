@@ -65,7 +65,7 @@ public class Taller {
         sData.darDeBajaServicio(6);
         
         //dar de alta a un servicio
-        sData.darDeAltaServicio(4);
+        sData.darDeAltaServicio(5);
   
 //------REPUESTO---------------------------------------------------------------------
 

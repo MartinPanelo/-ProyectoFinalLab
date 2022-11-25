@@ -63,7 +63,7 @@ public class BicicletaData {
     
         public Bicicleta buscarBicicletaPorID(int id) {
         Bicicleta bici = null;
-        String sql = "SELECT * FROM bicicleta WHERE id = ? AND borrado= false";
+        String sql = "SELECT * FROM bicicleta WHERE id = ?";
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
             ps.setInt(1, id);
