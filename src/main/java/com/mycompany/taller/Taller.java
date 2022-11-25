@@ -196,12 +196,14 @@ public class Taller {
         Item_detalleData iData = new Item_detalleData(conDataBase);
         
         //Creo un item
-        Reparacion reparacion = reData.buscarReparacionPorID(1);
+        Reparacion reparacion = reData.buscarReparacionPorID(2);
         Repuesto repuesto = rData.buscarRepuestoPorID(6);
         Item_detalle nuevoItem = new Item_detalle(reparacion, repuesto, 2, 0, false);
         
+        iData.guardarItem_detalle(nuevoItem);
+        
         //Busco por ID un item
-        iData.buscarItem_detallePorID(6);
+        System.out.println("item detalle por ID : "+ iData.buscarItem_detallePorID(6));
         
         //listar todos los items que estan dados de baja
         System.out.println("\nlista de items que estan dados de baja: \n"+ iData.listarItem(true));
@@ -212,12 +214,13 @@ public class Taller {
         //actualizar datos de un item
         Item_detalle itemActualizado = iData.buscarItem_detallePorID(6);
         itemActualizado.setCantidad(4);
+        iData.actualizarItem_detalle(itemActualizado);
         
         //Dar de baja a un item
         iData.darDeBajaItem_detalle(6);
         
         //Dar de alta a una item
-        bData.darDeAltaBicicleta(4);
+        iData.darDeAltaItem_detalle(4);
         
     }
 }
