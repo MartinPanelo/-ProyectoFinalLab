@@ -4,6 +4,7 @@
  */
 package com.mycompany.taller.persistencia;
 
+import com.mycompany.taller.entidades.Bicicleta;
 import com.mycompany.taller.entidades.Reparacion;
 import java.sql.Connection;
 import java.sql.Date;
@@ -25,11 +26,13 @@ public class ReparacionData {
     private Connection conexionData;
     private BicicletaData bData;
     private ServicioData sData;
+    private ClienteData cData;
 
     public ReparacionData(Connection connection) {
         this.conexionData = connection;
         this.bData = new BicicletaData(connection);
         this.sData = new ServicioData(connection);
+        this.cData = new ClienteData(connection);
     }
     
     public void crearReparacion(Reparacion reparacion) {
@@ -194,4 +197,32 @@ public class ReparacionData {
         }
     }
     
+    public ArrayList<Bicicleta> buscarBicicletasPorServicio(int id_servicio) {
+
+        ArrayList<Bicicleta> bicicletasPorServicio = new ArrayList();
+
+        String sql = "SELECT id_bicicleta FROM reparacion WHERE id_servicio = ?";
+
+        try {
+            PreparedStatement ps = conexionData.prepareStatement(sql);
+            
+            ps.setInt(1, id_servicio); 
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Bicicleta bici = bData.buscarBicicletaPorID(rs.getInt("id_bicicleta"));
+                
+                bicicletasPorServicio.add(bici);
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al obtener la lista de bicicletas por servicio "+ex);
+        }
+        return bicicletasPorServicio;
+    }
+     
 }

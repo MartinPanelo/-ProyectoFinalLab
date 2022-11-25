@@ -160,6 +160,9 @@ public class Taller {
         //Dar de alta a una bicicleta
         bData.darDeAltaBicicleta(5);
         
+        //listar bicicletas por dueño
+        System.out.println("\nLa lista de bicicletas por dueño es: \n"+ bData.buscarBicicletaPorCliente(2));
+       
 //------REPARACIÓN--------------------------------------------------------------------- 
 
         //Conexion de ReparacionData
@@ -189,6 +192,9 @@ public class Taller {
         
         //Dar de alta a una reparación
         reData.darDeAltaReparacion(5);
+        
+        //Lista de bicicletas por servicio
+        System.out.println("\nLa lista de bicicletas por servicio es: \n"+  reData.buscarBicicletasPorServicio(1));
         
 //------ITEM-DETALLE---------------------------------------------------------------------
         

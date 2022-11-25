@@ -191,4 +191,42 @@ public class BicicletaData {
             JOptionPane.showMessageDialog(null, "Error de tipo exception " + ex);
         }
     }
+    
+    public ArrayList<Bicicleta> buscarBicicletaPorCliente(int id_cliente) {
+
+        ArrayList<Bicicleta> buscarBicicletaPorCliente = new ArrayList();
+       
+        String sql = "SELECT * FROM bicicleta WHERE id_cliente = ? AND borrado= false";
+
+        try {
+            PreparedStatement ps = conexionData.prepareStatement(sql);
+            
+            ps.setInt(1, id_cliente);
+            
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Bicicleta bici = new Bicicleta();
+
+                bici.setId(rs.getInt("id"));
+                bici.setMarca(rs.getString("marca"));
+                bici.setTipo(rs.getString("tipo"));
+                bici.setColor(rs.getString("color"));
+                bici.setNumero_serie(rs.getLong("numero_serie"));
+                bici.setBorrado(rs.getBoolean("borrado"));
+                bici.setCliente(cData.buscarCliente(rs.getInt("id_cliente")));
+
+                buscarBicicletaPorCliente.add(bici);
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al obtener la lista de bicicletas por clientes " + ex);
+        }
+        return buscarBicicletaPorCliente;
+    }
+    
+   
 }
