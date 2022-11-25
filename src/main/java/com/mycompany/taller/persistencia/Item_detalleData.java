@@ -72,7 +72,7 @@ public class Item_detalleData {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 item = new Item_detalle();
-                item.setId_detalle(rs.getInt("id"));
+                item.setId_detalle(rs.getInt("id_detalle"));
                 item.setReparacion(repaData.buscarReparacionPorID(rs.getInt("id_reparacion")));
                 item.setRepuesto(repuData.buscarRepuestoPorID(rs.getInt("id_repuesto")));
                 item.setCantidad(rs.getInt("cantidad"));
@@ -93,7 +93,7 @@ public class Item_detalleData {
     
     //actualizar itemDetalle
     public void actualizarItem_detalle(Item_detalle item) { 
-        String sqlQuery = "UPDATE item_detalle SET id_reparacion= ? ,id_repuesto = ? ,cantidad= ? ,suma_precios= ? WHERE id = ?";
+        String sqlQuery = "UPDATE item_detalle SET id_reparacion= ? ,id_repuesto = ? ,cantidad= ? ,suma_precios= ? WHERE id_detalle = ?";
             if (buscarItem_detallePorID(item.getId_detalle()) != null) {
             try {
             PreparedStatement ps = conexionData.prepareStatement(sqlQuery);
@@ -136,7 +136,7 @@ public class Item_detalleData {
 
                 Item_detalle item = new Item_detalle();
 
-                item.setId_detalle(rs.getInt("id"));
+                item.setId_detalle(rs.getInt("id_detalle"));
                 item.setReparacion(repaData.buscarReparacionPorID(rs.getInt("id_reparacion")));
                 item.setRepuesto(repuData.buscarRepuestoPorID(rs.getInt("id_repuesto")));
                 item.setCantidad(rs.getInt("cantidad"));
@@ -156,7 +156,7 @@ public class Item_detalleData {
     
     //dar de baja itemDetalle
       public void darDeBajaItem_detalle (int id){
-        String sql="UPDATE item_detalle SET borrado= true WHERE id = ?";
+        String sql="UPDATE item_detalle SET borrado= true WHERE id_detalle = ?";
         try {
             PreparedStatement ps=conexionData.prepareStatement(sql);
             ps.setInt(1, id);
@@ -177,7 +177,7 @@ public class Item_detalleData {
     //dar de alta itemDetalle
       
       public void darDeAltaItem_detalle (int id){
-        String sql="UPDATE item_detalle SET borrado= false WHERE id = ?";
+        String sql="UPDATE item_detalle SET borrado= false WHERE id_detalle = ?";
         try {
             PreparedStatement ps=conexionData.prepareStatement(sql);
             ps.setInt(1, id);
