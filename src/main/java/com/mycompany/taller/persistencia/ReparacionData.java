@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -223,6 +224,34 @@ public class ReparacionData {
             JOptionPane.showMessageDialog(null, "Se produjo un error al obtener la lista de bicicletas por servicio "+ex);
         }
         return bicicletasPorServicio;
+    }
+    
+    public ArrayList<Bicicleta> buscarBicicletasPorFecha(LocalDate fecha) {
+
+        ArrayList<Bicicleta> bicicletasPorFecha = new ArrayList();
+
+        String sql = "SELECT id_bicicleta FROM `reparacion` WHERE fecha_entrada = ?";
+
+        try {
+            PreparedStatement ps = conexionData.prepareStatement(sql);
+            
+            ps.setDate(1, Date.valueOf(fecha)); 
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Bicicleta bici = bData.buscarBicicletaPorID(rs.getInt("id_bicicleta"));
+                
+                bicicletasPorFecha.add(bici);
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al obtener la lista de bicicletas por fecha "+ex);
+        }
+        return bicicletasPorFecha;
     }
      
 }

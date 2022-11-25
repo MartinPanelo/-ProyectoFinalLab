@@ -100,6 +100,8 @@ public class Taller {
         
         //dar de alta a un repuesto
         rData.darDeAltaRepuesto(4);
+        
+        
 
 //------CLIENTE---------------------------------------------------------------------
 
@@ -195,6 +197,10 @@ public class Taller {
         
         //Lista de bicicletas por servicio
         System.out.println("\nLa lista de bicicletas por servicio es: \n"+  reData.buscarBicicletasPorServicio(1));
+        
+        //Lista de bicicletas por fecha 2022-11-17
+        
+        System.out.println("\nLa lista de bicicletas por fecha es: \n"+  reData.buscarBicicletasPorFecha(LocalDate.of(2022, 11, 17)));
         
 //------ITEM-DETALLE---------------------------------------------------------------------
         
