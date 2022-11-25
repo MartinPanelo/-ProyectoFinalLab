@@ -100,6 +100,8 @@ public class Taller {
         
         //dar de alta a un repuesto
         rData.darDeAltaRepuesto(4);
+        
+        
 
 //------CLIENTE---------------------------------------------------------------------
 
@@ -190,6 +192,17 @@ public class Taller {
         //Lista de bicicletas por servicio
         System.out.println("\nLa lista de bicicletas por servicio es: \n"+  reData.buscarBicicletasPorServicio(1));
         
+        //Lista de bicicletas por fecha 2022-11-17
+        
+        System.out.println("\nLa lista de bicicletas por fecha es: \n"+  reData.buscarBicicletasPorFecha(LocalDate.of(2022, 11, 17)));
+        
+        //Lista de bicicletas reparadas 1
+        
+        System.out.println("\nLa lista de bicicletas reparadas es: \n"+  reData.buscarBicicletasPorEstado(true));
+        
+        //Lista de bicicletas NO reparadas 2 4 5 7 5
+        
+        System.out.println("\nLa lista de bicicletas NO REPARADAS es: \n"+  reData.buscarBicicletasPorEstado(false));
 //------ITEM-DETALLE---------------------------------------------------------------------
         
         //Conexion de Item_detalleData
