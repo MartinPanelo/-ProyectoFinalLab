@@ -121,16 +121,15 @@ public class ReparacionData {
             
     }
     
-    public ArrayList<Reparacion> listarReparaciones(boolean estadito) {
+    public ArrayList<Reparacion> listarReparaciones() {
 
         ArrayList<Reparacion> listaR = new ArrayList();
 
-        String sql = "SELECT * FROM reparacion WHERE borrado= ?";
+        String sql = "SELECT * FROM reparacion WHERE borrado= false";
 
         try {
-            PreparedStatement ps = conexionData.prepareStatement(sql);
-            
-            ps.setBoolean(1, estadito); //Estadito igual true me va atraer los que estan borrados y si es igual a false trae los que no estan borrados
+            PreparedStatement ps = conexionData.prepareStatement(sql);           
+     
 
             ResultSet rs = ps.executeQuery();
 
@@ -157,7 +156,7 @@ public class ReparacionData {
         return listaR;
     }
     
-    public void darDeBajaReparacion (int id){
+    public void borrarReparacion (int id){
         String sql="UPDATE reparacion SET borrado= true WHERE id = ?";
         try {
             PreparedStatement ps=conexionData.prepareStatement(sql);
@@ -165,9 +164,9 @@ public class ReparacionData {
             ps.executeUpdate();
             
             if (ps.executeUpdate() <= 0) {
-                JOptionPane.showMessageDialog(null, "No se pudo dar de baja a la reparación");
+                JOptionPane.showMessageDialog(null, "No se borro la reparación");
             } else  {   
-                JOptionPane.showMessageDialog(null, "Se dio de baja a la reparación correctamente");
+                JOptionPane.showMessageDialog(null, "Se borro reparación correctamente");
             }
          
             ps.close();
@@ -177,25 +176,6 @@ public class ReparacionData {
         }
     }
     
-    public void darDeAltaReparacion (int id){
-        String sql="UPDATE reparacion SET borrado= false WHERE id = ?";
-        try {
-            PreparedStatement ps=conexionData.prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.executeUpdate();
-            
-            if (ps.executeUpdate() <= 0) {
-                JOptionPane.showMessageDialog(null, "No se pudo dar de alta a la reparación");
-            } else  {   
-                JOptionPane.showMessageDialog(null, "Se dio de alta a la reparación correctamente");
-            }
-         
-            ps.close();
-            
-    }   catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error de tipo exception " + ex);
-        }
-    }
     
     public ArrayList<Bicicleta> buscarBicicletasPorServicio(int id_servicio) {
 

@@ -162,7 +162,7 @@ public class Taller {
         
         //listar bicicletas por dueño
         System.out.println("\nLa lista de bicicletas por dueño es: \n"+ bData.buscarBicicletaPorCliente(2));
-       
+               
 //------REPARACIÓN--------------------------------------------------------------------- 
 
         //Conexion de ReparacionData
@@ -174,13 +174,10 @@ public class Taller {
         Reparacion nuevaReparacion = new Reparacion(bicidb, serviciodb, false, 0, LocalDate.of(2022, 11, 24), false);
         
         //Busco por ID una reparación
-        System.out.println("\nReparación por ID: \n" + reData.buscarReparacionPorID(2));
+        System.out.println("\nReparación por ID: \n" + reData.buscarReparacionPorID(2));      
         
-        //listar todas las reparaciones que estan dadas de baja
-        System.out.println("\nlista de reparaciones que estan dadas de bajas: \n"+ reData.listarReparaciones(true));
-        
-        //listar todas las reparaciones que estan dadas de alta
-        System.out.println("\nlista de reparaciones que estan dadas de altas: \n"+ reData.listarReparaciones(false));
+        //listar todas las reparaciones
+        System.out.println("\nlista de reparaciones que estan dadas de altas: \n"+ reData.listarReparaciones());
         
         //actualizar datos de una reparación
         Servicio serviActualizado = sData.buscarServicioPorID(2);
@@ -188,10 +185,7 @@ public class Taller {
         reparacionActualizada.setServicio(serviActualizado); //Cambio de servicio
         
         //Dar de baja a una reparación
-        reData.darDeBajaReparacion(4);
-        
-        //Dar de alta a una reparación
-        reData.darDeAltaReparacion(5);
+        reData.borrarReparacion(4);
         
         //Lista de bicicletas por servicio
         System.out.println("\nLa lista de bicicletas por servicio es: \n"+  reData.buscarBicicletasPorServicio(1));
@@ -210,12 +204,10 @@ public class Taller {
         
         //Busco por ID un item
         System.out.println("item detalle por ID : "+ iData.buscarItem_detallePorID(6));
+
         
-        //listar todos los items que estan dados de baja
-        System.out.println("\nlista de items que estan dados de baja: \n"+ iData.listarItem(true));
-        
-        //listar todas las items que estan dados de alta
-        System.out.println("\nlista de items que estan dados de alta: \n"+ iData.listarItem(false));
+        //listar todas las items
+        System.out.println("\nlista de items que estan dados de alta: \n"+ iData.listarItem());
         
         //actualizar datos de un item
         Item_detalle itemActualizado = iData.buscarItem_detallePorID(6);
@@ -223,10 +215,8 @@ public class Taller {
         iData.actualizarItem_detalle(itemActualizado);
         
         //Dar de baja a un item
-        iData.darDeBajaItem_detalle(6);
-        
-        //Dar de alta a una item
-        iData.darDeAltaItem_detalle(4);
+        iData.borrarItemDetalle(6);
+
         
     }
 }

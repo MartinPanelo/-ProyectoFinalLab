@@ -119,16 +119,15 @@ public class Item_detalleData {
             
         }
     //listar itemDetalle
-    public ArrayList<Item_detalle> listarItem(boolean estadito) {
+    public ArrayList<Item_detalle> listarItem() {
 
         ArrayList<Item_detalle> listaItem = new ArrayList();
        
-        String sql = "SELECT * FROM item_detalle WHERE borrado= ?";
+        String sql = "SELECT * FROM item_detalle WHERE borrado= false";
 
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
             
-            ps.setBoolean(1, estadito); //Estadito igual true me va atraer los que estan borrados y si es igual a false trae los que no estan borrados
 
             ResultSet rs = ps.executeQuery();
 
@@ -155,7 +154,7 @@ public class Item_detalleData {
     }
     
     //dar de baja itemDetalle
-      public void darDeBajaItem_detalle (int id){
+      public void borrarItemDetalle (int id){
         String sql="UPDATE item_detalle SET borrado= true WHERE id_detalle = ?";
         try {
             PreparedStatement ps=conexionData.prepareStatement(sql);
@@ -163,9 +162,9 @@ public class Item_detalleData {
             ps.executeUpdate();
             
             if (ps.executeUpdate() <= 0) {
-                JOptionPane.showMessageDialog(null, "No se pudo dar de baja el item");
+                JOptionPane.showMessageDialog(null, "No se pudo borrar el item");
             } else  {   
-                JOptionPane.showMessageDialog(null, "Se dio de baja el item correctamente");
+                JOptionPane.showMessageDialog(null, "Se borro el item correctamente");
             }
          
             ps.close();
@@ -174,25 +173,6 @@ public class Item_detalleData {
             JOptionPane.showMessageDialog(null, "Error de tipo exception " + ex);
         }
     }
-    //dar de alta itemDetalle
-      
-      public void darDeAltaItem_detalle (int id){
-        String sql="UPDATE item_detalle SET borrado= false WHERE id_detalle = ?";
-        try {
-            PreparedStatement ps=conexionData.prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.executeUpdate();
-            
-            if (ps.executeUpdate() <= 0) {
-                JOptionPane.showMessageDialog(null, "No se pudo dar de alta el item");
-            } else  {   
-                JOptionPane.showMessageDialog(null, "Se dio de alta el item correctamente");
-            }
-         
-            ps.close();
-            
-    }   catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error de tipo exception " + ex);
-        }
-    }
+
+
 }
