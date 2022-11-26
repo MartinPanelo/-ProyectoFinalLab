@@ -30,26 +30,37 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
+        jMgestionar = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Taller de bicicletas El pinchazo");
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 898, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 589, Short.MAX_VALUE)
         );
 
         jMenu2.setText("Bicicleta");
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("servicio");
+        jMenu3.setText("Servicios");
+
+        jMgestionar.setText("Gestionar");
+        jMgestionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMgestionarActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMgestionar);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Repuesto");
@@ -68,11 +79,20 @@ public class VistaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jDesktopPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMgestionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMgestionarActionPerformed
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        VistaServicio formularioAlumno = new VistaServicio();
+        formularioAlumno.setVisible(true);
+        jDesktopPane1.add(formularioAlumno);
+        jDesktopPane1.moveToFront(formularioAlumno);
+    }//GEN-LAST:event_jMgestionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -116,5 +136,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMgestionar;
     // End of variables declaration//GEN-END:variables
 }

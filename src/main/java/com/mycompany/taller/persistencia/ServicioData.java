@@ -5,6 +5,7 @@
 package com.mycompany.taller.persistencia;
 
 import com.mycompany.taller.entidades.Servicio;
+import com.mycompany.taller.vistas.VistaServicio;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -76,9 +77,6 @@ public class ServicioData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Se produjo un error. en buscar un servicio por id. " + ex);
         }
-//        if (a == null) {
-//            JOptionPane.showMessageDialog(null, "No se pudo buscar por id porque no existe un alumno con ese id.");
-//        }
         return s;
     }
 
