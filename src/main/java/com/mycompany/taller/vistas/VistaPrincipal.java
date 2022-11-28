@@ -31,7 +31,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMgestionar = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        JMRepuesto = new javax.swing.JMenu();
+        JMIgestion = new javax.swing.JMenuItem();
+        JMIlistado = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -63,8 +65,25 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("Repuesto");
-        jMenuBar1.add(jMenu4);
+        JMRepuesto.setText("Repuesto");
+
+        JMIgestion.setText("Gestion");
+        JMIgestion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMIgestionActionPerformed(evt);
+            }
+        });
+        JMRepuesto.add(JMIgestion);
+
+        JMIlistado.setText("Listado");
+        JMIlistado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMIlistadoActionPerformed(evt);
+            }
+        });
+        JMRepuesto.add(JMIlistado);
+
+        jMenuBar1.add(JMRepuesto);
 
         jMenu5.setText("Cliente");
         jMenuBar1.add(jMenu5);
@@ -93,6 +112,24 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jDesktopPane1.add(formularioAlumno);
         jDesktopPane1.moveToFront(formularioAlumno);
     }//GEN-LAST:event_jMgestionarActionPerformed
+
+    private void JMIgestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIgestionActionPerformed
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        VistaRepuesto gestionRepuesto = new VistaRepuesto();
+        gestionRepuesto.setVisible(true);
+        jDesktopPane1.add(gestionRepuesto);
+        jDesktopPane1.moveToFront(gestionRepuesto);
+    }//GEN-LAST:event_JMIgestionActionPerformed
+
+    private void JMIlistadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIlistadoActionPerformed
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        VistaListadoRepuesto listadoRepuesto = new VistaListadoRepuesto();
+        listadoRepuesto.setVisible(true);
+        jDesktopPane1.add(listadoRepuesto);
+        jDesktopPane1.moveToFront(listadoRepuesto);
+    }//GEN-LAST:event_JMIlistadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,10 +167,12 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem JMIgestion;
+    private javax.swing.JMenuItem JMIlistado;
+    private javax.swing.JMenu JMRepuesto;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMgestionar;

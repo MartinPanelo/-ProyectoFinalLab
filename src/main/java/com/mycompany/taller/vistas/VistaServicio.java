@@ -10,10 +10,10 @@ import com.mycompany.taller.persistencia.ServicioData;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JLabel;
+//import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
+//import javax.swing.JTextField;
+//import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -80,7 +80,6 @@ public class VistaServicio extends javax.swing.JInternalFrame {
         jLservicioBaja = new javax.swing.JLabel();
 
         setClosable(true);
-        setResizable(true);
         setTitle("Gestion de Servicios");
 
         jLDescripcion.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
@@ -132,7 +131,7 @@ public class VistaServicio extends javax.swing.JInternalFrame {
             }
         });
 
-        jBTNLimpiarCampos.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
+        jBTNLimpiarCampos.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
         jBTNLimpiarCampos.setText("Limpiar Campos");
         jBTNLimpiarCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,7 +180,7 @@ public class VistaServicio extends javax.swing.JInternalFrame {
         });
         jScrollPane6.setViewportView(jTServiciosAlta);
 
-        jBTNCrearServicio.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
+        jBTNCrearServicio.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
         jBTNCrearServicio.setText("Crear Servicio");
         jBTNCrearServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -289,17 +288,21 @@ public class VistaServicio extends javax.swing.JInternalFrame {
 
         int filaSelecionada = jTServiciosAlta.getSelectedRow();
 
-        if (jTFCodigo.getText().length() != 0 && jTFCosto.getText().length() != 0 && jTADescripcion.getText().length() != 0) {
-            Servicio ServicioaActualizar = new Servicio();
-            ServicioaActualizar.setCodigo(Integer.parseInt(jTFCodigo.getText()));
-            ServicioaActualizar.setDescripcion(jTADescripcion.getText());
-            ServicioaActualizar.setCosto(Double.parseDouble(jTFCosto.getText()));
-            ServicioaActualizar.setId((Integer) jTServiciosAlta.getValueAt(filaSelecionada, 0));
-            System.out.println(ServicioaActualizar.toString());
-            sData.actualizarServicio(ServicioaActualizar);
-            cargarServiciosAlta();
+        if (filaSelecionada != -1) {
+            if (jTFCodigo.getText().length() != 0 && jTFCosto.getText().length() != 0 && jTADescripcion.getText().length() != 0) {
+                Servicio ServicioaActualizar = new Servicio();
+                ServicioaActualizar.setCodigo(Integer.parseInt(jTFCodigo.getText()));
+                ServicioaActualizar.setDescripcion(jTADescripcion.getText());
+                ServicioaActualizar.setCosto(Double.parseDouble(jTFCosto.getText()));
+                ServicioaActualizar.setId((Integer) jTServiciosAlta.getValueAt(filaSelecionada, 0));
+                //   System.out.println(ServicioaActualizar.toString());
+                sData.actualizarServicio(ServicioaActualizar);
+                cargarServiciosAlta();
+            } else {
+                JOptionPane.showMessageDialog(this, "revise los campos (no se permiten campos vacios)");
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "revise los campos (no se permiten campos vacios)");
+            JOptionPane.showMessageDialog(this, "No a seleccionado ningun servicio.");
         }
 
 //        ServicioaActualizar.setId();    //    jTServiciosBaja.getValueAt(jTServiciosBaja.getSelectedRow(), 0)      
@@ -314,8 +317,6 @@ public class VistaServicio extends javax.swing.JInternalFrame {
 //        
 //        
 //        sData.actualizarServicio(ServicioaActualizar);
-       
-
 
     }//GEN-LAST:event_jBTNActualizarServicioActionPerformed
 
@@ -323,13 +324,11 @@ public class VistaServicio extends javax.swing.JInternalFrame {
 
         int filaSelecionada = jTServiciosBaja.getSelectedRow();
 
-        Servicio ServicioSelecionado;
-
+        //  Servicio ServicioSelecionado;
         if (filaSelecionada != -1) {
 
-            ServicioSelecionado = sData.buscarServicioPorID((Integer) jTServiciosBaja.getValueAt(filaSelecionada, 0));
-
-            sData.darDeAltaServicio(ServicioSelecionado.getId());
+            //     ServicioSelecionado = sData.buscarServicioPorID((Integer) jTServiciosBaja.getValueAt(filaSelecionada, 0));
+            sData.darDeAltaServicio((Integer) jTServiciosBaja.getValueAt(filaSelecionada, 0));
 
             cargarServiciosAlta();
             cargarServiciosBaja();
@@ -364,13 +363,11 @@ public class VistaServicio extends javax.swing.JInternalFrame {
 
         int filaSelecionada = jTServiciosAlta.getSelectedRow();
 
-        Servicio ServicioSelecionado;
-
+        //  Servicio ServicioSelecionado;
         if (filaSelecionada != -1) {
 
-            ServicioSelecionado = sData.buscarServicioPorID((Integer) jTServiciosAlta.getValueAt(filaSelecionada, 0));
-
-            sData.darDeBajaServicio(ServicioSelecionado.getId());
+            //   ServicioSelecionado = sData.buscarServicioPorID((Integer) jTServiciosAlta.getValueAt(filaSelecionada, 0));
+            sData.darDeBajaServicio((Integer) jTServiciosAlta.getValueAt(filaSelecionada, 0));
 
             cargarServiciosAlta();
             cargarServiciosBaja();
@@ -416,13 +413,9 @@ public class VistaServicio extends javax.swing.JInternalFrame {
 
         int filaSeleccionada = jTServiciosAlta.getSelectedRow();
 
-        Servicio SaActualizar = new Servicio();
-
-        SaActualizar = sData.buscarServicioPorID((Integer) jTServiciosAlta.getValueAt(filaSeleccionada, 0));
-
-        jTFCodigo.setText(String.valueOf(SaActualizar.getCodigo()));
-        jTFCosto.setText(String.valueOf(SaActualizar.getCosto()));
-        jTADescripcion.setText(SaActualizar.getDescripcion());
+        jTFCodigo.setText(jTServiciosAlta.getValueAt(filaSeleccionada, 1).toString());
+        jTFCosto.setText(jTServiciosAlta.getValueAt(filaSeleccionada, 2).toString());
+        jTADescripcion.setText((String) jTServiciosAlta.getValueAt(filaSeleccionada, 3));
 
 
     }//GEN-LAST:event_jTServiciosAltaMouseClicked
@@ -494,9 +487,9 @@ public class VistaServicio extends javax.swing.JInternalFrame {
 
         }
     }
-    
-    private void limpiarCampos(){
-          jTFCodigo.setText("");
+
+    private void limpiarCampos() {
+        jTFCodigo.setText("");
         jTFCosto.setText("");
         jTADescripcion.setText("");
     }
