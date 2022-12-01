@@ -34,7 +34,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
         JMRepuesto = new javax.swing.JMenu();
         JMIgestion = new javax.swing.JMenuItem();
         JMIlistado = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        JMCliente = new javax.swing.JMenu();
+        JMGestion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Taller de bicicletas El pinchazo");
@@ -85,8 +86,17 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(JMRepuesto);
 
-        jMenu5.setText("Cliente");
-        jMenuBar1.add(jMenu5);
+        JMCliente.setText("Cliente");
+
+        JMGestion.setText("Gestion");
+        JMGestion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMGestionActionPerformed(evt);
+            }
+        });
+        JMCliente.add(JMGestion);
+
+        jMenuBar1.add(JMCliente);
 
         setJMenuBar(jMenuBar1);
 
@@ -131,6 +141,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jDesktopPane1.moveToFront(listadoRepuesto);
     }//GEN-LAST:event_JMIlistadoActionPerformed
 
+    private void JMGestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMGestionActionPerformed
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        VistaCliente clientesGestion = new VistaCliente();
+        clientesGestion.setVisible(true);
+        jDesktopPane1.add(clientesGestion);
+        jDesktopPane1.moveToFront(clientesGestion);
+    }//GEN-LAST:event_JMGestionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -167,13 +186,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu JMCliente;
+    private javax.swing.JMenuItem JMGestion;
     private javax.swing.JMenuItem JMIgestion;
     private javax.swing.JMenuItem JMIlistado;
     private javax.swing.JMenu JMRepuesto;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMgestionar;
     // End of variables declaration//GEN-END:variables
