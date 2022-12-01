@@ -183,6 +183,8 @@ public class VistaListadoRepuesto extends javax.swing.JInternalFrame {
             repuestoSelecionado.setNombre((String.valueOf(JTlistadoDeRepuestos.getValueAt(filaSelecionada, 1))));
             repuestoSelecionado.setId((Integer) JTlistadoDeRepuestos.getValueAt(filaSelecionada, 0));
             rData.darDeAltaRepuesto(repuestoSelecionado.getId());
+            cargarListadoDeRepuestosQueEstanDadosDeBaja();
+            
         }
     }//GEN-LAST:event_JBdarDeAltaActionPerformed
 
@@ -193,6 +195,7 @@ public class VistaListadoRepuesto extends javax.swing.JInternalFrame {
         if (filaSelecionada != -1) {
             repuestoSelecionado.setId((Integer) JTlistadoDeRepuestos.getValueAt(filaSelecionada, 0));
             rData.darDeBajaRepuesto(repuestoSelecionado.getId());
+            cargarListadoDeRepuestosQueEstanDadosDeAlta();
         }
     }//GEN-LAST:event_JBdarDeBajaActionPerformed
 
@@ -215,15 +218,21 @@ public class VistaListadoRepuesto extends javax.swing.JInternalFrame {
     //Armar tabla
     private void armarTabla() {
         ArrayList<Object> columnas = new ArrayList();
-        columnas.add("ID");
+        columnas.add("id");
         columnas.add("Nombre");
         columnas.add("Número de serie");
         columnas.add("Descripción");
         columnas.add("Precio");
+        
         for (Object aux : columnas) {
             modeloDeTabla.addColumn(aux);
         }
+        
         JTlistadoDeRepuestos.setModel(modeloDeTabla);
+        JTlistadoDeRepuestos.getColumnModel().getColumn(0).setMaxWidth(0);
+        JTlistadoDeRepuestos.getColumnModel().getColumn(0).setMinWidth(0);
+        JTlistadoDeRepuestos.getColumnModel().getColumn(0).setPreferredWidth(0);
+        
     }
     
     //Cargar listados dados de alta
@@ -231,7 +240,7 @@ public class VistaListadoRepuesto extends javax.swing.JInternalFrame {
         modeloDeTabla.setNumRows(0);
         listaRepuestos = rData.listarRepuestos(false);
         for (Repuesto aux : listaRepuestos) {
-            modeloDeTabla.addRow(new Object[]{aux.getId(), aux.getNombre(), aux.getNumero_serie(), aux.getDescripcion(), aux.getPrecio()});
+            modeloDeTabla.addRow(new Object[]{aux.getId(), aux.getNombre(), aux.getNumero_serie(), aux.getDescripcion(), aux.getPrecio(), aux.getId()});
         }
     }
     
@@ -240,7 +249,7 @@ public class VistaListadoRepuesto extends javax.swing.JInternalFrame {
         modeloDeTabla.setNumRows(0);
         listaRepuestos = rData.listarRepuestos(true);
         for (Repuesto aux : listaRepuestos) {
-            modeloDeTabla.addRow(new Object[]{aux.getId(), aux.getNombre(), aux.getNumero_serie(), aux.getDescripcion(), aux.getPrecio()});
+            modeloDeTabla.addRow(new Object[]{aux.getId(), aux.getNombre(), aux.getNumero_serie(), aux.getDescripcion(), aux.getPrecio(), aux.getId()});
         }
     }
     

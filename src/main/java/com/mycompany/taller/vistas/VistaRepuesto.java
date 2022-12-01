@@ -19,29 +19,35 @@ public class VistaRepuesto extends javax.swing.JInternalFrame {
     /**
      * Creates new form VistaRepuesto
      */
-    
     Connection conexiondb = Conexion.getConexion();
     RepuestoData rData = new RepuestoData(conexiondb);
-    
+
     public VistaRepuesto() {
         initComponents();
     }
-    
+
     //Validaciones
-    public boolean validarCamposVaciosAgregar(){
-     if (JTFnombre.getText().equals("") || JTFnumSerie.getText().equals("") || JTFdescripcion.getText().equals("") || JTFprecio.getText().equals("")) {
-        return false;
+    public boolean validarCamposVaciosAgregar() {
+        if (JTFnombre.getText().equals("") || JTFnumSerie.getText().equals("") || JTFdescripcion.getText().equals("") || JTFprecio.getText().equals("")) {
+            return false;
+        }
+        return true;
     }
-    return true;
-   }
-    
-    public boolean validarCamposVaciosBuscar(){
+
+    public boolean validarCamposVaciosBuscarID() {
         if (JTFid.getText().equals("")) {
-        return false;
+            return false;
+        }
+        return true;
     }
-    return true;
+
+    public boolean validarCamposVaciosBuscarNumSerie() {
+        if (JTFnumSerie.getText().equals("")) {
+            return false;
+        }
+        return true;
     }
-    
+
     public boolean validarCamposVaciosActualizar() {
         if (JTFnombre.getText().equals("") || JTFid.getText().equals("") || JTFnumSerie.getText().equals("") || JTFdescripcion.getText().equals("") || JTFprecio.getText().equals("")) {
             return false;
@@ -79,7 +85,7 @@ public class VistaRepuesto extends javax.swing.JInternalFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Gestion de repuesto", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP), "Gestión de repuesto", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Constantia", 0, 16))); // NOI18N
 
         JLid.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        JLid.setText("ID");
+        JLid.setText("N° de repuesto");
 
         JLnombre.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLnombre.setText("Nombre");
@@ -92,6 +98,14 @@ public class VistaRepuesto extends javax.swing.JInternalFrame {
 
         JLprecio.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLprecio.setText("Precio");
+
+        JTFid.setEditable(false);
+        JTFid.setEnabled(false);
+        JTFid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTFidActionPerformed(evt);
+            }
+        });
 
         JBbuscar.setText("Buscar");
         JBbuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -138,14 +152,13 @@ public class VistaRepuesto extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(JTFnombre)
-                            .addComponent(JTFnumSerie)
                             .addComponent(JTFdescripcion)
                             .addComponent(JTFprecio)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(JTFid, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(JBbuscar)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(JTFnumSerie)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(JBbuscar))
+                            .addComponent(JTFid))
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(JBlimpiar)
@@ -161,8 +174,7 @@ public class VistaRepuesto extends javax.swing.JInternalFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLid)
-                    .addComponent(JTFid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JBbuscar))
+                    .addComponent(JTFid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLnombre)
@@ -170,7 +182,8 @@ public class VistaRepuesto extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLnumSerie)
-                    .addComponent(JTFnumSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JTFnumSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JBbuscar))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLdescripcion)
@@ -206,19 +219,19 @@ public class VistaRepuesto extends javax.swing.JInternalFrame {
     //Botón Buscar:
     private void JBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBbuscarActionPerformed
         try {
-        if (validarCamposVaciosBuscar()) {
-        Repuesto r = new Repuesto();
-        r = rData.buscarRepuestoPorID(Integer.parseInt(JTFid.getText()));
-        JTFnombre.setText(r.getNombre());
-        JTFnumSerie.setText(String.valueOf(r.getNumero_serie()));
-        JTFdescripcion.setText(r.getDescripcion());
-        JTFprecio.setText(String.valueOf(r.getPrecio()));
-        } else  {
-            JOptionPane.showMessageDialog(null, "Falta ingresar el id para buscar.");
+            if (validarCamposVaciosBuscarNumSerie()) {
+                Repuesto r = new Repuesto();
+                r = rData.buscarRepuestoPorNumeroDeSerie(Long.parseLong(JTFnumSerie.getText()));
+                JTFnombre.setText(r.getNombre());
+                JTFid.setText(String.valueOf(r.getId()));
+                JTFdescripcion.setText(r.getDescripcion());
+                JTFprecio.setText(String.valueOf(r.getPrecio()));
+            } else {
+                JOptionPane.showMessageDialog(null, "Falta ingresar el id para buscar.");
+            }
+        } catch (NumberFormatException | NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "El id ingresado contiene caracteres o es invalido.");
         }
-        } catch (NumberFormatException | NullPointerException ex)  {
-            JOptionPane.showMessageDialog(null, "El id ingresado contiene caracteres o es invalido." );    
-        }        
     }//GEN-LAST:event_JBbuscarActionPerformed
 
     //Botón Limpiar
@@ -233,16 +246,16 @@ public class VistaRepuesto extends javax.swing.JInternalFrame {
     //Botón Agregar
     private void JBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBagregarActionPerformed
         try {
-        if (validarCamposVaciosAgregar()) {
-            Repuesto r = new Repuesto();
-            r.setNombre(JTFnombre.getText());
-            r.setPrecio(Double.parseDouble(JTFprecio.getText()));
-            r.setDescripcion(JTFdescripcion.getText());
-            r.setNumero_serie(Long.parseLong(JTFnumSerie.getText()));
-            rData.guardarRepuesto(r);
-        } else  {
-            JOptionPane.showMessageDialog(null, "Faltan llenar campos");
-        }
+            if (validarCamposVaciosAgregar()) {
+                Repuesto r = new Repuesto();
+                r.setNombre(JTFnombre.getText());
+                r.setPrecio(Double.parseDouble(JTFprecio.getText()));
+                r.setDescripcion(JTFdescripcion.getText());
+                r.setNumero_serie(Long.parseLong(JTFnumSerie.getText()));
+                rData.guardarRepuesto(r);
+            } else {
+                JOptionPane.showMessageDialog(null, "Faltan llenar campos");
+            }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Ocurrio un problema revise los datos ingresados.");
         }
@@ -251,21 +264,26 @@ public class VistaRepuesto extends javax.swing.JInternalFrame {
     //Botón Actualizar
     private void JBactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBactualizarActionPerformed
         try {
-        if (validarCamposVaciosActualizar()) {
-        Repuesto r = new Repuesto();
-        r.setNombre(JTFnombre.getText());
-        r.setPrecio(Double.parseDouble(JTFprecio.getText()));
-        r.setDescripcion(JTFdescripcion.getText());
-        r.setNumero_serie(Long.parseLong(JTFnumSerie.getText()));
-        r.setId(Integer.parseInt(JTFid.getText()));
-        rData.actualizarRepuesto(r);
-        } else  {   
-            JOptionPane.showMessageDialog(null, "Faltan llenar campos");
-        }
-        } catch (NumberFormatException ex)  {
+            if (validarCamposVaciosActualizar()) {
+                Repuesto r = new Repuesto();
+                r.setNombre(JTFnombre.getText());
+                r.setPrecio(Double.parseDouble(JTFprecio.getText()));
+                r.setDescripcion(JTFdescripcion.getText());
+                r.setNumero_serie(Long.parseLong(JTFnumSerie.getText()));
+                r.setId(Integer.parseInt(JTFid.getText()));
+                rData.actualizarRepuesto(r);
+            } else {
+                JOptionPane.showMessageDialog(null, "Faltan llenar campos");
+            }
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Ocurrio un problema revise los datos ingresados. " + ex);
         }
     }//GEN-LAST:event_JBactualizarActionPerformed
+
+    private void JTFidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFidActionPerformed
+        JTFid.setEditable(false);
+        JTFid.setEnabled(false);
+    }//GEN-LAST:event_JTFidActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

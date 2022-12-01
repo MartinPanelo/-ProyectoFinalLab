@@ -82,6 +82,34 @@ public class RepuestoData {
 //        }
         return r;
     }
+    
+    public Repuesto buscarRepuestoPorNumeroDeSerie(long numero_serie) {
+        Repuesto r = null;
+        String sql = "SELECT * FROM repuesto WHERE numero_serie = ?";
+        try {
+            PreparedStatement ps = conexionData.prepareStatement(sql);
+            ps.setLong(1, numero_serie);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                r = new Repuesto();
+                r.setNumero_serie(rs.getLong("numero_serie"));
+                r.setId(rs.getInt("id"));
+                r.setNombre(rs.getString("nombre"));
+                r.setDescripcion(rs.getString("descripcion"));
+                r.setPrecio(rs.getDouble("precio"));
+                r.setBorrado(rs.getBoolean("borrado"));
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error. en buscar repuesto por número de serie.");
+        }
+//        if (r == null) {
+//            JOptionPane.showMessageDialog(null, "No se pudo buscar por id porque no existe un repuesto con ese id.");
+//        }
+        return r;
+    }
 
     public void actualizarRepuesto(Repuesto r) {
         String sqlQuery = "UPDATE repuesto SET numero_serie= ? ,nombre= ? ,descripcion= ? ,precio= ? WHERE id = ?";
