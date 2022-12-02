@@ -28,21 +28,21 @@ public class VistaCliente extends javax.swing.JPanel {
     }
     
     public boolean validarCamposVaciosAgregar(){
-     if (JTFnombre.getText().equals("") || JTFapellido.getText().equals("") || JTFdomicilio.getText().equals("") || JTFdni.getText().equals("") || JTFcelular.getText().equals("")) {
+     if (JTFnombre.getText().equals("") || JTFapellido.getText().equals("") || JTFdomicilio.getText().equals("") || JTFid.getText().equals("") || JTFcelular.getText().equals("")) {
         return false;
     }
     return true;
    }
     
     public boolean validarCamposVaciosBuscar(){
-        if (JTFid.getText().equals("")) {
+        if (JTFdni.getText().equals("")) {
         return false;
     }
     return true;
     }
     
     public boolean validarCamposVaciosActualizar() {
-        if (JTFnombre.getText().equals("") || JTFid.getText().equals("") || JTFapellido.getText().equals("") || JTFdni.getText().equals("") || JTFdomicilio.getText().equals("") || JTFcelular.getText().equals("")) {
+        if (JTFnombre.getText().equals("") || JTFdni.getText().equals("") || JTFapellido.getText().equals("") || JTFid.getText().equals("") || JTFdomicilio.getText().equals("") || JTFcelular.getText().equals("")) {
             return false;
         }
         return true;
@@ -65,16 +65,16 @@ public class VistaCliente extends javax.swing.JPanel {
         JLnombre3 = new javax.swing.JLabel();
         JLnombre4 = new javax.swing.JLabel();
         JLnombre5 = new javax.swing.JLabel();
-        JTFnombre = new javax.swing.JTextField();
         JTFapellido = new javax.swing.JTextField();
-        JTFdni = new javax.swing.JTextField();
+        JTFid = new javax.swing.JTextField();
         JTFdomicilio = new javax.swing.JTextField();
         JTFcelular = new javax.swing.JTextField();
-        JTFid = new javax.swing.JTextField();
+        JTFdni = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jBagregar = new javax.swing.JButton();
         JBactualizar = new javax.swing.JButton();
         JBlimpiar = new javax.swing.JButton();
+        JTFnombre = new javax.swing.JTextField();
 
         jInternalFrame1.setClosable(true);
         jInternalFrame1.setVisible(true);
@@ -82,13 +82,13 @@ public class VistaCliente extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gestor de clientes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         JLnombre.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        JLnombre.setText("Nombre");
+        JLnombre.setText("ID");
 
         JLnombre1.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLnombre1.setText("Apellido");
 
         JLnombre2.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        JLnombre2.setText("DNI");
+        JLnombre2.setText("Nombre");
 
         JLnombre3.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLnombre3.setText("Domicilio");
@@ -97,7 +97,9 @@ public class VistaCliente extends javax.swing.JPanel {
         JLnombre4.setText("Celular");
 
         JLnombre5.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        JLnombre5.setText("ID");
+        JLnombre5.setText("DNI");
+
+        JTFid.setEditable(false);
 
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -146,13 +148,13 @@ public class VistaCliente extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(JTFcelular, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(JTFdomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JTFdni, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JTFid, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(JTFapellido, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JTFnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(JTFid, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(JTFdni, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))))
+                                .addComponent(jButton1))
+                            .addComponent(JTFnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(98, 98, 98)
                         .addComponent(jBagregar)
@@ -160,7 +162,7 @@ public class VistaCliente extends javax.swing.JPanel {
                         .addComponent(JBactualizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(JBlimpiar)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,7 +170,7 @@ public class VistaCliente extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLnombre)
-                    .addComponent(JTFnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JTFid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLnombre1)
@@ -176,7 +178,7 @@ public class VistaCliente extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLnombre2)
-                    .addComponent(JTFdni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JTFnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLnombre3)
@@ -188,7 +190,7 @@ public class VistaCliente extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLnombre5)
-                    .addComponent(JTFid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTFdni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -202,7 +204,9 @@ public class VistaCliente extends javax.swing.JPanel {
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(209, 209, 209))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,18 +229,18 @@ public class VistaCliente extends javax.swing.JPanel {
         try {
         if (validarCamposVaciosBuscar()) {
         Cliente c = new Cliente();
-        c = cData.buscarCliente(Integer.parseInt(JTFid.getText()));
+        c = cData.buscarClientePorDni(Long.parseLong(JTFdni.getText()));
         JTFnombre.setText(c.getNombre());
         JTFapellido.setText((c.getApellido()));
         JTFdomicilio.setText(c.getDomicilio());
-        JTFdni.setText(String.valueOf(c.getDni()));
+        JTFid.setText(String.valueOf(c.getDni()));
         JTFcelular.setText(String.valueOf(c.getCelular()));
         
         } else  {
-            JOptionPane.showMessageDialog(null, "Falta ingresar el id para buscar.");
+            JOptionPane.showMessageDialog(null, "Falta ingresar el dni para buscar.");
         }
         } catch (NumberFormatException | NullPointerException ex)  {
-            JOptionPane.showMessageDialog(null, "El id ingresado contiene caracteres o es invalido." );    
+            JOptionPane.showMessageDialog(null, "El dni ingresado contiene caracteres o es invalido." );    
         }  
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -246,7 +250,7 @@ public class VistaCliente extends javax.swing.JPanel {
             Cliente c = new Cliente();
             c.setNombre(JTFnombre.getText());
             c.setApellido((JTFapellido.getText()));
-            c.setDni(Long.parseLong(JTFdni.getText()));
+            c.setDni(Long.parseLong(JTFid.getText()));
             c.setCelular(Long.parseLong(JTFcelular.getText()));
             c.setDomicilio((JTFdomicilio.getText()));
             cData.guardarCliente(c);
@@ -266,8 +270,8 @@ public class VistaCliente extends javax.swing.JPanel {
         c.setApellido((JTFapellido.getText()));
         c.setDomicilio(JTFdomicilio.getText());
         c.setCelular(Long.parseLong(JTFcelular.getText()));
-        c.setDni(Long.parseLong(JTFdni.getText()));
-        c.setId(Integer.parseInt(JTFid.getText()));
+        c.setDni(Long.parseLong(JTFid.getText()));
+        c.setId(Integer.parseInt(JTFdni.getText()));
         cData.actualizarCliente(c);
         } else  {   
             JOptionPane.showMessageDialog(null, "Faltan llenar campos");
@@ -280,8 +284,8 @@ public class VistaCliente extends javax.swing.JPanel {
     private void JBlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBlimpiarActionPerformed
         JTFapellido.setText("");
         JTFnombre.setText("");
-        JTFdni.setText("");
         JTFid.setText("");
+        JTFdni.setText("");
         JTFcelular.setText("");
         JTFdomicilio.setText("");
     }//GEN-LAST:event_JBlimpiarActionPerformed
