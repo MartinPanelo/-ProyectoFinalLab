@@ -30,7 +30,12 @@ public class VistaListadoRepuesto extends javax.swing.JInternalFrame {
     
     public VistaListadoRepuesto() {
         initComponents();
-        modeloDeTabla = new DefaultTableModel();
+        modeloDeTabla = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         armarTabla();
     }
 
