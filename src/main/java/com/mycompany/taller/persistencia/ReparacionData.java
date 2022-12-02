@@ -6,6 +6,7 @@ package com.mycompany.taller.persistencia;
 
 import com.mycompany.taller.entidades.Bicicleta;
 import com.mycompany.taller.entidades.Reparacion;
+import com.mycompany.taller.entidades.Servicio;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -261,5 +262,34 @@ public class ReparacionData {
         }
         return bicicletasPorEstado;
     }
-     
+    
+    public Reparacion buscarReparacionPorBicicletaYServicio(Bicicleta bici, Servicio servi) {
+        Reparacion r = null;
+        String sql = "SELECT * FROM reparacion WHERE id_bicicleta = ? AND id_servicio = ?";
+        try {
+            PreparedStatement ps = conexionData.prepareStatement(sql);
+            ps.setObject(1, bici.getId());
+            ps.setObject(2, servi.getId());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                r = new Reparacion();
+                r.setId(rs.getInt("id"));
+                r.setBiclicleta(bData.buscarBicicletaPorID(rs.getInt("id_bicicleta")));
+                r.setServicio(sData.buscarServicioPorID(rs.getInt("id_servicio")));
+                r.setEstado(rs.getBoolean("estado"));
+                r.setPrecio_final(rs.getDouble("precio_final"));
+                r.setFecha_entrada(rs.getDate("fecha_entrada").toLocalDate());
+                r.setBorrado(rs.getBoolean("borrado"));
+
+            }
+            
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error. al buscar una reparacion por bicicleta y servicio. "+ex);
+        }
+
+        return r;
+    }
+      
 }

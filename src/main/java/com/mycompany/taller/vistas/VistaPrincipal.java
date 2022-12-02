@@ -36,6 +36,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
         JMIlistado = new javax.swing.JMenuItem();
         JMCliente = new javax.swing.JMenu();
         JMGestion = new javax.swing.JMenuItem();
+        JMReparacion = new javax.swing.JMenu();
+        JMIGestion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Taller de bicicletas El pinchazo");
@@ -98,6 +100,18 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(JMCliente);
 
+        JMReparacion.setText("Reparación");
+
+        JMIGestion.setText("Gestión");
+        JMIGestion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMIGestionActionPerformed(evt);
+            }
+        });
+        JMReparacion.add(JMIGestion);
+
+        jMenuBar1.add(JMReparacion);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -150,6 +164,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jDesktopPane1.moveToFront(clientesGestion);
     }//GEN-LAST:event_JMGestionActionPerformed
 
+    private void JMIGestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIGestionActionPerformed
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+       // VistaReparacion reparacionGestion = new VistaReparacion(); (No funca);
+        
+    }//GEN-LAST:event_JMIGestionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -188,8 +209,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu JMCliente;
     private javax.swing.JMenuItem JMGestion;
+    private javax.swing.JMenuItem JMIGestion;
     private javax.swing.JMenuItem JMIgestion;
     private javax.swing.JMenuItem JMIlistado;
+    private javax.swing.JMenu JMReparacion;
     private javax.swing.JMenu JMRepuesto;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu2;
