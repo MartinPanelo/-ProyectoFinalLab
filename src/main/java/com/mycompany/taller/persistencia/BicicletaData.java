@@ -5,6 +5,7 @@
 package com.mycompany.taller.persistencia;
 
 import com.mycompany.taller.entidades.Bicicleta;
+import com.mycompany.taller.entidades.Cliente;
 //import com.mycompany.taller.entidades.Cliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -227,6 +228,65 @@ public class BicicletaData {
         }
         return buscarBicicletaPorCliente;
     }
+    
+    public Bicicleta buscarBicicletaPorNroSerie(long nroSerie) {
+        Bicicleta bici = null;
+        String sql = "SELECT * FROM bicicleta WHERE numero_serie = ?";
+        try {
+            PreparedStatement ps = conexionData.prepareStatement(sql);
+            ps.setLong(1, nroSerie);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                bici = new Bicicleta();
+                bici.setId(rs.getInt("id"));
+                bici.setNumero_serie(rs.getLong("numero_serie"));
+                bici.setMarca(rs.getString("marca"));
+                bici.setTipo(rs.getString("tipo"));
+                bici.setColor(rs.getString("color"));
+                bici.setCliente(cData.buscarCliente(rs.getInt("id_cliente")));
+                bici.setBorrado(rs.getBoolean("borrado"));
+            }
+            
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error. en buscar bicicleta por Nro de Serie."+ex);
+        }
+
+        return bici;
+    }
+    
+    public Cliente BuscarClienteporBicicleta (Long nroSerie){
+        
+        Bicicleta bici= buscarBicicletaPorNroSerie(nroSerie);
+        
+        int id= bici.getCliente().getId(); // este es el id de cliente
+        Cliente cliente = null;
+        String sql = "SELECT * FROM cliente WHERE id = ?";
+        
+        try {
+            PreparedStatement ps = conexionData.prepareStatement(sql);
+            ps.setInt(1, id); // este tambien es el id de cliente
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                cliente = new Cliente();
+                cliente.setId(rs.getInt("id"));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setApellido(rs.getString("apellido"));
+                cliente.setDni(rs.getLong("dni"));
+                cliente.setDomicilio(rs.getString("domicilio"));
+                cliente.setCelular(rs.getLong("celular"));
+                cliente.setBorrado(rs.getBoolean("borrado"));
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Un error a ocurrido");
+        }
+        return cliente;
+    }
+    
     
    
 }
