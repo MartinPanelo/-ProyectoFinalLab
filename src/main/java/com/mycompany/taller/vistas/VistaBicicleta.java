@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package com.mycompany.taller.vistas;
+
 import com.mycompany.taller.entidades.Bicicleta;
 import com.mycompany.taller.persistencia.Conexion;
 import com.mycompany.taller.persistencia.BicicletaData;
@@ -10,6 +11,7 @@ import java.sql.Connection;
 import javax.swing.JOptionPane;
 import com.mycompany.taller.persistencia.ClienteData;
 import com.mycompany.taller.entidades.Cliente;
+
 /**
  *
  * @author ailen
@@ -21,22 +23,24 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
      */
     Connection conexiondb = Conexion.getConexion();
     BicicletaData bData = new BicicletaData(conexiondb);
-    
-    private ClienteData cData; // VER SI HACE FALTA DESPUES DE LA CREACION DEL METODO BUSCARCLIENTE POR BICICLETA
-    
+
+    private ClienteData cData;
+
     public VistaBicicleta() {
         initComponents();
-         this.cData = new ClienteData(conexiondb);
+        this.cData = new ClienteData(conexiondb);
     }
+
     //Validaciones  !!VER LA VALIDACION DE CLIENTE
-        public boolean validarCamposVaciosBuscarID() {
+    public boolean validarCamposVaciosBuscarID() {
         if (JTFid.getText().equals("")) {
             return false;
         }
         return true;
     }
+
     public boolean validarCamposVaciosAgregar() {
-        if (JTFnroSerie.getText().equals("") ||JTFmarca.getText().equals("") || JTFtipo.getText().equals("") || JTFcolor.getText().equals("")) {
+        if (JTFnroSerie.getText().equals("") || JTFmarca.getText().equals("") || JTFtipo.getText().equals("") || JTFcolor.getText().equals("")) {
             return false;
         }
         return true;
@@ -50,12 +54,18 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
     }
 
     public boolean validarCamposVaciosActualizar() {
-        if (JTFnroSerie.getText().equals("") ||JTFmarca.getText().equals("") || JTFtipo.getText().equals("") || JTFcolor.getText().equals("")) {
+        if (JTFnroSerie.getText().equals("") || JTFmarca.getText().equals("") || JTFtipo.getText().equals("") || JTFcolor.getText().equals("")) {
             return false;
         }
         return true;
     }
 
+    public boolean validarCamposVaciosBuscarCliente() {
+        if (JTFcliente.getText().equals("")) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -113,8 +123,18 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
         JLid.setText("N° de Bicicleta");
 
         JBagregar.setText("Agregar");
+        JBagregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBagregarActionPerformed(evt);
+            }
+        });
 
         JBactualizar.setText("Actualizar");
+        JBactualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBactualizarActionPerformed(evt);
+            }
+        });
 
         JBlimpiar.setText("Limpiar");
         JBlimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -131,6 +151,11 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
         });
 
         JBbucarDNI.setText("Buscar");
+        JBbucarDNI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBbucarDNIActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -236,32 +261,100 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
 
     private void JBlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBlimpiarActionPerformed
         // TODO add your handling code here:
+        JTFid.setText("");
+        JTFnroSerie.setText("");
+        JTFmarca.setText("");
+        JTFtipo.setText("");
+        JTFcolor.setText("");
+        JTFcliente.setText("");
     }//GEN-LAST:event_JBlimpiarActionPerformed
 
     // BOTON Buscar bicicleta
     private void JBbuscarNroSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBbuscarNroSerieActionPerformed
-    
+
         // TODO add your handling code here:
-               try {
+        try {
             if (validarCamposVaciosBuscarNroSerie()) {
                 Bicicleta b = new Bicicleta();
-                
+
                 b = bData.buscarBicicletaPorNroSerie(Long.parseLong(JTFnroSerie.getText()));
-              
+
                 JTFid.setText(String.valueOf(b.getId()));
                 JTFmarca.setText(b.getMarca());
                 JTFtipo.setText(b.getTipo());
                 JTFcolor.setText(b.getColor());
                 JTFcliente.setText(String.valueOf(bData.BuscarClienteporBicicleta(Long.parseLong(JTFnroSerie.getText())).getDni()));
-               
+
             } else {
                 JOptionPane.showMessageDialog(null, "Falta ingresar el nro de serie para buscar.");
             }
         } catch (NumberFormatException | NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "El nro de serie ingresado contiene caracteres o es invalido.");
         }
-       
+
     }//GEN-LAST:event_JBbuscarNroSerieActionPerformed
+
+//BUSCAR CLIENTE POR DNI
+    private void JBbucarDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBbucarDNIActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (validarCamposVaciosBuscarCliente()) {
+                Cliente c = new Cliente();
+                c = cData.buscarClientePorDni(Long.parseLong(JTFcliente.getText()));
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Falta ingresar el dni para buscar.");
+            }
+        } catch (NumberFormatException | NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "El dni ingresado contiene caracteres o no es cliente.");
+        }
+
+    }//GEN-LAST:event_JBbucarDNIActionPerformed
+
+    private void JBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBagregarActionPerformed
+        // TODO add your handling code here:
+        
+        try {
+            if (validarCamposVaciosAgregar()) {
+                Bicicleta b = new Bicicleta();
+                //Cliente c = new Cliente();
+               b.setNumero_serie(Long.parseLong(JTFnroSerie.getText()));
+                b.setMarca(JTFmarca.getText());
+                b.setTipo(JTFtipo.getText());
+                b.setColor(JTFcolor.getText());
+                b.setCliente(cData.buscarClientePorDni(Long.parseLong(JTFcliente.getText())));
+                             
+            } else {
+                JOptionPane.showMessageDialog(null, "Faltan llenar campos");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Ocurrio un problema revise los datos ingresados.");
+        }
+       
+    }//GEN-LAST:event_JBagregarActionPerformed
+
+    private void JBactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBactualizarActionPerformed
+        // TODO add your handling code here:
+                try {
+            if (validarCamposVaciosActualizar()) {
+               Bicicleta b = new Bicicleta();
+                //Cliente c = new Cliente();
+               
+                b.setNumero_serie(Long.parseLong(JTFnroSerie.getText()));
+                b.setMarca(JTFmarca.getText());
+                b.setTipo(JTFtipo.getText());
+                b.setColor(JTFcolor.getText());
+                b.setCliente(cData.buscarClientePorDni(Long.parseLong(JTFcliente.getText())));
+                bData.actualizarBicicleta(b);
+               
+            } else {
+                JOptionPane.showMessageDialog(null, "Faltan llenar campos");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Ocurrio un problema revise los datos ingresados. " + ex);
+        }
+        
+    }//GEN-LAST:event_JBactualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

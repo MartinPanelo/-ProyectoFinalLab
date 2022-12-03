@@ -190,11 +190,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Agregar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBagregarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="JBactualizar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Actualizar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBactualizarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="JBlimpiar">
           <Properties>
@@ -216,6 +222,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBbucarDNIActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
