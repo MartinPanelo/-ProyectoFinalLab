@@ -1,31 +1,33 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package com.mycompany.taller.vistas;
 
-import com.mycompany.taller.entidades.Cliente;
-import com.mycompany.taller.persistencia.ClienteData;
 import com.mycompany.taller.persistencia.Conexion;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
+import com.mycompany.taller.entidades.Cliente;
+import com.mycompany.taller.persistencia.ClienteData;
 
 /**
  *
- * @author martin
+ * @author User
  */
-public class VistaCliente extends javax.swing.JInternalFrame {
+public class VistaClientejpank extends javax.swing.JPanel {
 
     /**
      * Creates new form VistaCliente
      */
     
-     Connection conexiondb = Conexion.getConexion();
+    Connection conexiondb = Conexion.getConexion();
     ClienteData cData = new ClienteData(conexiondb);
-    public VistaCliente() {
+    
+    public VistaClientejpank() {
         initComponents();
     }
- public boolean validarCamposVaciosAgregar(){
+    
+    public boolean validarCamposVaciosAgregar(){
      if (JTFnombre.getText().equals("") || JTFapellido.getText().equals("") || JTFdomicilio.getText().equals("") || JTFid.getText().equals("") || JTFcelular.getText().equals("")) {
         return false;
     }
@@ -45,6 +47,7 @@ public class VistaCliente extends javax.swing.JInternalFrame {
         }
         return true;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,6 +57,7 @@ public class VistaCliente extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jInternalFrame1 = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
         JLnombre = new javax.swing.JLabel();
         JLnombre1 = new javax.swing.JLabel();
@@ -71,6 +75,9 @@ public class VistaCliente extends javax.swing.JInternalFrame {
         JBactualizar = new javax.swing.JButton();
         JBlimpiar = new javax.swing.JButton();
         JTFnombre = new javax.swing.JTextField();
+
+        jInternalFrame1.setClosable(true);
+        jInternalFrame1.setVisible(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Gestor de clientes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -185,7 +192,7 @@ public class VistaCliente extends javax.swing.JInternalFrame {
                     .addComponent(JLnombre5)
                     .addComponent(JTFdni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBagregar)
                     .addComponent(JBactualizar)
@@ -193,54 +200,63 @@ public class VistaCliente extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(19, 19, 19))
+                .addGap(209, 209, 209))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pack();
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jInternalFrame1, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jInternalFrame1)
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            if (validarCamposVaciosBuscar()) {
-                Cliente c = new Cliente();
-                c = cData.buscarClientePorDni(Long.parseLong(JTFdni.getText()));
-                JTFnombre.setText(c.getNombre());
-                JTFapellido.setText((c.getApellido()));
-                JTFdomicilio.setText(c.getDomicilio());
-                JTFid.setText(String.valueOf(c.getDni()));
-                JTFcelular.setText(String.valueOf(c.getCelular()));
-
-            } else  {
-                JOptionPane.showMessageDialog(null, "Falta ingresar el dni para buscar.");
-            }
-        } catch (NumberFormatException | NullPointerException ex)  {
-            JOptionPane.showMessageDialog(null, "El dni ingresado contiene caracteres o es invalido." );
+        if (validarCamposVaciosBuscar()) {
+        Cliente c = new Cliente();
+        c = cData.buscarClientePorDni(Long.parseLong(JTFdni.getText()));
+        JTFnombre.setText(c.getNombre());
+        JTFapellido.setText((c.getApellido()));
+        JTFdomicilio.setText(c.getDomicilio());
+        JTFid.setText(String.valueOf(c.getDni()));
+        JTFcelular.setText(String.valueOf(c.getCelular()));
+        
+        } else  {
+            JOptionPane.showMessageDialog(null, "Falta ingresar el dni para buscar.");
         }
+        } catch (NumberFormatException | NullPointerException ex)  {
+            JOptionPane.showMessageDialog(null, "El dni ingresado contiene caracteres o es invalido." );    
+        }  
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBagregarActionPerformed
         try {
-            if (validarCamposVaciosAgregar()) {
-                Cliente c = new Cliente();
-                c.setNombre(JTFnombre.getText());
-                c.setApellido((JTFapellido.getText()));
-                c.setDni(Long.parseLong(JTFid.getText()));
-                c.setCelular(Long.parseLong(JTFcelular.getText()));
-                c.setDomicilio((JTFdomicilio.getText()));
-                cData.guardarCliente(c);
-            } else  {
-                JOptionPane.showMessageDialog(null, "Faltan llenar campos");
-            }
+        if (validarCamposVaciosAgregar()) {
+            Cliente c = new Cliente();
+            c.setNombre(JTFnombre.getText());
+            c.setApellido((JTFapellido.getText()));
+            c.setDni(Long.parseLong(JTFid.getText()));
+            c.setCelular(Long.parseLong(JTFcelular.getText()));
+            c.setDomicilio((JTFdomicilio.getText()));
+            cData.guardarCliente(c);
+        } else  {
+            JOptionPane.showMessageDialog(null, "Faltan llenar campos");
+        }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Ocurrio un problema revise los datos ingresados.");
         }
@@ -248,18 +264,18 @@ public class VistaCliente extends javax.swing.JInternalFrame {
 
     private void JBactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBactualizarActionPerformed
         try {
-            if (validarCamposVaciosActualizar()) {
-                Cliente c = new Cliente();
-                c.setNombre(JTFnombre.getText());
-                c.setApellido((JTFapellido.getText()));
-                c.setDomicilio(JTFdomicilio.getText());
-                c.setCelular(Long.parseLong(JTFcelular.getText()));
-                c.setDni(Long.parseLong(JTFid.getText()));
-                c.setId(Integer.parseInt(JTFdni.getText()));
-                cData.actualizarCliente(c);
-            } else  {
-                JOptionPane.showMessageDialog(null, "Faltan llenar campos");
-            }
+        if (validarCamposVaciosActualizar()) {
+        Cliente c = new Cliente();
+        c.setNombre(JTFnombre.getText());
+        c.setApellido((JTFapellido.getText()));
+        c.setDomicilio(JTFdomicilio.getText());
+        c.setCelular(Long.parseLong(JTFcelular.getText()));
+        c.setDni(Long.parseLong(JTFid.getText()));
+        c.setId(Integer.parseInt(JTFdni.getText()));
+        cData.actualizarCliente(c);
+        } else  {   
+            JOptionPane.showMessageDialog(null, "Faltan llenar campos");
+        }
         } catch (NumberFormatException ex)  {
             JOptionPane.showMessageDialog(null, "Ocurrio un problema revise los datos ingresados. " + ex);
         }
@@ -292,6 +308,7 @@ public class VistaCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField JTFnombre;
     private javax.swing.JButton jBagregar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
