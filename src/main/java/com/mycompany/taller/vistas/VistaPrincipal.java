@@ -131,10 +131,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void jMgestionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMgestionarActionPerformed
         jDesktopPane1.removeAll();
         jDesktopPane1.repaint();
-        VistaServicio formularioAlumno = new VistaServicio();
-        formularioAlumno.setVisible(true);
-        jDesktopPane1.add(formularioAlumno);
-        jDesktopPane1.moveToFront(formularioAlumno);
+        VistaServicio vistaServicio = new VistaServicio();
+        vistaServicio.setVisible(true);
+        jDesktopPane1.add(vistaServicio);
+        jDesktopPane1.moveToFront(vistaServicio);
     }//GEN-LAST:event_jMgestionarActionPerformed
 
     private void JMIgestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIgestionActionPerformed
@@ -167,6 +167,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void JMIGestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIGestionActionPerformed
         jDesktopPane1.removeAll();
         jDesktopPane1.repaint();
+        VistaReparacion clientesGestion = new VistaReparacion();
+        clientesGestion.setVisible(true);
+        jDesktopPane1.add(clientesGestion);
+        jDesktopPane1.moveToFront(clientesGestion);
        // VistaReparacion reparacionGestion = new VistaReparacion(); (No funca);
         
     }//GEN-LAST:event_JMIGestionActionPerformed

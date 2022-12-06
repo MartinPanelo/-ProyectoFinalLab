@@ -79,7 +79,7 @@ public class VistaCliente extends javax.swing.JPanel {
         jInternalFrame1.setClosable(true);
         jInternalFrame1.setVisible(true);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gestor de clientes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Gestor de clientes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         JLnombre.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLnombre.setText("ID");
@@ -192,7 +192,7 @@ public class VistaCliente extends javax.swing.JPanel {
                     .addComponent(JLnombre5)
                     .addComponent(JTFdni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBagregar)
                     .addComponent(JBactualizar)

@@ -23,19 +23,21 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
     /**
      * Creates new form VistaReparacion
      */
-    
-    private ClienteData cData;
-    private BicicletaData bData;
-    private ServicioData sData;
+//    
+//    private ClienteData cData;
+//    private BicicletaData bData;
+//    private ServicioData sData;
     
     Connection conexiondb = Conexion.getConexion();
     ReparacionData reData = new ReparacionData(conexiondb);
-    
-    public VistaReparacion(Connection conexiondb) {
+    ClienteData cData =  new ClienteData(conexiondb);
+    BicicletaData bData = new BicicletaData(conexiondb);
+    ServicioData sData = new ServicioData(conexiondb);
+    public VistaReparacion() {
         initComponents();
-        this.bData = new BicicletaData(conexiondb);
-        this.sData = new ServicioData(conexiondb);
-        this.cData = new ClienteData(conexiondb);
+//        this.bData = new BicicletaData(conexiondb);
+//        this.sData = new ServicioData(conexiondb);
+//        this.cData = new ClienteData(conexiondb);
     }
 
     /**
