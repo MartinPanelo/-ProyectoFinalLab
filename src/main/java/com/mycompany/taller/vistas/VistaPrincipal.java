@@ -29,6 +29,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMgestionar = new javax.swing.JMenuItem();
         JMRepuesto = new javax.swing.JMenu();
@@ -54,6 +55,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
         );
 
         jMenu2.setText("Bicicleta");
+
+        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Servicios");
@@ -175,6 +185,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_JMIGestionActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        VistaBicicleta bicicletaGestion = new VistaBicicleta();
+        bicicletaGestion.setVisible(true);
+        jDesktopPane1.add(bicicletaGestion);
+        jDesktopPane1.moveToFront(bicicletaGestion);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -222,6 +241,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMgestionar;
     // End of variables declaration//GEN-END:variables
 }
