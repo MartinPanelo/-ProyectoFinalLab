@@ -82,6 +82,30 @@ public class ServicioData {
         }
         return s;
     }
+     public Servicio buscarServicioPorCodigo(int codigo) {
+        Servicio s = null;
+        String sql = "SELECT * FROM servicio WHERE codigo = ?";
+        try {
+            PreparedStatement ps = conexionData.prepareStatement(sql);
+            ps.setInt(1, codigo);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                s = new Servicio();
+                s.setId(rs.getInt("id"));
+                s.setCodigo(rs.getInt("codigo"));
+                s.setDescripcion(rs.getString("descripcion"));
+                s.setCosto(rs.getDouble("costo"));
+                s.setBorrado(rs.getBoolean("borrado"));
+
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error. en buscar un servicio por id. " + ex);
+        }
+        return s;
+    }
 
     public void actualizarServicio(Servicio s) {
         String sqlQuery = "UPDATE servicio SET codigo= ? ,descripcion= ? ,costo= ? WHERE id = ?";
