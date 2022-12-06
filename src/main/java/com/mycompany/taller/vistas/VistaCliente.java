@@ -19,32 +19,34 @@ public class VistaCliente extends javax.swing.JInternalFrame {
     /**
      * Creates new form VistaCliente
      */
-    
-     Connection conexiondb = Conexion.getConexion();
+    Connection conexiondb = Conexion.getConexion();
     ClienteData cData = new ClienteData(conexiondb);
+
     public VistaCliente() {
         initComponents();
     }
- public boolean validarCamposVaciosAgregar(){
-     if (JTFnombre.getText().equals("") || JTFapellido.getText().equals("") || JTFdomicilio.getText().equals("") || JTFid.getText().equals("") || JTFcelular.getText().equals("")) {
-        return false;
+
+    public boolean validarCamposVaciosAgregar() {
+        if (JTFnombre.getText().equals("") || JTFapellido.getText().equals("") || JTFdomicilio.getText().equals("") || JTFid.getText().equals("") || JTFcelular.getText().equals("")) {
+            return false;
+        }
+        return true;
     }
-    return true;
-   }
-    
-    public boolean validarCamposVaciosBuscar(){
+
+    public boolean validarCamposVaciosBuscar() {
         if (JTFdni.getText().equals("")) {
-        return false;
+            return false;
+        }
+        return true;
     }
-    return true;
-    }
-    
+
     public boolean validarCamposVaciosActualizar() {
         if (JTFnombre.getText().equals("") || JTFdni.getText().equals("") || JTFapellido.getText().equals("") || JTFid.getText().equals("") || JTFdomicilio.getText().equals("") || JTFcelular.getText().equals("")) {
             return false;
         }
         return true;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -220,11 +222,11 @@ public class VistaCliente extends javax.swing.JInternalFrame {
                 JTFid.setText(String.valueOf(c.getDni()));
                 JTFcelular.setText(String.valueOf(c.getCelular()));
 
-            } else  {
+            } else {
                 JOptionPane.showMessageDialog(null, "Falta ingresar el dni para buscar.");
             }
-        } catch (NumberFormatException | NullPointerException ex)  {
-            JOptionPane.showMessageDialog(null, "El dni ingresado contiene caracteres o es invalido." );
+        } catch (NumberFormatException | NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "El dni ingresado contiene caracteres o es invalido.");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -238,7 +240,7 @@ public class VistaCliente extends javax.swing.JInternalFrame {
                 c.setCelular(Long.parseLong(JTFcelular.getText()));
                 c.setDomicilio((JTFdomicilio.getText()));
                 cData.guardarCliente(c);
-            } else  {
+            } else {
                 JOptionPane.showMessageDialog(null, "Faltan llenar campos");
             }
         } catch (NumberFormatException ex) {
@@ -257,10 +259,10 @@ public class VistaCliente extends javax.swing.JInternalFrame {
                 c.setDni(Long.parseLong(JTFid.getText()));
                 c.setId(Integer.parseInt(JTFdni.getText()));
                 cData.actualizarCliente(c);
-            } else  {
+            } else {
                 JOptionPane.showMessageDialog(null, "Faltan llenar campos");
             }
-        } catch (NumberFormatException ex)  {
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Ocurrio un problema revise los datos ingresados. " + ex);
         }
     }//GEN-LAST:event_JBactualizarActionPerformed

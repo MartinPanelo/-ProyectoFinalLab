@@ -114,6 +114,9 @@ public class Taller {
 
         //busco un cliente por ID
         System.out.println("\nCliente por ID : \n" + cData.buscarCliente(3));
+        
+        //busco un cliente por DNI //Deberia traer a cliente carlos lucero
+        System.out.println("\nCliente por DNI : \n" + cData.buscarClientePorDni(45768563));
 
         //actualizar cliente
         Cliente ClienteActializado = cData.buscarCliente(3);
@@ -131,6 +134,10 @@ public class Taller {
         
         //dar de alta a un cliente
         cData.darDeAltaCliente(6);
+        
+   
+        
+        
 
 //------BICICLETA---------------------------------------------------------------------
 

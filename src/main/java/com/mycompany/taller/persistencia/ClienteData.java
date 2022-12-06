@@ -74,7 +74,7 @@ public class ClienteData {
     
     public Cliente buscarClientePorDni(long dni){
         Cliente cliente = null;
-        String sql = "SELECT * FROM cliente WHERE dni = ?";
+        String sql = "SELECT * FROM `cliente` WHERE dni = ?";
         try {
             PreparedStatement ps = conexionData.prepareStatement(sql);
             ps.setLong(1, dni);

@@ -171,8 +171,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
         clientesGestion.setVisible(true);
         jDesktopPane1.add(clientesGestion);
         jDesktopPane1.moveToFront(clientesGestion);
-       // VistaReparacion reparacionGestion = new VistaReparacion(); (No funca);
-        
+        // VistaReparacion reparacionGestion = new VistaReparacion(); (No funca);
+
     }//GEN-LAST:event_JMIGestionActionPerformed
 
     /**
