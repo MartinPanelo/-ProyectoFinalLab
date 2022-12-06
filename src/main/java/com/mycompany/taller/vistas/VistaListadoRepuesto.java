@@ -57,7 +57,9 @@ public class VistaListadoRepuesto extends javax.swing.JInternalFrame {
         JRBdadosDeBaja = new javax.swing.JRadioButton();
         JRBdadosDeAlta = new javax.swing.JRadioButton();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Listado de repuesto", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Constantia", 0, 16))); // NOI18N
+        setClosable(true);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de repuesto", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Constantia", 0, 16))); // NOI18N
 
         JTlistadoDeRepuestos.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
         JTlistadoDeRepuestos.setModel(new javax.swing.table.DefaultTableModel(

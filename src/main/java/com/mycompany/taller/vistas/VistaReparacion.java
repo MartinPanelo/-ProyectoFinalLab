@@ -70,7 +70,9 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
         JLbicicleta = new javax.swing.JLabel();
         JCBbicicleta = new javax.swing.JComboBox<>();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Gestión de reparación", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Constantia", 0, 16))); // NOI18N
+        setClosable(true);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gestión de reparación", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Constantia", 0, 16))); // NOI18N
 
         JLid.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLid.setText("N° de reparación");

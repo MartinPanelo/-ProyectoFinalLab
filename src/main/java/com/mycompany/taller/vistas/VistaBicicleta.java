@@ -95,6 +95,7 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
         JBbuscarNroSerie = new javax.swing.JButton();
         JBbucarDNI = new javax.swing.JButton();
 
+        setClosable(true);
         setTitle("Gestion de Bicicletas");
 
         JLnroSerie.setText("N° de Serie");

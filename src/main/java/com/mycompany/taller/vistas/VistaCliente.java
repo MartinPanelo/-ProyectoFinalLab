@@ -74,7 +74,9 @@ public class VistaCliente extends javax.swing.JInternalFrame {
         JBlimpiar = new javax.swing.JButton();
         JTFnombre = new javax.swing.JTextField();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Gestor de clientes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        setClosable(true);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gestor de clientes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         JLnombre.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLnombre.setText("ID");
