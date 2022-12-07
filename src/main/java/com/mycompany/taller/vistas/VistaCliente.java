@@ -221,7 +221,7 @@ public class VistaCliente extends javax.swing.JInternalFrame {
                 JTFnombre.setText(c.getNombre());
                 JTFapellido.setText((c.getApellido()));
                 JTFdomicilio.setText(c.getDomicilio());
-                JTFid.setText(String.valueOf(c.getDni()));
+                JTFid.setText(String.valueOf(c.getId()));
                 JTFcelular.setText(String.valueOf(c.getCelular()));
 
             } else {
@@ -238,7 +238,7 @@ public class VistaCliente extends javax.swing.JInternalFrame {
                 Cliente c = new Cliente();
                 c.setNombre(JTFnombre.getText());
                 c.setApellido((JTFapellido.getText()));
-                c.setDni(Long.parseLong(JTFid.getText()));
+                c.setDni(Long.parseLong(JTFdni.getText()));
                 c.setCelular(Long.parseLong(JTFcelular.getText()));
                 c.setDomicilio((JTFdomicilio.getText()));
                 cData.guardarCliente(c);
@@ -258,8 +258,8 @@ public class VistaCliente extends javax.swing.JInternalFrame {
                 c.setApellido((JTFapellido.getText()));
                 c.setDomicilio(JTFdomicilio.getText());
                 c.setCelular(Long.parseLong(JTFcelular.getText()));
-                c.setDni(Long.parseLong(JTFid.getText()));
-                c.setId(Integer.parseInt(JTFdni.getText()));
+                c.setDni(Long.parseLong(JTFdni.getText()));
+                c.setId(Integer.parseInt(JTFid.getText()));
                 cData.actualizarCliente(c);
             } else {
                 JOptionPane.showMessageDialog(null, "Faltan llenar campos");
