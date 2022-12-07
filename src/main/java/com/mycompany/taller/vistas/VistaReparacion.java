@@ -52,7 +52,7 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
         modeloTablaRepuestos = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column == 1;
+                return column == 1 || column == 2;
             }
 
             @Override
@@ -316,22 +316,21 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_JCBservicioActionPerformed
 
     private void JBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBagregarActionPerformed
-        try{
-             Reparacion unaReparacion = new Reparacion();
+        try {
+            Reparacion unaReparacion = new Reparacion();
 
-        unaReparacion.setBiclicleta((Bicicleta) JCBbicicleta.getSelectedItem());
-        unaReparacion.setServicio((Servicio) JCBservicio.getSelectedItem());
-        unaReparacion.setEstado(JCBestado.isSelected());
-        unaReparacion.setFecha_entrada(LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(JDCfechadeentrada.getDate())));
-        unaReparacion.setPrecio_final(precioFinal());
-        unaReparacion.setBorrado(false);
+            unaReparacion.setBiclicleta((Bicicleta) JCBbicicleta.getSelectedItem());
+            unaReparacion.setServicio((Servicio) JCBservicio.getSelectedItem());
+            unaReparacion.setEstado(JCBestado.isSelected());
+            unaReparacion.setFecha_entrada(LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(JDCfechadeentrada.getDate())));
+            unaReparacion.setPrecio_final(precioFinal());
+            unaReparacion.setBorrado(false);
 
-        reData.crearReparacion(unaReparacion);
-        //      System.out.println(unaReparacion.toString());
-        }catch(NullPointerException err){// lo produce el campo vacio del calendario
-             JOptionPane.showMessageDialog(this, "El campo fecha de entrega no se permite vacio");
+            reData.crearReparacion(unaReparacion);
+            //      System.out.println(unaReparacion.toString());
+        } catch (NullPointerException err) {// lo produce el campo vacio del calendario
+            JOptionPane.showMessageDialog(this, "El campo fecha de entrega no se permite vacio");
         }
-       
 
 
     }//GEN-LAST:event_JBagregarActionPerformed
@@ -342,14 +341,19 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_JTFpreciofinalMouseMoved
 
     private void jBTNcalcularPrecioFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNcalcularPrecioFinalActionPerformed
+        try {
+            JBagregar.setEnabled(true);
+            JTFpreciofinal.setText(String.valueOf(precioFinal()));            
+            JBagregar.requestFocus();
+        } catch (NumberFormatException err) {
+            JOptionPane.showMessageDialog(this, "El valor ingresado no es un numero entero");
+            JBagregar.setEnabled(false);
+        }
 
-        JTFpreciofinal.setText(String.valueOf(precioFinal()));
-        JBagregar.setEnabled(true);
-        JBagregar.requestFocus();
     }//GEN-LAST:event_jBTNcalcularPrecioFinalActionPerformed
 
     private void JBagregarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JBagregarFocusLost
-       JBagregar.setEnabled(false);
+        JBagregar.setEnabled(false);
     }//GEN-LAST:event_JBagregarFocusLost
 
 
@@ -404,6 +408,7 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
         ArrayList<Object> columnas = new ArrayList();
         columnas.add("id");
         columnas.add("usar en reparacion");
+        columnas.add("cantidad");
         columnas.add("Nombre");
         columnas.add("Descripcion");
         columnas.add("Precio");
@@ -429,7 +434,7 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
 
         for (Repuesto aux : listaRepuestos) {
 
-            modeloTablaRepuestos.addRow(new Object[]{aux.getId(), false, aux.getNombre(), aux.getDescripcion(), aux.getPrecio()});
+            modeloTablaRepuestos.addRow(new Object[]{aux.getId(), false, "0", aux.getNombre(), aux.getDescripcion(), aux.getPrecio()});
 
         }
 
@@ -444,14 +449,19 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
 
             if ((Boolean) (jTRepuestos.getValueAt(i, 1))) {
 
-                System.out.println(((Double) jTRepuestos.getValueAt(i, 4)));
-                preciofinal += ((Double) jTRepuestos.getValueAt(i, 4));
+                if( Double.parseDouble((String)jTRepuestos.getValueAt(i, 2)) == (int) Double.parseDouble((String)jTRepuestos.getValueAt(i, 2))){
+                     preciofinal += ((Double) jTRepuestos.getValueAt(i, 5)) * Double.parseDouble((String) jTRepuestos.getValueAt(i, 2));
+                }else{
+                     JOptionPane.showMessageDialog(this, "Erorr el la fila : "+i+ " La cantidad tiene que ser un valor entero");
+                     JBagregar.setEnabled(false);
+                }
+               
 
             }
 
         }
         preciofinal += preciofinal * 0.15;
-        
-        return  preciofinal;
+
+        return preciofinal;
     }
 }
