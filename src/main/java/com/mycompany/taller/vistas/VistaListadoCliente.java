@@ -180,10 +180,11 @@ public class VistaListadoCliente extends javax.swing.JInternalFrame {
         int filaSelecionada = JTListadoClientes.getSelectedRow();
         Cliente clienteSelect = new Cliente();
         if (filaSelecionada != -1) {
-            clienteSelect.setId((Integer)JTListadoClientes.getValueAt(filaSelecionada, 4));
+            clienteSelect.setId((Integer)JTListadoClientes.getValueAt(filaSelecionada, 0));
             clienteSelect.setNombre((String.valueOf(JTListadoClientes.getValueAt(filaSelecionada, 1))));
             clienteSelect.setApellido((String.valueOf(JTListadoClientes.getValueAt(filaSelecionada, 2))));
-            clienteSelect.setDni((Long)JTListadoClientes.getValueAt(filaSelecionada, 3));
+            clienteSelect.setCelular((Long)JTListadoClientes.getValueAt(filaSelecionada, 3));
+            clienteSelect.setDni((Long)JTListadoClientes.getValueAt(filaSelecionada, 4));
             cData.darDeAltaCliente(clienteSelect.getId());
             listadoClientesBaja();
             
