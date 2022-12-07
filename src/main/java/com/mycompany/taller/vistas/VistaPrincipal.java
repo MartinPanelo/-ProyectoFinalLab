@@ -122,6 +122,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         JMReparacion.add(JMIGestion);
 
         jMenuItem2.setText("Gestionar Reparaciones");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         JMReparacion.add(jMenuItem2);
 
         jMenuBar1.add(JMReparacion);
@@ -201,6 +206,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jDesktopPane1.add(bicicletaGestion);
         jDesktopPane1.moveToFront(bicicletaGestion);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        VistaGestionReparaciones GestionReparaciones = new VistaGestionReparaciones();
+        GestionReparaciones.setVisible(true);
+        jDesktopPane1.add(GestionReparaciones);
+        jDesktopPane1.moveToFront(GestionReparaciones);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments

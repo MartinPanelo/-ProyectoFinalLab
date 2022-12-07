@@ -27,7 +27,7 @@ public class VistaCliente extends javax.swing.JInternalFrame {
     }
 
     public boolean validarCamposVaciosAgregar() {
-        if (JTFnombre.getText().equals("") || JTFapellido.getText().equals("") || JTFdomicilio.getText().equals("") || JTFid.getText().equals("") || JTFcelular.getText().equals("")) {
+        if (JTFnombre.getText().equals("") || JTFapellido.getText().equals("") || JTFdomicilio.getText().equals("") || JTFcelular.getText().equals("")) {
             return false;
         }
         return true;

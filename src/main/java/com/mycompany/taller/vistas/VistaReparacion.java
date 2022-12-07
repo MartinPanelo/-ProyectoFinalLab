@@ -6,12 +6,14 @@ package com.mycompany.taller.vistas;
 
 import com.mycompany.taller.entidades.Bicicleta;
 import com.mycompany.taller.entidades.Cliente;
+import com.mycompany.taller.entidades.Item_detalle;
 import com.mycompany.taller.entidades.Reparacion;
 import com.mycompany.taller.entidades.Repuesto;
 import com.mycompany.taller.entidades.Servicio;
 import com.mycompany.taller.persistencia.BicicletaData;
 import com.mycompany.taller.persistencia.ClienteData;
 import com.mycompany.taller.persistencia.Conexion;
+import com.mycompany.taller.persistencia.Item_detalleData;
 import com.mycompany.taller.persistencia.ReparacionData;
 import com.mycompany.taller.persistencia.RepuestoData;
 import com.mycompany.taller.persistencia.ServicioData;
@@ -38,6 +40,7 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
     BicicletaData bData = new BicicletaData(conexiondb);
     ServicioData sData = new ServicioData(conexiondb);
     RepuestoData rData = new RepuestoData(conexiondb);
+    Item_detalleData idata = new Item_detalleData(conexiondb);
     List<Cliente> listaClientes;
     List<Bicicleta> listaBicicletas;
     List<Servicio> listaServicios;
@@ -80,13 +83,11 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        JLid = new javax.swing.JLabel();
         JLcliente = new javax.swing.JLabel();
         JLservicio = new javax.swing.JLabel();
         JLpreciofinal = new javax.swing.JLabel();
         JLfechadeentrada = new javax.swing.JLabel();
         JCBservicio = new javax.swing.JComboBox<>();
-        JTFid = new javax.swing.JTextField();
         JTFpreciofinal = new javax.swing.JTextField();
         JDCfechadeentrada = new com.toedter.calendar.JDateChooser();
         JLbicicleta = new javax.swing.JLabel();
@@ -105,9 +106,6 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Gestión de reparación", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Constantia", 0, 16))); // NOI18N
 
-        JLid.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        JLid.setText("N° de reparación");
-
         JLcliente.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLcliente.setText("Cliente");
 
@@ -125,9 +123,6 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
                 JCBservicioActionPerformed(evt);
             }
         });
-
-        JTFid.setEditable(false);
-        JTFid.setEnabled(false);
 
         JTFpreciofinal.setEditable(false);
         JTFpreciofinal.setEnabled(false);
@@ -189,59 +184,50 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(162, 162, 162)
-                .addComponent(JBagregar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(197, 197, 197)
+                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(JLid)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(JTFid, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(156, 156, 156)
+                        .addComponent(JBagregar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(162, 162, 162))
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(JLfechadeentrada)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JDCfechadeentrada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(JLfechadeentrada)
+                                .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JDCfechadeentrada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(JCBestado))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(JCBestado))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(JLpreciofinal)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(JTFpreciofinal, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jBTNcalcularPrecioFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(JLfechadeentrada1))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JLservicio)
-                                    .addComponent(JLbicicleta)
-                                    .addComponent(JLcliente))
+                                .addComponent(JLpreciofinal)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCBclientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(JCBbicicleta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(JCBservicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addContainerGap())))
+                                .addComponent(JTFpreciofinal, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(jBTNcalcularPrecioFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(JLfechadeentrada1))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JLservicio)
+                            .addComponent(JLbicicleta)
+                            .addComponent(JLcliente))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCBclientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(JCBbicicleta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(JCBservicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JLid)
-                    .addComponent(JTFid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLcliente)
                     .addComponent(jCBclientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -262,22 +248,19 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(JLpreciofinal)
-                            .addComponent(JTFpreciofinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBTNcalcularPrecioFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JLpreciofinal)
+                    .addComponent(JTFpreciofinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBTNcalcularPrecioFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
                     .addComponent(JCBestado))
                 .addGap(4, 4, 4)
                 .addComponent(JBagregar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(138, 138, 138))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -287,13 +270,13 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -327,6 +310,13 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
             unaReparacion.setBorrado(false);
 
             reData.crearReparacion(unaReparacion);
+//            System.out.println(unaReparacion.getBiclicleta().toString());
+//            System.out.println(unaReparacion.getServicio().toString());
+//            
+//            System.out.println((reData.buscarReparacionPorBicicletaYServicio(unaReparacion.getBiclicleta(), unaReparacion.getServicio()).toString()));
+
+            CrearItems_Detalles(unaReparacion);
+
             //      System.out.println(unaReparacion.toString());
         } catch (NullPointerException err) {// lo produce el campo vacio del calendario
             JOptionPane.showMessageDialog(this, "El campo fecha de entrega no se permite vacio");
@@ -343,7 +333,7 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
     private void jBTNcalcularPrecioFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNcalcularPrecioFinalActionPerformed
         try {
             JBagregar.setEnabled(true);
-            JTFpreciofinal.setText(String.valueOf(precioFinal()));            
+            JTFpreciofinal.setText(String.valueOf(precioFinal()));
             JBagregar.requestFocus();
         } catch (NumberFormatException err) {
             JOptionPane.showMessageDialog(this, "El valor ingresado no es un numero entero");
@@ -367,10 +357,8 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel JLcliente;
     private javax.swing.JLabel JLfechadeentrada;
     private javax.swing.JLabel JLfechadeentrada1;
-    private javax.swing.JLabel JLid;
     private javax.swing.JLabel JLpreciofinal;
     private javax.swing.JLabel JLservicio;
-    private javax.swing.JTextField JTFid;
     private javax.swing.JTextField JTFpreciofinal;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JButton jBTNcalcularPrecioFinal;
@@ -449,13 +437,12 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
 
             if ((Boolean) (jTRepuestos.getValueAt(i, 1))) {
 
-                if( Double.parseDouble((String)jTRepuestos.getValueAt(i, 2)) == (int) Double.parseDouble((String)jTRepuestos.getValueAt(i, 2))){
-                     preciofinal += ((Double) jTRepuestos.getValueAt(i, 5)) * Double.parseDouble((String) jTRepuestos.getValueAt(i, 2));
-                }else{
-                     JOptionPane.showMessageDialog(this, "Erorr el la fila : "+i+ " La cantidad tiene que ser un valor entero");
-                     JBagregar.setEnabled(false);
+                if (Double.parseDouble((String) jTRepuestos.getValueAt(i, 2)) == (int) Double.parseDouble((String) jTRepuestos.getValueAt(i, 2))) {
+                    preciofinal += ((Double) jTRepuestos.getValueAt(i, 5)) * Double.parseDouble((String) jTRepuestos.getValueAt(i, 2));
+                } else {
+                    JOptionPane.showMessageDialog(this, "Erorr el la fila : " + i + " La cantidad tiene que ser un valor entero");
+                    JBagregar.setEnabled(false);
                 }
-               
 
             }
 
@@ -463,5 +450,25 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
         preciofinal += preciofinal * 0.15;
 
         return preciofinal;
+    }
+
+    private void CrearItems_Detalles(Reparacion r) {
+
+        for (int i = 0; i < jTRepuestos.getRowCount(); i++) {
+
+            if ((Boolean) (jTRepuestos.getValueAt(i, 1))) {
+
+                Item_detalle item = new Item_detalle();
+
+                item.setReparacion(r);
+                item.setRepuesto(rData.buscarRepuestoPorID((Integer)jTRepuestos.getValueAt(i, 0)));
+                item.setCantidad(Integer.parseInt((String)jTRepuestos.getValueAt(i, 2)));
+                item.setSuma_precios(((Double) jTRepuestos.getValueAt(i, 5)) * Double.parseDouble((String) jTRepuestos.getValueAt(i, 2)) );
+                idata.guardarItem_detalle(item);
+
+            }
+
+        }
+
     }
 }

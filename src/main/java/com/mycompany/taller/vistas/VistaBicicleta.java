@@ -302,7 +302,7 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
             if (validarCamposVaciosBuscarCliente()) {
                 Cliente c = new Cliente();
                 c = cData.buscarClientePorDni(Long.parseLong(JTFcliente.getText()));
-
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Falta ingresar el dni para buscar.");
             }
@@ -324,7 +324,7 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
                 b.setTipo(JTFtipo.getText());
                 b.setColor(JTFcolor.getText());
                 b.setCliente(cData.buscarClientePorDni(Long.parseLong(JTFcliente.getText())));
-                             
+                bData.guardarBicicleta(b);
             } else {
                 JOptionPane.showMessageDialog(null, "Faltan llenar campos");
             }
