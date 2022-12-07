@@ -410,7 +410,7 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
         jTRepuestos.getColumnModel().getColumn(0).setMinWidth(0);
         jTRepuestos.getColumnModel().getColumn(0).setPreferredWidth(0);
 
-        jTRepuestos.setModel(modeloTablaRepuestos);
+     //   jTRepuestos.setModel(modeloTablaRepuestos);
 
     }
 

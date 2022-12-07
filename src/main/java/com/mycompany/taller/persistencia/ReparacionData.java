@@ -123,6 +123,30 @@ public class ReparacionData {
             
     }
     
+    public void FinalizarReparacion(int id) {
+        String sqlQuery = "UPDATE reparacion SET estado= true WHERE id = ?";
+            
+            try {
+            PreparedStatement ps = conexionData.prepareStatement(sqlQuery);
+            ps.setInt(1, id);
+           
+              
+            if (ps.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Se pudo finalizar la reparación.");
+            } else  {
+                JOptionPane.showMessageDialog(null, "No se pudo finalizar la reparación.");
+            }
+            
+            ps.close();
+            
+        } catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error. tratando de finalizar una reparación" + ex);
+        }  
+            
+            
+    }
+    
+    
     public ArrayList<Reparacion> listarReparaciones() {
 
         ArrayList<Reparacion> listaR = new ArrayList();
@@ -261,6 +285,41 @@ public class ReparacionData {
             JOptionPane.showMessageDialog(null, "Se produjo un error al obtener la lista de bicicletas por estado "+ex);
         }
         return bicicletasPorEstado;
+    }
+        public ArrayList<Reparacion> buscarReparacionesPorEstado(Boolean estado) {
+
+        ArrayList<Reparacion> reparacionesPorEstado = new ArrayList();
+
+        String sql = "SELECT * FROM `reparacion` WHERE estado = ?";
+
+        try {
+            PreparedStatement ps = conexionData.prepareStatement(sql);
+            
+            ps.setBoolean(1, estado); 
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                
+                Reparacion r = new Reparacion();
+
+                r.setId(rs.getInt("id"));
+                r.setBiclicleta(bData.buscarBicicletaPorID(rs.getInt("id_bicicleta")));
+                r.setServicio(sData.buscarServicioPorID(rs.getInt("id_servicio")));
+                r.setEstado(rs.getBoolean("estado"));
+                r.setPrecio_final(rs.getDouble("precio_final"));
+                r.setFecha_entrada(rs.getDate("fecha_entrada").toLocalDate());
+                r.setBorrado(rs.getBoolean("borrado"));
+                
+                reparacionesPorEstado.add(r);
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al obtener la lista de reparaciones por estado "+ex);
+        }
+        return reparacionesPorEstado;
     }
     
     public Reparacion buscarReparacionPorBicicletaYServicio(Bicicleta bici, Servicio servi) {
