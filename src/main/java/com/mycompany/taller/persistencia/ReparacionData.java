@@ -47,7 +47,7 @@ public class ReparacionData {
             ps.setBoolean(3, reparacion.isEstado());
             ps.setDouble(4, reparacion.getPrecio_final()); // precio del servicio + precio total de repuestos + 15% sobre el total
             ps.setDate(5, Date.valueOf(reparacion.getFecha_entrada()));
-            ps.setBoolean(6, reparacion.isBorrado());
+         //   ps.setBoolean(6, reparacion.isBorrado());
             
             if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Nueva reparación creada");

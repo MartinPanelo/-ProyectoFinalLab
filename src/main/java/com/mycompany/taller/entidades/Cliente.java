@@ -100,7 +100,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", domicilio=" + domicilio + ", celular=" + celular + '}';
+        return this.apellido + "  "+this.nombre+"  DNI : "+this.dni ;
     }
 
     @Override

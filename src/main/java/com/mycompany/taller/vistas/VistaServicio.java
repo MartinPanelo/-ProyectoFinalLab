@@ -25,8 +25,8 @@ public class VistaServicio extends javax.swing.JInternalFrame {
     Connection conDataBase = Conexion.getConexion();
     ServicioData sData = new ServicioData(conDataBase);
 
-    List<Servicio> listaServiciosAlta = new ArrayList<>();
-    List<Servicio> listaServiciosBaja = new ArrayList<>();
+    List<Servicio> listaServiciosAlta;
+    List<Servicio> listaServiciosBaja;
 
     private DefaultTableModel ModelotablaServiciosAlta;
     private DefaultTableModel ModelotablaServiciosBaja;

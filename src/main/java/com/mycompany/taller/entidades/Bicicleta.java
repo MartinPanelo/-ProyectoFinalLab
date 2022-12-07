@@ -144,7 +144,7 @@ public class Bicicleta {
 
     @Override
     public String toString() {
-        return "Bicicleta{" + "id=" + id + ", numero_serie=" + numero_serie + ", marca=" + marca + ", tipo=" + tipo + ", color=" + color + ", cliente=" + cliente + ", borrado =" + borrado +'}';
+        return "N° de serie: "+this.numero_serie +" marca : "+this.marca+ " tipo: "+ this.tipo;
     }
     
     
