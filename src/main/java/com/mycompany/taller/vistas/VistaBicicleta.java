@@ -302,7 +302,7 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
             if (validarCamposVaciosBuscarCliente()) {
                 Cliente c = new Cliente();
                 c = cData.buscarClientePorDni(Long.parseLong(JTFcliente.getText()));
-                
+                // 
             } else {
                 JOptionPane.showMessageDialog(null, "Falta ingresar el dni para buscar.");
             }
