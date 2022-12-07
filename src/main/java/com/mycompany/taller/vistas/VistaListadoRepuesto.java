@@ -73,6 +73,7 @@ public class VistaListadoRepuesto extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        JTlistadoDeRepuestos.setShowGrid(true);
         jScrollPane2.setViewportView(JTlistadoDeRepuestos);
 
         JBdarDeAlta.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N

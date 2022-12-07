@@ -37,6 +37,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         JMIlistado = new javax.swing.JMenuItem();
         JMCliente = new javax.swing.JMenu();
         JMGestion = new javax.swing.JMenuItem();
+        JMListaClientes = new javax.swing.JMenuItem();
         JMReparacion = new javax.swing.JMenu();
         JMIGestion = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -108,6 +109,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
         JMCliente.add(JMGestion);
+
+        JMListaClientes.setText("Listado");
+        JMListaClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMListaClientesActionPerformed(evt);
+            }
+        });
+        JMCliente.add(JMListaClientes);
 
         jMenuBar1.add(JMCliente);
 
@@ -216,6 +225,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jDesktopPane1.moveToFront(GestionReparaciones);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void JMListaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMListaClientesActionPerformed
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        VistaListadoCliente listadoClientes = new VistaListadoCliente();
+        listadoClientes.setVisible(true);
+        jDesktopPane1.add(listadoClientes);
+        jDesktopPane1.moveToFront(listadoClientes);
+    }//GEN-LAST:event_JMListaClientesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -257,6 +275,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem JMIGestion;
     private javax.swing.JMenuItem JMIgestion;
     private javax.swing.JMenuItem JMIlistado;
+    private javax.swing.JMenuItem JMListaClientes;
     private javax.swing.JMenu JMReparacion;
     private javax.swing.JMenu JMRepuesto;
     private javax.swing.JDesktopPane jDesktopPane1;
