@@ -95,13 +95,11 @@ public boolean validarCombo(){
         JLmarca = new javax.swing.JLabel();
         JLcolor = new javax.swing.JLabel();
         JLcliente = new javax.swing.JLabel();
-        JTFid = new javax.swing.JTextField();
         JTFnroSerie = new javax.swing.JTextField();
         JTFmarca = new javax.swing.JTextField();
         JTFtipo = new javax.swing.JTextField();
         JLtipo = new javax.swing.JLabel();
         JTFcolor = new javax.swing.JTextField();
-        JLid = new javax.swing.JLabel();
         JBagregar = new javax.swing.JButton();
         JBlimpiar = new javax.swing.JButton();
         JCBclientes = new javax.swing.JComboBox<>();
@@ -117,13 +115,6 @@ public boolean validarCombo(){
 
         JLcliente.setText("Cliente");
 
-        JTFid.setEnabled(false);
-        JTFid.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFidActionPerformed(evt);
-            }
-        });
-
         JTFnroSerie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTFnroSerieActionPerformed(evt);
@@ -131,8 +122,6 @@ public boolean validarCombo(){
         });
 
         JLtipo.setText("Tipo");
-
-        JLid.setText("N° de Bicicleta");
 
         JBagregar.setText("Agregar");
         JBagregar.addActionListener(new java.awt.event.ActionListener() {
@@ -160,60 +149,58 @@ public boolean validarCombo(){
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(JBlimpiar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
-                        .addComponent(JBagregar)
-                        .addGap(41, 41, 41))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(JLcliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JLtipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JLnroSerie, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JLid, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
-                            .addComponent(JLmarca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JLcolor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(28, 28, 28)
+                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JCBclientes, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JTFid)
-                            .addComponent(JTFmarca)
-                            .addComponent(JTFtipo)
-                            .addComponent(JTFcolor)
-                            .addComponent(JTFnroSerie))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(JBlimpiar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                                .addComponent(JBagregar)
+                                .addGap(41, 41, 41))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(JLcliente, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                                    .addComponent(JLtipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(JLmarca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(JLcolor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(28, 28, 28)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(JCBclientes, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(JTFmarca)
+                                    .addComponent(JTFtipo)
+                                    .addComponent(JTFcolor)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(JLnroSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(JTFnroSerie)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JLid)
-                    .addComponent(JTFid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JTFnroSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JLnroSerie))
+                    .addComponent(JLnroSerie)
+                    .addComponent(JTFnroSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JLmarca)
                     .addComponent(JTFmarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JLtipo)
-                    .addComponent(JTFtipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(JTFtipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JLtipo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLcolor)
                     .addComponent(JTFcolor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLcliente)
                     .addComponent(JCBclientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBagregar)
                     .addComponent(JBlimpiar))
@@ -236,10 +223,6 @@ public boolean validarCombo(){
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void JTFidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFidActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTFidActionPerformed
 
     private void JTFnroSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFnroSerieActionPerformed
         // TODO add your handling code here:
@@ -269,6 +252,7 @@ public boolean validarCombo(){
                 b.setCliente((Cliente)JCBclientes.getSelectedItem());
                 
                 bData.guardarBicicleta(b);
+                
             } else if(!validarCombo()){
                 JOptionPane.showMessageDialog(null,"Debe seleccionar un cliente");
             } 
@@ -292,26 +276,24 @@ public boolean validarCombo(){
     private javax.swing.JComboBox<Cliente> JCBclientes;
     private javax.swing.JLabel JLcliente;
     private javax.swing.JLabel JLcolor;
-    private javax.swing.JLabel JLid;
     private javax.swing.JLabel JLmarca;
     private javax.swing.JLabel JLnroSerie;
     private javax.swing.JLabel JLtipo;
     private javax.swing.JTextField JTFcolor;
-    private javax.swing.JTextField JTFid;
     private javax.swing.JTextField JTFmarca;
     private javax.swing.JTextField JTFnroSerie;
     private javax.swing.JTextField JTFtipo;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
-  private void CargarClientes() {
+    private void CargarClientes() {
 
-        listaClientes = cData.listarClientes(false);
+          listaClientes = cData.listarClientes(false);
 
-        for (Cliente aux : listaClientes) {
+          for (Cliente aux : listaClientes) {
 
-            JCBclientes.addItem(aux);
-        }
-        JCBclientes.setSelectedIndex(-1);
-        
-    }
+              JCBclientes.addItem(aux);
+          }
+          JCBclientes.setSelectedIndex(-1);
+
+      }
 }
