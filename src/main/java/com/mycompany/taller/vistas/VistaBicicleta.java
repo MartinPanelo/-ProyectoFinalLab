@@ -107,7 +107,7 @@ public boolean validarCombo(){
         JCBclientes = new javax.swing.JComboBox<>();
 
         setClosable(true);
-        setTitle("Gestion de Bicicletas");
+        setTitle("Agregar Bicicletas");
 
         JLnroSerie.setText("N° de Serie");
 
