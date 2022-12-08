@@ -43,7 +43,15 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
         }
         return true;
     }
-
+public boolean validarCombo(){
+    
+    int index=JCBclientes.getSelectedIndex();
+    if (index==-1){
+        return false;
+    }
+    return true;
+}
+    //||JCBclientes.getSelectedItem().toString().equals("")
     public boolean validarCamposVaciosAgregar() {
         if (JTFnroSerie.getText().equals("") || JTFmarca.getText().equals("") || JTFtipo.getText().equals("") || JTFcolor.getText().equals("")) {
             return false;
@@ -58,14 +66,14 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
         return true;
     }
 
-    public boolean validarCamposVaciosActualizar() {
+    /* public boolean validarCamposVaciosActualizar() {
         if (JTFnroSerie.getText().equals("") || JTFmarca.getText().equals("") || JTFtipo.getText().equals("") || JTFcolor.getText().equals("")) {
             return false;
         }
         return true;
     }
 
-   /* public boolean validarCamposVaciosBuscarCliente() {
+   public boolean validarCamposVaciosBuscarCliente() {
         if (JCBclientes.getSelectedItem()) {
             return false;
         }
@@ -157,9 +165,9 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(JBlimpiar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
                         .addComponent(JBagregar)
-                        .addGap(36, 36, 36))
+                        .addGap(41, 41, 41))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(JLcliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -251,7 +259,7 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         
         try {
-            if (validarCamposVaciosAgregar()) {
+            if (validarCamposVaciosAgregar() && validarCombo()) {
                 Bicicleta b = new Bicicleta();
                 //Cliente c = new Cliente();
                b.setNumero_serie(Long.parseLong(JTFnroSerie.getText()));
@@ -260,9 +268,11 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
                 b.setColor(JTFcolor.getText());
                 b.setCliente((Cliente)JCBclientes.getSelectedItem());
                 
-//b.setCliente(cData.buscarClientePorDni(Long.parseLong(JCBclientes.getName())));
                 bData.guardarBicicleta(b);
-            } else {
+            } else if(!validarCombo()){
+                JOptionPane.showMessageDialog(null,"Debe seleccionar un cliente");
+            } 
+            else {
                 JOptionPane.showMessageDialog(null, "Faltan llenar campos");
             }
         } catch (NumberFormatException ex) {
@@ -301,6 +311,7 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
 
             JCBclientes.addItem(aux);
         }
-        JCBclientes.getSelectedIndex();
+        JCBclientes.setSelectedIndex(-1);
+        
     }
 }
