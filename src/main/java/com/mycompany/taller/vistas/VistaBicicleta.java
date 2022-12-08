@@ -11,6 +11,7 @@ import java.sql.Connection;
 import javax.swing.JOptionPane;
 import com.mycompany.taller.persistencia.ClienteData;
 import com.mycompany.taller.entidades.Cliente;
+import java.util.List;
 
 /**
  *
@@ -23,12 +24,16 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
      */
     Connection conexiondb = Conexion.getConexion();
     BicicletaData bData = new BicicletaData(conexiondb);
+    ClienteData cData = new ClienteData(conexiondb);
+    List<Cliente> listaClientes;
 
-    private ClienteData cData;
+    //private ClienteData cData;
 
     public VistaBicicleta() {
         initComponents();
-        this.cData = new ClienteData(conexiondb);
+        CargarClientes();
+       // this.cData = new ClienteData(conexiondb);
+        
     }
 
     //Validaciones  !!VER LA VALIDACION DE CLIENTE
@@ -38,7 +43,15 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
         }
         return true;
     }
-
+public boolean validarCombo(){
+    
+    int index=JCBclientes.getSelectedIndex();
+    if (index==-1){
+        return false;
+    }
+    return true;
+}
+    //||JCBclientes.getSelectedItem().toString().equals("")
     public boolean validarCamposVaciosAgregar() {
         if (JTFnroSerie.getText().equals("") || JTFmarca.getText().equals("") || JTFtipo.getText().equals("") || JTFcolor.getText().equals("")) {
             return false;
@@ -53,20 +66,21 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
         return true;
     }
 
-    public boolean validarCamposVaciosActualizar() {
+    /* public boolean validarCamposVaciosActualizar() {
         if (JTFnroSerie.getText().equals("") || JTFmarca.getText().equals("") || JTFtipo.getText().equals("") || JTFcolor.getText().equals("")) {
             return false;
         }
         return true;
     }
 
-    public boolean validarCamposVaciosBuscarCliente() {
-        if (JTFcliente.getText().equals("")) {
+   public boolean validarCamposVaciosBuscarCliente() {
+        if (JCBclientes.getSelectedItem()) {
             return false;
         }
         return true;
-    }
+    }*/
 
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,15 +102,12 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
         JLtipo = new javax.swing.JLabel();
         JTFcolor = new javax.swing.JTextField();
         JLid = new javax.swing.JLabel();
-        JTFcliente = new javax.swing.JTextField();
         JBagregar = new javax.swing.JButton();
-        JBactualizar = new javax.swing.JButton();
         JBlimpiar = new javax.swing.JButton();
-        JBbuscarNroSerie = new javax.swing.JButton();
-        JBbucarDNI = new javax.swing.JButton();
+        JCBclientes = new javax.swing.JComboBox<>();
 
         setClosable(true);
-        setTitle("Gestion de Bicicletas");
+        setTitle("Agregar Bicicletas");
 
         JLnroSerie.setText("N° de Serie");
 
@@ -130,13 +141,6 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
             }
         });
 
-        JBactualizar.setText("Actualizar");
-        JBactualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBactualizarActionPerformed(evt);
-            }
-        });
-
         JBlimpiar.setText("Limpiar");
         JBlimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,17 +148,10 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
             }
         });
 
-        JBbuscarNroSerie.setText("Buscar");
-        JBbuscarNroSerie.addActionListener(new java.awt.event.ActionListener() {
+        JCBclientes.setToolTipText("");
+        JCBclientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBbuscarNroSerieActionPerformed(evt);
-            }
-        });
-
-        JBbucarDNI.setText("Buscar");
-        JBbucarDNI.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBbucarDNIActionPerformed(evt);
+                JCBclientesActionPerformed(evt);
             }
         });
 
@@ -166,6 +163,12 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(JBlimpiar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                        .addComponent(JBagregar)
+                        .addGap(41, 41, 41))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(JLcliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(JLtipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -175,27 +178,12 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
                             .addComponent(JLcolor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JCBclientes, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(JTFid)
                             .addComponent(JTFmarca)
                             .addComponent(JTFtipo)
                             .addComponent(JTFcolor)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(JTFnroSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(JBbuscarNroSerie))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(JTFcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(JBbucarDNI)))
-                                .addGap(0, 8, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(JBlimpiar)
-                        .addGap(65, 65, 65)
-                        .addComponent(JBagregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(JBactualizar)))
+                            .addComponent(JTFnroSerie))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -208,8 +196,7 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JTFnroSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JLnroSerie)
-                    .addComponent(JBbuscarNroSerie))
+                    .addComponent(JLnroSerie))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLmarca)
@@ -222,15 +209,13 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLcolor)
                     .addComponent(JTFcolor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLcliente)
-                    .addComponent(JTFcliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JBbucarDNI))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                    .addComponent(JCBclientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBagregar)
-                    .addComponent(JBactualizar)
                     .addComponent(JBlimpiar))
                 .addGap(45, 45, 45))
         );
@@ -267,65 +252,27 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
         JTFmarca.setText("");
         JTFtipo.setText("");
         JTFcolor.setText("");
-        JTFcliente.setText("");
+        JCBclientes.removeAllItems();
     }//GEN-LAST:event_JBlimpiarActionPerformed
-
-    // BOTON Buscar bicicleta
-    private void JBbuscarNroSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBbuscarNroSerieActionPerformed
-
-        // TODO add your handling code here:
-        try {
-            if (validarCamposVaciosBuscarNroSerie()) {
-                Bicicleta b = new Bicicleta();
-
-                b = bData.buscarBicicletaPorNroSerie(Long.parseLong(JTFnroSerie.getText()));
-
-                JTFid.setText(String.valueOf(b.getId()));
-                JTFmarca.setText(b.getMarca());
-                JTFtipo.setText(b.getTipo());
-                JTFcolor.setText(b.getColor());
-                JTFcliente.setText(String.valueOf(bData.BuscarClienteporBicicleta(Long.parseLong(JTFnroSerie.getText())).getDni()));
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Falta ingresar el nro de serie para buscar.");
-            }
-        } catch (NumberFormatException | NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, "El nro de serie ingresado contiene caracteres o es invalido.");
-        }
-
-    }//GEN-LAST:event_JBbuscarNroSerieActionPerformed
-
-//BUSCAR CLIENTE POR DNI
-    private void JBbucarDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBbucarDNIActionPerformed
-        // TODO add your handling code here:
-        try {
-            if (validarCamposVaciosBuscarCliente()) {
-                Cliente c = new Cliente();
-                c = cData.buscarClientePorDni(Long.parseLong(JTFcliente.getText()));
-                // 
-            } else {
-                JOptionPane.showMessageDialog(null, "Falta ingresar el dni para buscar.");
-            }
-        } catch (NumberFormatException | NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, "El dni ingresado contiene caracteres o no es cliente.");
-        }
-
-    }//GEN-LAST:event_JBbucarDNIActionPerformed
 
     private void JBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBagregarActionPerformed
         // TODO add your handling code here:
         
         try {
-            if (validarCamposVaciosAgregar()) {
+            if (validarCamposVaciosAgregar() && validarCombo()) {
                 Bicicleta b = new Bicicleta();
                 //Cliente c = new Cliente();
                b.setNumero_serie(Long.parseLong(JTFnroSerie.getText()));
                 b.setMarca(JTFmarca.getText());
                 b.setTipo(JTFtipo.getText());
                 b.setColor(JTFcolor.getText());
-                b.setCliente(cData.buscarClientePorDni(Long.parseLong(JTFcliente.getText())));
+                b.setCliente((Cliente)JCBclientes.getSelectedItem());
+                
                 bData.guardarBicicleta(b);
-            } else {
+            } else if(!validarCombo()){
+                JOptionPane.showMessageDialog(null,"Debe seleccionar un cliente");
+            } 
+            else {
                 JOptionPane.showMessageDialog(null, "Faltan llenar campos");
             }
         } catch (NumberFormatException ex) {
@@ -334,43 +281,21 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
        
     }//GEN-LAST:event_JBagregarActionPerformed
 
-    private void JBactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBactualizarActionPerformed
+    private void JCBclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBclientesActionPerformed
         // TODO add your handling code here:
-                try {
-            if (validarCamposVaciosActualizar()) {
-               Bicicleta b = new Bicicleta();
-                //Cliente c = new Cliente();
-               
-                b.setNumero_serie(Long.parseLong(JTFnroSerie.getText()));
-                b.setMarca(JTFmarca.getText());
-                b.setTipo(JTFtipo.getText());
-                b.setColor(JTFcolor.getText());
-                b.setCliente(cData.buscarClientePorDni(Long.parseLong(JTFcliente.getText())));
-                bData.actualizarBicicleta(b);
-               
-            } else {
-                JOptionPane.showMessageDialog(null, "Faltan llenar campos");
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Ocurrio un problema revise los datos ingresados. " + ex);
-        }
-        
-    }//GEN-LAST:event_JBactualizarActionPerformed
+    }//GEN-LAST:event_JCBclientesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton JBactualizar;
     private javax.swing.JButton JBagregar;
-    private javax.swing.JButton JBbucarDNI;
-    private javax.swing.JButton JBbuscarNroSerie;
     private javax.swing.JButton JBlimpiar;
+    private javax.swing.JComboBox<Cliente> JCBclientes;
     private javax.swing.JLabel JLcliente;
     private javax.swing.JLabel JLcolor;
     private javax.swing.JLabel JLid;
     private javax.swing.JLabel JLmarca;
     private javax.swing.JLabel JLnroSerie;
     private javax.swing.JLabel JLtipo;
-    private javax.swing.JTextField JTFcliente;
     private javax.swing.JTextField JTFcolor;
     private javax.swing.JTextField JTFid;
     private javax.swing.JTextField JTFmarca;
@@ -378,4 +303,15 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
     private javax.swing.JTextField JTFtipo;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+  private void CargarClientes() {
+
+        listaClientes = cData.listarClientes(false);
+
+        for (Cliente aux : listaClientes) {
+
+            JCBclientes.addItem(aux);
+        }
+        JCBclientes.setSelectedIndex(-1);
+        
+    }
 }
