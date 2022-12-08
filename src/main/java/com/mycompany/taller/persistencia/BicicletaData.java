@@ -99,7 +99,7 @@ public class BicicletaData {
             ps.setString(3, bici.getTipo());
             ps.setString(4, bici.getColor());
             ps.setInt(5, bici.getCliente().getId());
-            ps.setDouble(6, bici.getId());
+            ps.setInt(6, bici.getId());
            // ps.setBoolean(7, bici.getBorrado()); //  los chicos tienen is? preguntar
            
             if (ps.executeUpdate() > 0) {
