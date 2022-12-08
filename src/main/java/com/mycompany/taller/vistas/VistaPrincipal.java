@@ -30,6 +30,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        JMIlistadoBicis = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMgestionar = new javax.swing.JMenuItem();
         JMRepuesto = new javax.swing.JMenu();
@@ -65,6 +66,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem1);
+
+        JMIlistadoBicis.setText("Listado");
+        JMIlistadoBicis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMIlistadoBicisActionPerformed(evt);
+            }
+        });
+        jMenu2.add(JMIlistadoBicis);
 
         jMenuBar1.add(jMenu2);
 
@@ -234,6 +243,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jDesktopPane1.moveToFront(listadoClientes);
     }//GEN-LAST:event_JMListaClientesActionPerformed
 
+    private void JMIlistadoBicisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIlistadoBicisActionPerformed
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        VistaGestionarBicicletas vc = new VistaGestionarBicicletas();
+        vc.setVisible(true);
+        jDesktopPane1.add(vc);
+        jDesktopPane1.moveToFront(vc);
+    }//GEN-LAST:event_JMIlistadoBicisActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -275,6 +293,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem JMIGestion;
     private javax.swing.JMenuItem JMIgestion;
     private javax.swing.JMenuItem JMIlistado;
+    private javax.swing.JMenuItem JMIlistadoBicis;
     private javax.swing.JMenuItem JMListaClientes;
     private javax.swing.JMenu JMReparacion;
     private javax.swing.JMenu JMRepuesto;
