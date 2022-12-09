@@ -37,12 +37,12 @@ public class VistaBicicleta extends javax.swing.JInternalFrame {
     }
 
     //Validaciones  !!VER LA VALIDACION DE CLIENTE
-    public boolean validarCamposVaciosBuscarID() {
-        if (JTFid.getText().equals("")) {
-            return false;
-        }
-        return true;
-    }
+//    public boolean validarCamposVaciosBuscarID() {
+//        if (JTFid.getText().equals("")) {
+//            return false;
+//        }
+//        return true;
+//    }
 public boolean validarCombo(){
     
     int index=JCBclientes.getSelectedIndex();
@@ -230,7 +230,7 @@ public boolean validarCombo(){
 
     private void JBlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBlimpiarActionPerformed
         // TODO add your handling code here:
-        JTFid.setText("");
+      //  JTFid.setText("");
         JTFnroSerie.setText("");
         JTFmarca.setText("");
         JTFtipo.setText("");

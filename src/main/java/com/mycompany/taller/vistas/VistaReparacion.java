@@ -71,6 +71,7 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
         armarTablas();
         cargarServicios();
         JBagregar.setEnabled(false);
+        
     }
 
     /**
@@ -93,9 +94,7 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
         JLbicicleta = new javax.swing.JLabel();
         JCBbicicleta = new javax.swing.JComboBox<>();
         jCBclientes = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
         JBagregar = new javax.swing.JButton();
-        JCBestado = new javax.swing.JCheckBox();
         JLfechadeentrada1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTRepuestos = new javax.swing.JTable();
@@ -104,7 +103,7 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
 
         setClosable(true);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Gestión de reparación", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Constantia", 0, 16))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Facturacion de reparacion", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Constantia", 0, 16))); // NOI18N
 
         JLcliente.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLcliente.setText("Cliente");
@@ -140,9 +139,6 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
                 jCBclientesActionPerformed(evt);
             }
         });
-
-        jLabel4.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        jLabel4.setText("Estado");
 
         JBagregar.setText("Agregar");
         JBagregar.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -193,37 +189,35 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(156, 156, 156)
                         .addComponent(JBagregar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(162, 162, 162))
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(JLfechadeentrada)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JDCfechadeentrada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                .addComponent(JLfechadeentrada)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JCBestado))
+                                .addComponent(JDCfechadeentrada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(JLpreciofinal)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(JLservicio)
+                                    .addComponent(JLbicicleta)
+                                    .addComponent(JLcliente))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JTFpreciofinal, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(jBTNcalcularPrecioFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(JLfechadeentrada1))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JLservicio)
-                            .addComponent(JLbicicleta)
-                            .addComponent(JLcliente))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCBclientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JCBbicicleta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JCBservicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCBclientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(JCBbicicleta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(JCBservicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(JLfechadeentrada1)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(JLpreciofinal)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(JTFpreciofinal, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jBTNcalcularPrecioFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,13 +244,9 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLpreciofinal)
-                    .addComponent(JTFpreciofinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTFpreciofinal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBTNcalcularPrecioFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(JCBestado))
-                .addGap(4, 4, 4)
+                .addGap(46, 46, 46)
                 .addComponent(JBagregar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -270,7 +260,7 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,7 +294,7 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
 
             unaReparacion.setBiclicleta((Bicicleta) JCBbicicleta.getSelectedItem());
             unaReparacion.setServicio((Servicio) JCBservicio.getSelectedItem());
-            unaReparacion.setEstado(JCBestado.isSelected());
+            unaReparacion.setEstado(false);
             unaReparacion.setFecha_entrada(LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(JDCfechadeentrada.getDate())));
             unaReparacion.setPrecio_final(precioFinal());
             unaReparacion.setBorrado(false);
@@ -350,7 +340,6 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBagregar;
     private javax.swing.JComboBox<Bicicleta> JCBbicicleta;
-    private javax.swing.JCheckBox JCBestado;
     private javax.swing.JComboBox<Servicio> JCBservicio;
     private com.toedter.calendar.JDateChooser JDCfechadeentrada;
     private javax.swing.JLabel JLbicicleta;
@@ -363,7 +352,6 @@ public class VistaReparacion extends javax.swing.JInternalFrame {
     private javax.swing.Box.Filler filler1;
     private javax.swing.JButton jBTNcalcularPrecioFinal;
     private javax.swing.JComboBox<Cliente> jCBclientes;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTRepuestos;

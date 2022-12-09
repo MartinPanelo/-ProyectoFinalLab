@@ -116,7 +116,7 @@ public class Servicio {
 
     @Override
     public String toString() {
-        return "codigo: " + codigo + " , descripcion=" + descripcion ;
+        return "Codigo: " + codigo + " , Descripcion=" + descripcion + " , Precio=" + costo;
     }
 
    
