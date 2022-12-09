@@ -100,6 +100,7 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Gestionar Bicicletas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Constantia", 0, 16))); // NOI18N
 
+        JTbiciDadasDeAlta.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
         JTbiciDadasDeAlta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -118,6 +119,7 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(JTbiciDadasDeAlta);
 
+        JTBicisDadasDeBaja.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
         JTBicisDadasDeBaja.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -139,6 +141,7 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(JTBicisDadasDeBaja);
 
+        JBdarDeBaja.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JBdarDeBaja.setText("Dar de baja");
         JBdarDeBaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +149,7 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
             }
         });
 
+        JBdarDeAlta.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JBdarDeAlta.setText("Dar de alta");
         JBdarDeAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,8 +157,10 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
             }
         });
 
+        JLbicisDadasDeAlta.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLbicisDadasDeAlta.setText("Bicicletas dadas de Alta:");
 
+        JLbicisDadasDeBaja.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLbicisDadasDeBaja.setText("Bicicletas dadas de Baja:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -205,23 +211,30 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
             }
         });
 
+        JLnumSerie.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLnumSerie.setText("Numero de serie");
 
+        JLmarca.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLmarca.setText("Marca");
 
+        JLtipo.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLtipo.setText("Tipo");
 
+        JLcolor.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLcolor.setText("Color");
 
+        JLcliente.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLcliente.setText("Cliente");
 
         JCBcliente.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
 
+        JLnumBicicleta.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLnumBicicleta.setText("N° de Bicicleta");
 
         JTFnumBicicleta.setEditable(false);
         JTFnumBicicleta.setEnabled(false);
 
+        JLclienteActual.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLclienteActual.setText("Cliente actual");
 
         JTFclienteActual.setEditable(false);
