@@ -49,7 +49,7 @@ public class VistaRepuesto extends javax.swing.JInternalFrame {
     }
 
     public boolean validarCamposVaciosActualizar() {
-        if (JTFnombre.getText().equals("") || JTFid.getText().equals("") || JTFnumSerie.getText().equals("") || JTFdescripcion.getText().equals("") || JTFprecio.getText().equals("")) {
+        if (JTFid.getText().equals("")  || JTFnombre.getText().equals("") || JTFnumSerie.getText().equals("") || JTFdescripcion.getText().equals("") || JTFprecio.getText().equals("")) {
             return false;
         }
         return true;

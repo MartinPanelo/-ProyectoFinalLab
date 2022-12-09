@@ -117,6 +117,9 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="JTbiciDadasDeAlta">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Constantia" size="12" style="0"/>
+                </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="4">
                     <Column editable="true" title="Title 1" type="java.lang.Object"/>
@@ -141,6 +144,9 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="JTBicisDadasDeBaja">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Constantia" size="12" style="0"/>
+                </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="4">
                     <Column editable="true" title="Title 1" type="java.lang.Object"/>
@@ -159,6 +165,9 @@
         </Container>
         <Component class="javax.swing.JButton" name="JBdarDeBaja">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Constantia" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Dar de baja"/>
           </Properties>
           <Events>
@@ -167,6 +176,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="JBdarDeAlta">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Constantia" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Dar de alta"/>
           </Properties>
           <Events>
@@ -175,11 +187,17 @@
         </Component>
         <Component class="javax.swing.JLabel" name="JLbicisDadasDeAlta">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Constantia" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Bicicletas dadas de Alta:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="JLbicisDadasDeBaja">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Constantia" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Bicicletas dadas de Baja:"/>
           </Properties>
         </Component>
@@ -302,6 +320,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="JLnumSerie">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Constantia" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Numero de serie"/>
           </Properties>
         </Component>
@@ -309,6 +330,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="JLmarca">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Constantia" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Marca"/>
           </Properties>
         </Component>
@@ -316,16 +340,25 @@
         </Component>
         <Component class="javax.swing.JLabel" name="JLtipo">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Constantia" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Tipo"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="JLcolor">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Constantia" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Color"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="JLcliente">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Constantia" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cliente"/>
           </Properties>
         </Component>
@@ -348,6 +381,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="JLnumBicicleta">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Constantia" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="N&#xb0; de Bicicleta"/>
           </Properties>
         </Component>
@@ -359,6 +395,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="JLclienteActual">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Constantia" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cliente actual"/>
           </Properties>
         </Component>
