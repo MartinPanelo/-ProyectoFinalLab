@@ -12,6 +12,7 @@ import com.mycompany.taller.persistencia.ClienteData;
 import com.mycompany.taller.persistencia.Conexion;
 import com.mycompany.taller.persistencia.ReparacionData;
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -60,6 +61,7 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
         JBactualizar.setEnabled(false);
         JBdarDeAlta.setEnabled(false);
         JBdarDeBaja.setEnabled(false);
+        jDCalendario.setEnabled(false);
 
     }
 
@@ -85,6 +87,7 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
         jTFparametroAFiltrar = new javax.swing.JTextField();
         jCBTipoDeFiltro = new javax.swing.JComboBox<>();
         jBTNFiltrar = new javax.swing.JButton();
+        jDCalendario = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         JBactualizar = new javax.swing.JButton();
         JLnumSerie = new javax.swing.JLabel();
@@ -178,6 +181,11 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
         });
 
         jCBTipoDeFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dueño", "servicio", "Fecha de entrada" }));
+        jCBTipoDeFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBTipoDeFiltroActionPerformed(evt);
+            }
+        });
 
         jBTNFiltrar.setText("Filtrar");
         jBTNFiltrar.addActionListener(new java.awt.event.ActionListener() {
@@ -192,21 +200,25 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTFparametroAFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTFparametroAFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCBTipoDeFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jBTNFiltrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jDCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCBTipoDeFiltro, 0, 1, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBTNFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFparametroAFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCBTipoDeFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBTNFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jDCalendario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTFparametroAFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCBTipoDeFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBTNFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -216,19 +228,19 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addComponent(JBdarDeBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JBdarDeBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(JBdarDeAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(104, 104, 104))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(JLbicisDadasDeBaja)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2)
-                    .addComponent(JLbicisDadasDeAlta))
-                .addContainerGap(26, Short.MAX_VALUE))
+                    .addComponent(JLbicisDadasDeAlta)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,7 +344,7 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(101, 101, 101)
                         .addComponent(JBactualizar)
-                        .addGap(0, 87, Short.MAX_VALUE)))
+                        .addGap(0, 66, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -509,6 +521,20 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JCBclienteActionPerformed
 
+    private void jCBTipoDeFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTipoDeFiltroActionPerformed
+        
+        if(jCBTipoDeFiltro.getSelectedIndex() == 2){
+            jDCalendario.setEnabled(true);
+            jTFparametroAFiltrar.setEnabled(false);
+            jTFparametroAFiltrar.setText("");
+        }else{
+            jDCalendario.setEnabled(false);
+            jDCalendario.setCalendar(null);
+            jTFparametroAFiltrar.setEnabled(true);
+            
+        }
+    }//GEN-LAST:event_jCBTipoDeFiltroActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBactualizar;
@@ -534,6 +560,7 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
     private javax.swing.JTable JTbiciDadasDeAlta;
     private javax.swing.JButton jBTNFiltrar;
     private javax.swing.JComboBox<String> jCBTipoDeFiltro;
+    private com.toedter.calendar.JDateChooser jDCalendario;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -572,7 +599,7 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
         listaBicicletasAlta = bData.listarBicicletas(false);
         listaBicicletasBaja = bData.listarBicicletas(true);
 
-        if (jTFparametroAFiltrar.getText().isEmpty()) {
+        if (jTFparametroAFiltrar.getText().isEmpty() && jCBTipoDeFiltro.getSelectedIndex() != 2) {
 
             for (Bicicleta aux : listaBicicletasAlta) {
                 modeloTablaBicisAlta.addRow(new Object[]{aux.getId(), aux.getNumero_serie(), aux.getMarca(), aux.getTipo(), aux.getColor(), aux.getCliente().toString()});
@@ -636,7 +663,8 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
 
         } else if (jCBTipoDeFiltro.getSelectedIndex() == 2) { // filtro por fecha de entrada
             try {
-                HashSet<Bicicleta> listaBicicletasFiltradaPorFecha = ReData.buscarBicicletasPorFecha(LocalDate.parse(jTFparametroAFiltrar.getText()));
+               
+                HashSet<Bicicleta> listaBicicletasFiltradaPorFecha = ReData.buscarBicicletasPorFecha(LocalDate.parse( new SimpleDateFormat("yyyy-MM-dd").format(jDCalendario.getDate())));
 
                 for (Bicicleta aux : listaBicicletasFiltradaPorFecha) {
 
@@ -649,7 +677,7 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
                     }
 
                 }
-            } catch (java.time.format.DateTimeParseException ex) {
+            } catch (NullPointerException ex) {
                 JOptionPane.showMessageDialog(null, "Error en el formato de la fecha [ AÑO-MES-DIA ] ");
 
             }
