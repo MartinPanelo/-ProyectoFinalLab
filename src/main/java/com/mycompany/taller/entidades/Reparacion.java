@@ -101,14 +101,9 @@ public class Reparacion {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 47 * hash + this.id;
+        int hash = 7;
         hash = 47 * hash + Objects.hashCode(this.biclicleta);
         hash = 47 * hash + Objects.hashCode(this.servicio);
-        hash = 47 * hash + (this.estado ? 1 : 0);
-        hash = 47 * hash + (int) (Double.doubleToLongBits(this.precio_final) ^ (Double.doubleToLongBits(this.precio_final) >>> 32));
-        hash = 47 * hash + Objects.hashCode(this.fecha_entrada);
-        hash = 47 * hash + (this.borrado ? 1 : 0);
         return hash;
     }
 
@@ -124,26 +119,14 @@ public class Reparacion {
             return false;
         }
         final Reparacion other = (Reparacion) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (this.estado != other.estado) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.precio_final) != Double.doubleToLongBits(other.precio_final)) {
-            return false;
-        }
-        if (this.borrado != other.borrado) {
-            return false;
-        }
         if (!Objects.equals(this.biclicleta, other.biclicleta)) {
             return false;
         }
-        if (!Objects.equals(this.servicio, other.servicio)) {
-            return false;
-        }
-        return Objects.equals(this.fecha_entrada, other.fecha_entrada);
+        return Objects.equals(this.servicio, other.servicio);
     }
+
+
+
 
     @Override
     public String toString() {

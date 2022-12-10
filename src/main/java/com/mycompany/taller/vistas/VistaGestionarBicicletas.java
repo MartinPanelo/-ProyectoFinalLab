@@ -6,11 +6,15 @@ package com.mycompany.taller.vistas;
 
 import com.mycompany.taller.entidades.Bicicleta;
 import com.mycompany.taller.entidades.Cliente;
+import com.mycompany.taller.entidades.Reparacion;
 import com.mycompany.taller.persistencia.BicicletaData;
 import com.mycompany.taller.persistencia.ClienteData;
 import com.mycompany.taller.persistencia.Conexion;
+import com.mycompany.taller.persistencia.ReparacionData;
 import java.sql.Connection;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,17 +27,18 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
     /**
      * Creates new form VistaGestionarBicicletas
      */
-    
     Connection conexiondb = Conexion.getConexion();
     BicicletaData bData = new BicicletaData(conexiondb);
     ClienteData cData = new ClienteData(conexiondb);
+    ReparacionData ReData = new ReparacionData(conexiondb);
     ArrayList<Bicicleta> listaBicicletasAlta;
     ArrayList<Bicicleta> listaBicicletasBaja;
     ArrayList<Cliente> listaDeClientesAlta;
-    
+    ArrayList<Reparacion> listaReparaciones;
+
     private DefaultTableModel modeloTablaBicisAlta;
     private DefaultTableModel modeloTablaBicisBaja;
-    
+
     public VistaGestionarBicicletas() {
         initComponents();
         modeloTablaBicisAlta = new DefaultTableModel() {
@@ -41,9 +46,9 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
-        
+
         };
-        
+
         modeloTablaBicisBaja = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -55,11 +60,8 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
         JBactualizar.setEnabled(false);
         JBdarDeAlta.setEnabled(false);
         JBdarDeBaja.setEnabled(false);
-        
+
     }
-    
-    
-        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,6 +81,10 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
         JBdarDeAlta = new javax.swing.JButton();
         JLbicisDadasDeAlta = new javax.swing.JLabel();
         JLbicisDadasDeBaja = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jTFparametroAFiltrar = new javax.swing.JTextField();
+        jCBTipoDeFiltro = new javax.swing.JComboBox<>();
+        jBTNFiltrar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         JBactualizar = new javax.swing.JButton();
         JLnumSerie = new javax.swing.JLabel();
@@ -163,42 +169,85 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
         JLbicisDadasDeBaja.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLbicisDadasDeBaja.setText("Bicicletas dadas de Baja:");
 
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtros"));
+
+        jTFparametroAFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFparametroAFiltrarActionPerformed(evt);
+            }
+        });
+
+        jCBTipoDeFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dueño", "servicio", "Fecha de entrada" }));
+
+        jBTNFiltrar.setText("Filtrar");
+        jBTNFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBTNFiltrarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTFparametroAFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCBTipoDeFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jBTNFiltrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFparametroAFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBTipoDeFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBTNFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JLbicisDadasDeBaja)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JLbicisDadasDeAlta)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(JBdarDeBaja)
-                        .addGap(62, 62, 62)
-                        .addComponent(JBdarDeAlta)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(JBdarDeBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JBdarDeAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(104, 104, 104))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JLbicisDadasDeBaja)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
+                    .addComponent(JLbicisDadasDeAlta))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JLbicisDadasDeAlta)
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JLbicisDadasDeBaja)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JBdarDeBaja)
-                    .addComponent(JBdarDeAlta))
-                .addGap(21, 21, 21))
+                    .addComponent(JBdarDeBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JBdarDeAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -227,6 +276,11 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
         JLcliente.setText("Cliente");
 
         JCBcliente.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        JCBcliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCBclienteActionPerformed(evt);
+            }
+        });
 
         JLnumBicicleta.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         JLnumBicicleta.setText("N° de Bicicleta");
@@ -245,38 +299,40 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(JBactualizar)
-                .addContainerGap(101, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(JLclienteActual)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JTFclienteActual))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(JLnumBicicleta)
-                        .addGap(22, 22, 22)
-                        .addComponent(JTFnumBicicleta))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JLcliente)
-                            .addComponent(JLcolor)
-                            .addComponent(JLtipo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JTFtipo)
-                            .addComponent(JTFcolor)
-                            .addComponent(JCBcliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(JLclienteActual)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(JTFclienteActual))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(JLnumBicicleta)
+                                .addGap(22, 22, 22)
+                                .addComponent(JTFnumBicicleta))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(JLcliente)
+                                    .addComponent(JLcolor)
+                                    .addComponent(JLtipo))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(JTFtipo)
+                                    .addComponent(JTFcolor)
+                                    .addComponent(JCBcliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(JLnumSerie)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(JTFnumSerie))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(JLmarca)
+                                .addGap(18, 18, 18)
+                                .addComponent(JTFmarca))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(JLnumSerie)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JTFnumSerie))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(JLmarca)
-                        .addGap(18, 18, 18)
-                        .addComponent(JTFmarca)))
+                        .addGap(101, 101, 101)
+                        .addComponent(JBactualizar)
+                        .addGap(0, 87, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -312,7 +368,7 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
                     .addComponent(JCBcliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addComponent(JBactualizar)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -348,18 +404,18 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
         JBdarDeBaja.setEnabled(true);
         JBactualizar.setEnabled(true);
         JCBcliente.setEnabled(true);
-        
+
         int filaSeleccionada = JTbiciDadasDeAlta.getSelectedRow();
         JTFnumBicicleta.setText(String.valueOf(JTbiciDadasDeAlta.getValueAt(filaSeleccionada, 0)));
         JTFnumSerie.setText(String.valueOf(JTbiciDadasDeAlta.getValueAt(filaSeleccionada, 1)));
-        JTFmarca.setText((String)JTbiciDadasDeAlta.getValueAt(filaSeleccionada, 2));
-        JTFtipo.setText((String)JTbiciDadasDeAlta.getValueAt(filaSeleccionada, 3));
-        JTFcolor.setText((String)JTbiciDadasDeAlta.getValueAt(filaSeleccionada, 4));
-        JTFclienteActual.setText((String)JTbiciDadasDeAlta.getValueAt(filaSeleccionada, 5));
+        JTFmarca.setText((String) JTbiciDadasDeAlta.getValueAt(filaSeleccionada, 2));
+        JTFtipo.setText((String) JTbiciDadasDeAlta.getValueAt(filaSeleccionada, 3));
+        JTFcolor.setText((String) JTbiciDadasDeAlta.getValueAt(filaSeleccionada, 4));
+        JTFclienteActual.setText((String) JTbiciDadasDeAlta.getValueAt(filaSeleccionada, 5));
         listaDeClientesAlta = cData.listarClientes(false);
         for (Cliente aux : listaDeClientesAlta) {
             JCBcliente.addItem(aux);
-            
+
         }
         JCBcliente.setSelectedIndex(-1);
     }//GEN-LAST:event_JTbiciDadasDeAltaMouseClicked
@@ -371,25 +427,25 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
         JBactualizar.setEnabled(false);
         JCBcliente.setSelectedIndex(-1);
         JCBcliente.setEnabled(false);
-        
+
         int filaSeleccionada = JTBicisDadasDeBaja.getSelectedRow();
         JTFnumBicicleta.setText(String.valueOf(JTBicisDadasDeBaja.getValueAt(filaSeleccionada, 0)));
         JTFnumSerie.setText(String.valueOf(JTBicisDadasDeBaja.getValueAt(filaSeleccionada, 1)));
-        JTFmarca.setText((String)JTBicisDadasDeBaja.getValueAt(filaSeleccionada, 2));
-        JTFtipo.setText((String)JTBicisDadasDeBaja.getValueAt(filaSeleccionada, 3));
-        JTFcolor.setText((String)JTBicisDadasDeBaja.getValueAt(filaSeleccionada, 4));
-        JTFclienteActual.setText((String)JTBicisDadasDeBaja.getValueAt(filaSeleccionada, 5));
+        JTFmarca.setText((String) JTBicisDadasDeBaja.getValueAt(filaSeleccionada, 2));
+        JTFtipo.setText((String) JTBicisDadasDeBaja.getValueAt(filaSeleccionada, 3));
+        JTFcolor.setText((String) JTBicisDadasDeBaja.getValueAt(filaSeleccionada, 4));
+        JTFclienteActual.setText((String) JTBicisDadasDeBaja.getValueAt(filaSeleccionada, 5));
     }//GEN-LAST:event_JTBicisDadasDeBajaMouseClicked
 
     private void JBdarDeBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBdarDeBajaActionPerformed
         int filaSeleccionada = JTbiciDadasDeAlta.getSelectedRow();
-       // Bicicleta bici = new Bicicleta();
+        // Bicicleta bici = new Bicicleta();
         if (filaSeleccionada != -1) {
             //bici = bData.buscarBicicletaPorID((Integer)JTbiciDadasDeAlta.getValueAt(filaSeleccionada, 0));
-            bData.darDeBajaBicicleta((Integer)JTbiciDadasDeAlta.getValueAt(filaSeleccionada, 0));
+            bData.darDeBajaBicicleta((Integer) JTbiciDadasDeAlta.getValueAt(filaSeleccionada, 0));
             cargarTablas();
         }
-        
+
     }//GEN-LAST:event_JBdarDeBajaActionPerformed
 
     private void JTBicisDadasDeBajaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTBicisDadasDeBajaMouseEntered
@@ -398,47 +454,60 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
 
     private void JBdarDeAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBdarDeAltaActionPerformed
         int filaSeleccionada = JTBicisDadasDeBaja.getSelectedRow();
-       // Bicicleta bici = new Bicicleta();
+        // Bicicleta bici = new Bicicleta();
         if (filaSeleccionada != -1) {
             //bici = bData.buscarBicicletaPorID((Integer)JTbiciDadasDeAlta.getValueAt(filaSeleccionada, 0));
-            bData.darDeAltaBicicleta((Integer)JTBicisDadasDeBaja.getValueAt(filaSeleccionada, 0));
+            bData.darDeAltaBicicleta((Integer) JTBicisDadasDeBaja.getValueAt(filaSeleccionada, 0));
             cargarTablas();
         }
     }//GEN-LAST:event_JBdarDeAltaActionPerformed
 
     private void JBactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBactualizarActionPerformed
-        try { 
-        Bicicleta b = new Bicicleta();
-        int filaSeleccionada = JTbiciDadasDeAlta.getSelectedRow();
-           
-        b.setId(Integer.parseInt(JTFnumBicicleta.getText()));
-        b.setNumero_serie(Long.parseLong(JTFnumSerie.getText()));
-        b.setMarca(JTFmarca.getText());
-        b.setTipo(JTFtipo.getText());
-        b.setColor(JTFcolor.getText());
-        
-        if(JCBcliente.getSelectedIndex()== -1){
-            System.out.println(JTbiciDadasDeAlta.getValueAt(filaSeleccionada, 1).getClass());
-            b.setCliente(bData.buscarBicicletaPorNroSerie((Long)JTbiciDadasDeAlta.getValueAt(filaSeleccionada, 1)).getCliente());
-            
-            
-            
-        } else{
+        try {
+            Bicicleta b = new Bicicleta();
+            int filaSeleccionada = JTbiciDadasDeAlta.getSelectedRow();
 
-        b.setCliente((Cliente)JCBcliente.getSelectedItem());}
+            b.setId(Integer.parseInt(JTFnumBicicleta.getText()));
+            b.setNumero_serie(Long.parseLong(JTFnumSerie.getText()));
+            b.setMarca(JTFmarca.getText());
+            b.setTipo(JTFtipo.getText());
+            b.setColor(JTFcolor.getText());
 
-        bData.actualizarBicicleta(b);
-        limpiarCampos();
-        JBactualizar.setEnabled(false);
-        JBdarDeBaja.setEnabled(false);
-        
-        cargarTablas();
-        } catch (Exception ex)  {
+            if (JCBcliente.getSelectedIndex() == -1) {
+                System.out.println(JTbiciDadasDeAlta.getValueAt(filaSeleccionada, 1).getClass());
+                b.setCliente(bData.buscarBicicletaPorNroSerie((Long) JTbiciDadasDeAlta.getValueAt(filaSeleccionada, 1)).getCliente());
+
+            } else {
+
+                b.setCliente((Cliente) JCBcliente.getSelectedItem());
+            }
+
+            bData.actualizarBicicleta(b);
+            limpiarCampos();
+            JBactualizar.setEnabled(false);
+            JBdarDeBaja.setEnabled(false);
+
+            cargarTablas();
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Los campos estan mal seteados.");
         }
-        
+
 
     }//GEN-LAST:event_JBactualizarActionPerformed
+
+    private void jBTNFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNFiltrarActionPerformed
+
+        cargarTablas();
+
+    }//GEN-LAST:event_jBTNFiltrarActionPerformed
+
+    private void jTFparametroAFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFparametroAFiltrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFparametroAFiltrarActionPerformed
+
+    private void JCBclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBclienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JCBclienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -463,10 +532,14 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
     private javax.swing.JTextField JTFnumSerie;
     private javax.swing.JTextField JTFtipo;
     private javax.swing.JTable JTbiciDadasDeAlta;
+    private javax.swing.JButton jBTNFiltrar;
+    private javax.swing.JComboBox<String> jCBTipoDeFiltro;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTFparametroAFiltrar;
     // End of variables declaration//GEN-END:variables
 
     private void armarTablas() {
@@ -495,19 +568,94 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
     private void cargarTablas() {
         modeloTablaBicisAlta.setNumRows(0);
         modeloTablaBicisBaja.setNumRows(0);
-        
+
         listaBicicletasAlta = bData.listarBicicletas(false);
         listaBicicletasBaja = bData.listarBicicletas(true);
-        
-        for (Bicicleta aux : listaBicicletasAlta) {
-            modeloTablaBicisAlta.addRow(new Object[] {aux.getId(), aux.getNumero_serie(), aux.getMarca(), aux.getTipo(), aux.getColor(), aux.getCliente().toString()});
-                    
+
+        if (jTFparametroAFiltrar.getText().isEmpty()) {
+
+            for (Bicicleta aux : listaBicicletasAlta) {
+                modeloTablaBicisAlta.addRow(new Object[]{aux.getId(), aux.getNumero_serie(), aux.getMarca(), aux.getTipo(), aux.getColor(), aux.getCliente().toString()});
+
+            }
+
+            for (Bicicleta aux : listaBicicletasBaja) {
+                modeloTablaBicisBaja.addRow(new Object[]{aux.getId(), aux.getNumero_serie(), aux.getMarca(), aux.getTipo(), aux.getColor(), aux.getCliente().toString()});
+            }
+
+        } else if (jCBTipoDeFiltro.getSelectedIndex() == 0) { // filtro por Dueño
+
+            for (Bicicleta aux : listaBicicletasAlta) {
+
+                String Fdueno = aux.getCliente().getApellido() + aux.getCliente().getNombre() + aux.getCliente().getDomicilio() + aux.getCliente().getDni() + aux.getCliente().getCelular();
+
+                if (Fdueno.contains(jTFparametroAFiltrar.getText())) {
+
+                    modeloTablaBicisAlta.addRow(new Object[]{aux.getId(), aux.getNumero_serie(), aux.getMarca(), aux.getTipo(), aux.getColor(), aux.getCliente().toString()});
+
+                }
+
+            }
+            for (Bicicleta aux : listaBicicletasBaja) {
+
+                String Fdueno = aux.getCliente().getApellido() + aux.getCliente().getNombre() + aux.getCliente().getDomicilio() + aux.getCliente().getDni() + aux.getCliente().getCelular();
+
+                if (Fdueno.contains(jTFparametroAFiltrar.getText())) {
+
+                    modeloTablaBicisBaja.addRow(new Object[]{aux.getId(), aux.getNumero_serie(), aux.getMarca(), aux.getTipo(), aux.getColor(), aux.getCliente().toString()});
+
+                }
+
+            }
+
+        } else if (jCBTipoDeFiltro.getSelectedIndex() == 1) { // filtro por servicio 
+
+            try {
+
+                HashSet<Reparacion> listaBicicletasFiltradaPorServicio = ReData.listarReparaciones();
+
+                for (Reparacion aux : listaBicicletasFiltradaPorServicio) {
+
+                    String Fservicio = aux.getServicio().getCodigo() + aux.getServicio().getDescripcion();
+
+                    if (!aux.getBiclicleta().getBorrado() && Fservicio.contains(jTFparametroAFiltrar.getText())) {
+
+                        modeloTablaBicisAlta.addRow(new Object[]{aux.getBiclicleta().getId(), aux.getBiclicleta().getNumero_serie(), aux.getBiclicleta().getMarca(), aux.getBiclicleta().getTipo(), aux.getBiclicleta().getColor(), aux.getBiclicleta().getCliente().toString()});
+
+                    }
+                    if (aux.getBiclicleta().getBorrado() && Fservicio.contains(jTFparametroAFiltrar.getText())) {
+                        modeloTablaBicisBaja.addRow(new Object[]{aux.getBiclicleta().getId(), aux.getBiclicleta().getNumero_serie(), aux.getBiclicleta().getMarca(), aux.getBiclicleta().getTipo(), aux.getBiclicleta().getColor(), aux.getBiclicleta().getCliente().toString()});
+
+                    }
+
+                }
+            } catch (java.time.format.DateTimeParseException ex) {
+                JOptionPane.showMessageDialog(null, "Error --  ");
+
+            }
+
+        } else if (jCBTipoDeFiltro.getSelectedIndex() == 2) { // filtro por fecha de entrada
+            try {
+                HashSet<Bicicleta> listaBicicletasFiltradaPorFecha = ReData.buscarBicicletasPorFecha(LocalDate.parse(jTFparametroAFiltrar.getText()));
+
+                for (Bicicleta aux : listaBicicletasFiltradaPorFecha) {
+
+                    if (!aux.getBorrado()) {
+                        modeloTablaBicisAlta.addRow(new Object[]{aux.getId(), aux.getNumero_serie(), aux.getMarca(), aux.getTipo(), aux.getColor(), aux.getCliente().toString()});
+
+                    } else {
+                        modeloTablaBicisBaja.addRow(new Object[]{aux.getId(), aux.getNumero_serie(), aux.getMarca(), aux.getTipo(), aux.getColor(), aux.getCliente().toString()});
+
+                    }
+
+                }
+            } catch (java.time.format.DateTimeParseException ex) {
+                JOptionPane.showMessageDialog(null, "Error en el formato de la fecha [ AÑO-MES-DIA ] ");
+
+            }
+
         }
-        
-        for (Bicicleta aux : listaBicicletasBaja) {
-            modeloTablaBicisBaja.addRow(new Object[] {aux.getId(), aux.getNumero_serie(), aux.getMarca(), aux.getTipo(), aux.getColor(), aux.getCliente().toString()});
-        }
-        
+
     }
 
     private void limpiarCampos() {
@@ -521,6 +669,5 @@ public class VistaGestionarBicicletas extends javax.swing.JInternalFrame {
         JCBcliente.setEnabled(false);
 
     }
-    
-    
+
 }

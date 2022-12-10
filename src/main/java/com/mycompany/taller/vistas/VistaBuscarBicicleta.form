@@ -52,12 +52,10 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="JLclienteActual" max="32767" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="JLcliente" max="32767" attributes="0"/>
-                                  <Component id="JLtipo" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="JLcolor" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="JLnroSerie" alignment="0" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="JLcliente" max="32767" attributes="0"/>
+                              <Component id="JLtipo" alignment="1" max="32767" attributes="0"/>
+                              <Component id="JLcolor" alignment="0" max="32767" attributes="0"/>
+                              <Component id="JLnroSerie" alignment="0" max="32767" attributes="0"/>
                               <Component id="JLmarca" alignment="1" max="32767" attributes="0"/>
                               <Component id="JLid" pref="174" max="32767" attributes="0"/>
                           </Group>

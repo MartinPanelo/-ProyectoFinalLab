@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -147,9 +148,9 @@ public class ReparacionData {
     }
     
     
-    public ArrayList<Reparacion> listarReparaciones() {
+    public HashSet<Reparacion> listarReparaciones() {
 
-        ArrayList<Reparacion> listaR = new ArrayList();
+        HashSet<Reparacion> listaR = new HashSet();
 
         String sql = "SELECT * FROM reparacion WHERE borrado= false";
 
@@ -203,9 +204,9 @@ public class ReparacionData {
     }
     
     
-    public ArrayList<Bicicleta> buscarBicicletasPorServicio(int id_servicio) {
+    public HashSet<Bicicleta> buscarBicicletasPorServicio(int id_servicio) {
 
-        ArrayList<Bicicleta> bicicletasPorServicio = new ArrayList();
+        HashSet<Bicicleta> bicicletasPorServicio = new HashSet();
 
         String sql = "SELECT id_bicicleta FROM reparacion WHERE id_servicio = ?";
 
@@ -231,9 +232,9 @@ public class ReparacionData {
         return bicicletasPorServicio;
     }
     
-    public ArrayList<Bicicleta> buscarBicicletasPorFecha(LocalDate fecha) {
+    public HashSet<Bicicleta> buscarBicicletasPorFecha(LocalDate fecha) {
 
-        ArrayList<Bicicleta> bicicletasPorFecha = new ArrayList();
+        HashSet<Bicicleta> bicicletasPorFecha = new HashSet();
 
         String sql = "SELECT id_bicicleta FROM `reparacion` WHERE fecha_entrada = ?";
 

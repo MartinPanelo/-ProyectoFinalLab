@@ -43,7 +43,7 @@ public class VistaBuscarBicicleta extends javax.swing.JInternalFrame {
             }
         };
        armarTablas();
-        cargarTablas();
+      //  cargarTablas();
         JBactualizar.setEnabled(false);
     }
 

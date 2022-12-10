@@ -42,7 +42,7 @@ public class Item_detalleData {
             ps.setDouble(4, item.getSuma_precios()); //Valor de repuesto por cantidad de repuesto
 
             if (ps.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Item agregado");
+               // JOptionPane.showMessageDialog(null, "Item agregado");
             } else {
                 JOptionPane.showMessageDialog(null, "Item no agregada");
             }
