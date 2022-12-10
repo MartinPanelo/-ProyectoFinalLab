@@ -31,7 +31,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         JMIlistadoBicis = new javax.swing.JMenuItem();
-        JMIbuscarBicicletas = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMgestionar = new javax.swing.JMenuItem();
         JMRepuesto = new javax.swing.JMenu();
@@ -75,14 +74,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu2.add(JMIlistadoBicis);
-
-        JMIbuscarBicicletas.setText("Buscar Bicicletas");
-        JMIbuscarBicicletas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JMIbuscarBicicletasActionPerformed(evt);
-            }
-        });
-        jMenu2.add(JMIbuscarBicicletas);
 
         jMenuBar1.add(jMenu2);
 
@@ -261,19 +252,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jDesktopPane1.moveToFront(vc);
     }//GEN-LAST:event_JMIlistadoBicisActionPerformed
 
-    private void JMIbuscarBicicletasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIbuscarBicicletasActionPerformed
-        // TODO add your handling code here:
-                                                             
-        jDesktopPane1.removeAll();
-        jDesktopPane1.repaint();
-        VistaBuscarBicicleta buscarBicicletas = new VistaBuscarBicicleta();
-        buscarBicicletas.setVisible(true);
-        jDesktopPane1.add(buscarBicicletas);
-        jDesktopPane1.moveToFront(buscarBicicletas);
-                                                   
-
-    }//GEN-LAST:event_JMIbuscarBicicletasActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -313,7 +291,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu JMCliente;
     private javax.swing.JMenuItem JMGestion;
     private javax.swing.JMenuItem JMIGestion;
-    private javax.swing.JMenuItem JMIbuscarBicicletas;
     private javax.swing.JMenuItem JMIgestion;
     private javax.swing.JMenuItem JMIlistado;
     private javax.swing.JMenuItem JMIlistadoBicis;
