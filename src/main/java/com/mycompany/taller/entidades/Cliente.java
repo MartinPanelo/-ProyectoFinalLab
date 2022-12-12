@@ -33,7 +33,7 @@ public class Cliente {
         this.borrado = borrado;
     }
 
-    public Cliente(String nombre, String apellido, long dni, String domicilio, long celular,boolean estado) {
+    public Cliente(String nombre, String apellido, long dni, String domicilio, long celular,boolean borrado) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
